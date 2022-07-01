@@ -3,3 +3,5 @@ stocker data
 creer page web
 finir client (integrer commande del) ° request post
 gerer add et del server
+
+gerer dates en 7 et pas 07
