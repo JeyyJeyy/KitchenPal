@@ -1,9 +1,6 @@
 si quantité = 0 changer en 1
-stocker data
 creer page web
-gerer add et del server
 
 gerer dates en 7 et pas 07
-contact api serveur
 
-suppr quantity juste quantité = nb d'envois de la commande
+suppr date peremption delete

@@ -4,42 +4,46 @@ const axios = require('axios');
 const fs = require('fs');
 const app = express();
 
-// Parses the body for POST, PUT, DELETE, etc.
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/posts', function (req, res, next) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
-        let obj = [];
-        obj = JSON.parse(data); //now it an object
+        let obj = JSON.parse(data);
+        let num = req.body.quantity;
         if (req.body.command == 'add') {
-            obj.push(req.body);
-            apicall(req.body.barcode);
-            json = JSON.stringify(obj); //convert it back to json
+            delete req.body['quantity'];
+            for (var i = 0; i < Number(num); i++) {
+                obj.push(req.body);
+                apicall(req.body.barcode);
+            }
+            apicall(req.body.barcode, num);
+            json = JSON.stringify(obj);
             fs.writeFile("data.json", json, (err) => {
                 if (err) console.log(err);
-                console.log("Saved data to data.json");
             });
+            console.log("Saved "+num+" elements to data.json");
         } else if (req.body.command == 'del') {
-            let id =
-            delet(req.body.barcode);
+            delet(req.body.barcode, num);
         }
     });
 });
 
-function apicall(bar) {
+function apicall(bar, num) {
     axios.get(`https://fr.openfoodfacts.org/api/v0/product/${bar}.json`)
         .then(res => {
             let name = res.data.product.product_name;
             let url = res.data.product.selected_images.front.display.fr;
             fs.readFile('api.json', 'utf8', function readFileCallback(err, data) {
-                let das = [];
-                das = JSON.parse(data); //now it an object
-                das.push({ nom: name, lien: url });
-                json = JSON.stringify(das); //convert it back to json
+                let das = JSON.parse(data);
+                for (var i = 0; i < Number(num); i++) {
+                    das.push({ nom: name, lien: url, barcode: bar });
+                }
+                json = JSON.stringify(das);
                 fs.writeFile("api.json", json, (err) => {
                     if (err) console.log(err);
-                    console.log("Saved data to api.json");
                 });
+                console.log("Saved "+num+" elements to api.json");
             });
         })
         .catch(function (error) {
@@ -47,25 +51,41 @@ function apicall(bar) {
         });
 }
 
-function delet(bar) {
-    axios.get(`https://fr.openfoodfacts.org/api/v0/product/${bar}.json`)
-        .then(res => {
-            let name = res.data.product.product_name;
-            let url = res.data.product.selected_images.front.display.fr;
-            fs.readFile('api.json', 'utf8', function readFileCallback(err, data) {
-                let das = [];
-                das = JSON.parse(data); //now it an object
-                das.push({ nom: name, lien: url });
-                json = JSON.stringify(das); //convert it back to json
-                fs.writeFile("api.json", json, (err) => {
-                    if (err) console.log(err);
-                    console.log("Saved data to api.json");
-                });
-            });
-        })
-        .catch(function (error) {
-            console.log(error);
+function delet(bar, num) {
+    fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
+        let das = JSON.parse(data);
+        let index;
+        for (var i = 0; i < Number(num); i++) {
+            das.forEach(function (value) {
+                if (value.barcode == bar) {
+                    index = das.indexOf(value);
+                }
+            })
+            das.splice(index, 1);
+        }
+        json = JSON.stringify(das);
+        fs.writeFile("data.json", json, (err) => {
+            if (err) console.log(err);
         });
+        console.log("Deleted "+num+" elements of data.json");
+    });
+    fs.readFile('api.json', 'utf8', function readFileCallback(err, data) {
+        let das = JSON.parse(data);
+        let index;
+        for (var i = 0; i < Number(num); i++) {
+            das.forEach(function (value) {
+                if (value.barcode == bar) {
+                    index = das.indexOf(value);
+                }
+            })
+            das.splice(index, 1);
+        }
+        json = JSON.stringify(das);
+        fs.writeFile("api.json", json, (err) => {
+            if (err) console.log(err);
+        });
+        console.log("Deleted "+num+" elements of api.json");
+    });
 }
 
 app.listen(8080, '192.168.1.249');
