@@ -5,8 +5,13 @@ const fs = require('fs');
 const app = express();
 
 
+console.clear();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.get("/", (req, res) => {
+    res.sendFile('index.html', { root: './webpage/' });
+    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Webpage has been loaded');
+});
 app.post('/posts', function (req, res, next) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let obj = JSON.parse(data);
@@ -20,7 +25,6 @@ app.post('/posts', function (req, res, next) {
             delete req.body['quantity'];
             for (var i = 0; i < num; i++) {
                 obj.push(req.body);
-                apicall(req.body.barcode);
             }
             apicall(req.body.barcode, num);
             json = JSON.stringify(obj);
@@ -94,7 +98,7 @@ function delet(bar, num) {
 }
 
 app.listen(8080, '192.168.1.249');
-console.log("\x1b[1m",'Serveur allumé sur le port 8080')
+console.log("\x1b[1m",'Stock-Manager: [Serveur allumé sur le port 8080]')
 
 function date(date){
     if(date[0].length == 1){
