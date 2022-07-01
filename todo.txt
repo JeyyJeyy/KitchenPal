@@ -1,11 +1,9 @@
 si quantité = 0 changer en 1
 stocker data
 creer page web
-finir client (integrer commande del) ° request post
 gerer add et del server
 
 gerer dates en 7 et pas 07
+contact api serveur
 
-
-enlever contact api client nodejs
-deplacer sur serveur
+suppr quantity juste quantité = nb d'envois de la commande
