@@ -1,0 +1,5 @@
+si quantité = 0 changer en 1
+stocker data
+creer page web
+finir client (integrer commande del) ° request post
+gerer add et del server
