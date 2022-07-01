@@ -5,3 +5,7 @@ finir client (integrer commande del) ° request post
 gerer add et del server
 
 gerer dates en 7 et pas 07
+
+
+enlever contact api client nodejs
+deplacer sur serveur
