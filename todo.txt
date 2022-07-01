@@ -1,3 +1,2 @@
-si quantité = 0 changer en 1
 creer page web
 gerer dates en 7 et pas 07

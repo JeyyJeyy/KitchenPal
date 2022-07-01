@@ -14,6 +14,8 @@ app.post('/posts', function (req, res, next) {
         if(num == 0){
             num = 1;
         }
+        let datee = req.body.date.split('/');
+        req.body.date = date(datee);
         if (req.body.command == 'add') {
             delete req.body['quantity'];
             for (var i = 0; i < num; i++) {
@@ -25,7 +27,7 @@ app.post('/posts', function (req, res, next) {
             fs.writeFile("data.json", json, (err) => {
                 if (err) console.log(err);
             });
-            console.log("Saved "+num+" elements to data.json");
+            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved '+num+' elements to data.json');
         } else if (req.body.command == 'del') {
             delet(req.body.barcode, num);
         }
@@ -46,7 +48,7 @@ function apicall(bar, num) {
                 fs.writeFile("api.json", json, (err) => {
                     if (err) console.log(err);
                 });
-                console.log("Saved "+num+" elements to api.json");
+                console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved '+num+' elements to api.json');
             });
         })
         .catch(function (error) {
@@ -70,7 +72,7 @@ function delet(bar, num) {
         fs.writeFile("data.json", json, (err) => {
             if (err) console.log(err);
         });
-        console.log("Deleted "+num+" elements of data.json");
+        console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted "+num+" elements of data.json");
     });
     fs.readFile('api.json', 'utf8', function readFileCallback(err, data) {
         let das = JSON.parse(data);
@@ -87,9 +89,22 @@ function delet(bar, num) {
         fs.writeFile("api.json", json, (err) => {
             if (err) console.log(err);
         });
-        console.log("Deleted "+num+" elements of api.json");
+        console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted "+num+" elements of api.json");
     });
 }
 
 app.listen(8080, '192.168.1.249');
-console.log('Serveur allumé sur le port 8080')
+console.log("\x1b[1m",'Serveur allumé sur le port 8080')
+
+function date(date){
+    if(date[0].length == 1){
+        date[0] = '0'+date[0];
+    }
+    if(date[1].length == 1){
+        date[1] = '0'+date[1];
+    }
+    if(date[2].length == 2){
+        date[2] = '20'+date[2];
+    }
+    return date[0]+'/'+date[1]+'/'+date[2]
+}
