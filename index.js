@@ -28,6 +28,7 @@ app.post('/posts', function (req, res, next) {
                 if (err) console.log(err);
             });
             console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved '+num+' elements to data.json');
+            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved '+num+' elements to api.json');
         } else if (req.body.command == 'del') {
             delet(req.body.barcode, num);
         }
@@ -48,7 +49,6 @@ function apicall(bar, num) {
                 fs.writeFile("api.json", json, (err) => {
                     if (err) console.log(err);
                 });
-                console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved '+num+' elements to api.json');
             });
         })
         .catch(function (error) {
@@ -73,6 +73,7 @@ function delet(bar, num) {
             if (err) console.log(err);
         });
         console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted "+num+" elements of data.json");
+        console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted "+num+" elements of api.json");
     });
     fs.readFile('api.json', 'utf8', function readFileCallback(err, data) {
         let das = JSON.parse(data);
@@ -89,7 +90,6 @@ function delet(bar, num) {
         fs.writeFile("api.json", json, (err) => {
             if (err) console.log(err);
         });
-        console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted "+num+" elements of api.json");
     });
 }
 
