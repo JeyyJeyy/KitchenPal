@@ -10,10 +10,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/posts', function (req, res, next) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let obj = JSON.parse(data);
-        let num = req.body.quantity;
+        let num = Number(req.body.quantity);
+        if(num == 0){
+            num = 1;
+        }
         if (req.body.command == 'add') {
             delete req.body['quantity'];
-            for (var i = 0; i < Number(num); i++) {
+            for (var i = 0; i < num; i++) {
                 obj.push(req.body);
                 apicall(req.body.barcode);
             }
@@ -36,7 +39,7 @@ function apicall(bar, num) {
             let url = res.data.product.selected_images.front.display.fr;
             fs.readFile('api.json', 'utf8', function readFileCallback(err, data) {
                 let das = JSON.parse(data);
-                for (var i = 0; i < Number(num); i++) {
+                for (var i = 0; i < num; i++) {
                     das.push({ nom: name, lien: url, barcode: bar });
                 }
                 json = JSON.stringify(das);
@@ -55,7 +58,7 @@ function delet(bar, num) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let das = JSON.parse(data);
         let index;
-        for (var i = 0; i < Number(num); i++) {
+        for (var i = 0; i < num; i++) {
             das.forEach(function (value) {
                 if (value.barcode == bar) {
                     index = das.indexOf(value);
@@ -72,7 +75,7 @@ function delet(bar, num) {
     fs.readFile('api.json', 'utf8', function readFileCallback(err, data) {
         let das = JSON.parse(data);
         let index;
-        for (var i = 0; i < Number(num); i++) {
+        for (var i = 0; i < num; i++) {
             das.forEach(function (value) {
                 if (value.barcode == bar) {
                     index = das.indexOf(value);
