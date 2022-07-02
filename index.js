@@ -12,6 +12,18 @@ app.get("/", (req, res) => {
     res.sendFile('index.html', { root: './webpage/' });
     console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Webpage has been loaded');
 });
+app.get("/app.js", (req, res) => {
+    res.sendFile('app.js', { root: './webpage/' });
+    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] App.JS has been loaded');
+});
+app.get("/api.json", (req, res) => {
+    res.sendFile('api.json', { root: './' });
+    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Api.JSON has been loaded');
+});
+app.get("/styles.css", (req, res) => {
+    res.sendFile('styles.css', { root: './webpage/' });
+    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Styles.CSS has been loaded');
+});
 app.post('/posts', function (req, res, next) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let obj = JSON.parse(data);

@@ -1,1 +1,10 @@
-creer page web
+recompiler en exe
+handle quanttié pour api.json (quantity=4) si del 1 --> quanttiy 3 puis afficher sur html
+--faire attention date peremption
+
+gerer dates en mm/yyyy
+
+
+nutriscore_grade: 'e',
+nutriscore_score: 27,
+categories:
