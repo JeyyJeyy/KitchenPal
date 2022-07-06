@@ -33,4 +33,5 @@ function delet(bar) {
          "Content-type": "application/json; charset=UTF-8"
       }
    })
+   location.reload();
 }
