@@ -25,42 +25,39 @@ app.get("/styles.css", (req, res) => {
     console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Styles.CSS has been loaded');
 });
 app.post('/posts', function (req, res, next) {
+    console.log(req.body)
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let obj = JSON.parse(data);
         let num = Number(req.body.quantity);
         if (num == 0) {
             num = 1;
         }
+        req.body.quantity = num;
         let datee = req.body.date.split('/');
         req.body.date = date(datee);
         if (req.body.command == 'add') {
-            delete req.body['quantity'];
-            for (var i = 0; i < num; i++) {
-                obj.push(req.body);
-            }
-            apicall(req.body.barcode, num);
+            obj.push(req.body);
+            apicall(req.body.barcode, num, req.body.date);
             json = JSON.stringify(obj);
             fs.writeFile("data.json", json, (err) => {
                 if (err) console.log(err);
             });
-            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved ' + num + ' elements to data.json');
-            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved ' + num + ' elements to api.json');
+            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved element to data.json');
+            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved element to api.json');
         } else if (req.body.command == 'del') {
             delet(req.body.barcode, num);
         }
     });
 });
 
-function apicall(bar, num) {
+function apicall(bar, num, date) {
     axios.get(`https://fr.openfoodfacts.org/api/v0/product/${bar}.json`)
         .then(res => {
             let name = res.data.product.product_name_fr;
             let url = res.data.product.selected_images.front.display.fr;
             fs.readFile('api.json', 'utf8', function readFileCallback(err, data) {
                 let das = JSON.parse(data);
-                for (var i = 0; i < num; i++) {
-                    das.push({ nom: name, lien: url, barcode: bar });
-                }
+                das.push({ nom: name, lien: url, barcode: bar, quantity: num, date: date });
                 json = JSON.stringify(das);
                 fs.writeFile("api.json", json, (err) => {
                     if (err) console.log(err);
@@ -82,7 +79,7 @@ function delet(bar, num) {
                     index = das.indexOf(value);
                 }
             })
-            das.splice(index, 1);
+            das[index].quantity = das[index].quantity - 1;
         }
         json = JSON.stringify(das);
         fs.writeFile("data.json", json, (err) => {
@@ -100,7 +97,7 @@ function delet(bar, num) {
                     index = das.indexOf(value);
                 }
             })
-            das.splice(index, 1);
+            das[index].quantity = das[index].quantity - 1;
         }
         json = JSON.stringify(das);
         fs.writeFile("api.json", json, (err) => {
