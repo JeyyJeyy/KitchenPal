@@ -25,7 +25,6 @@ app.get("/styles.css", (req, res) => {
     console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Styles.CSS has been loaded');
 });
 app.post('/posts', function (req, res, next) {
-    console.log(req.body)
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let obj = JSON.parse(data);
         let num = Number(req.body.quantity);
