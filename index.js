@@ -105,8 +105,8 @@ function delet(bar, num, date) {
                 index = das.indexOf(value);
                 if (x == 0 && index != null) {
                     if (num >= das[index].quantity) {
-                        das.splice(index, 1);
                         y = das[index].quantity;
+                        das.splice(index, 1);
                     } else {
                         das[index].quantity = das[index].quantity - num;
                         y = num;
