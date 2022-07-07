@@ -32,10 +32,26 @@ app.post('/posts', function (req, res, next) {
             num = 1;
         }
         req.body.quantity = num;
+        if (!req.body.date.includes('/')) {
+            let day = req.body.date.slice(0, 2);
+            let month = req.body.date.slice(2, 4);
+            let year = req.body.date.slice(-4);
+            req.body.date = day + '/' + month + '/' + year;
+        }
         let datee = req.body.date.split('/');
         req.body.date = date(datee);
+        let index;
         if (req.body.command == 'add') {
-            obj.push(req.body);
+            for (let dat of obj) {
+                if (dat.barcode == req.body.barcode && dat.date == req.body.date) {
+                    index = obj.indexOf(dat);
+                }
+            }
+            if (index != null) {
+                obj[index].quantity = obj[index].quantity + num;
+            } else {
+                obj.push(req.body);
+            }
             apicall(req.body.barcode, num, req.body.date);
             json = JSON.stringify(obj);
             fs.writeFile("data.json", json, (err) => {
@@ -44,7 +60,7 @@ app.post('/posts', function (req, res, next) {
             console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved element to data.json');
             console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved element to api.json');
         } else if (req.body.command == 'del') {
-            delet(req.body.barcode, num);
+            delet(req.body.barcode, num, req.body.date);
         }
     });
 });
@@ -52,11 +68,21 @@ app.post('/posts', function (req, res, next) {
 function apicall(bar, num, date) {
     axios.get(`https://fr.openfoodfacts.org/api/v0/product/${bar}.json`)
         .then(res => {
+            let index;
             let name = res.data.product.product_name_fr;
             let url = res.data.product.selected_images.front.display.fr;
             fs.readFile('api.json', 'utf8', function readFileCallback(err, data) {
                 let das = JSON.parse(data);
-                das.push({ nom: name, lien: url, barcode: bar, quantity: num, date: date });
+                for (let dat of das) {
+                    if (dat.barcode == bar && dat.date == date) {
+                        index = das.indexOf(dat);
+                    }
+                }
+                if (index != null) {
+                    das[index].quantity = das[index].quantity + num;
+                } else {
+                    das.push({ nom: name, lien: url, barcode: bar, quantity: num, date: date });
+                }
                 json = JSON.stringify(das);
                 fs.writeFile("api.json", json, (err) => {
                     if (err) console.log(err);
@@ -68,17 +94,29 @@ function apicall(bar, num, date) {
         });
 }
 
-function delet(bar, num) {
+function delet(bar, num, date) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let das = JSON.parse(data);
         let index;
+        let x = 0;
         for (var i = 0; i < num; i++) {
             das.forEach(function (value) {
-                if (value.barcode == bar) {
+                if (value.barcode == bar && value.date == date) {
                     index = das.indexOf(value);
+                    if (x == 0) {
+                        num = value.quantity;
+                        x++
+                    }
                 }
             })
-            das[index].quantity = das[index].quantity - 1;
+            if (index == null) {
+                console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] This element does not exist");
+                return;
+            } else if (das[index].quantity <= 0) {
+                das.splice(index, 1);
+            } else {
+                das[index].quantity = das[index].quantity - 1;
+            }
         }
         json = JSON.stringify(das);
         fs.writeFile("data.json", json, (err) => {
@@ -92,11 +130,22 @@ function delet(bar, num) {
         let index;
         for (var i = 0; i < num; i++) {
             das.forEach(function (value) {
-                if (value.barcode == bar) {
+                if (value.barcode == bar && value.date == date) {
                     index = das.indexOf(value);
+                    if (x == 0) {
+                        num = value.quantity;
+                        x++
+                    }
                 }
             })
-            das[index].quantity = das[index].quantity - 1;
+            if (index == null) {
+                console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] This element does not exist");
+                return;
+            } else if (das[index].quantity <= 0) {
+                das.splice(index, 1);
+            } else {
+                das[index].quantity = das[index].quantity - 1;
+            }
         }
         json = JSON.stringify(das);
         fs.writeFile("api.json", json, (err) => {
