@@ -147,7 +147,7 @@ function delet(bar, num, date) {
 }
 
 app.listen(8080, '192.168.1.249');
-console.log("\x1b[1m", 'Stock-Manager: [Serveur allumé sur le port 8080]')
+console.log("\x1b[1m", 'Stock-Manager v1.2.0: [Serveur allumé sur le port 8080]')
 
 function date(date) {
     if (!date[2]) {
