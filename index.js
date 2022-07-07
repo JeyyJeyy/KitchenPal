@@ -57,8 +57,8 @@ app.post('/posts', function (req, res, next) {
             fs.writeFile("data.json", json, (err) => {
                 if (err) console.log(err);
             });
-            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved element to data.json');
-            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved element to api.json');
+            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved '+num+' elements to data.json');
+            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved '+num+' elements to api.json');
         } else if (req.body.command == 'del') {
             delet(req.body.barcode, num, req.body.date);
         }
@@ -99,54 +99,50 @@ function delet(bar, num, date) {
         let das = JSON.parse(data);
         let index;
         let x = 0;
-        for (var i = 0; i < num; i++) {
-            das.forEach(function (value) {
-                if (value.barcode == bar && value.date == date) {
-                    index = das.indexOf(value);
-                    if (x == 0) {
-                        num = value.quantity;
-                        x++
+        let y;
+        das.forEach(function (value) {
+            if (value.barcode == bar && value.date == date) {
+                index = das.indexOf(value);
+                if (x == 0) {
+                    if (num >= das[index].quantity) {
+                        das.splice(index, 1);
+                        y = das[index].quantity;
+                    } else {
+                        das[index].quantity = das[index].quantity - num;
+                        y = num;
                     }
+                    x++
                 }
-            })
-            if (index == null) {
-                console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] This element does not exist");
-                return;
-            } else if (das[index].quantity <= 0) {
-                das.splice(index, 1);
             } else {
-                das[index].quantity = das[index].quantity - 1;
+                console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] This element does not exist");
             }
-        }
+        })
         json = JSON.stringify(das);
         fs.writeFile("data.json", json, (err) => {
             if (err) console.log(err);
         });
-        console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted " + num + " elements of data.json");
-        console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted " + num + " elements of api.json");
+        console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted " + y + " elements of data.json");
+        console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted " + y + " elements of api.json");
     });
     fs.readFile('api.json', 'utf8', function readFileCallback(err, data) {
         let das = JSON.parse(data);
         let index;
-        for (var i = 0; i < num; i++) {
-            das.forEach(function (value) {
-                if (value.barcode == bar && value.date == date) {
-                    index = das.indexOf(value);
-                    if (x == 0) {
-                        num = value.quantity;
-                        x++
+        let x = 0;
+        das.forEach(function (value) {
+            if (value.barcode == bar && value.date == date) {
+                index = das.indexOf(value);
+                if (x == 0) {
+                    if (num >= das[index].quantity) {
+                        das.splice(index, 1);
+                    } else {
+                        das[index].quantity = das[index].quantity - num;
                     }
+                    x++
                 }
-            })
-            if (index == null) {
-                console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] This element does not exist");
-                return;
-            } else if (das[index].quantity <= 0) {
-                das.splice(index, 1);
             } else {
-                das[index].quantity = das[index].quantity - 1;
+                console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] This element does not exist");
             }
-        }
+        })
         json = JSON.stringify(das);
         fs.writeFile("api.json", json, (err) => {
             if (err) console.log(err);
