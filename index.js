@@ -57,8 +57,8 @@ app.post('/posts', function (req, res, next) {
             fs.writeFile("data.json", json, (err) => {
                 if (err) console.log(err);
             });
-            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved '+num+' elements to data.json');
-            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved '+num+' elements to api.json');
+            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved ' + num + ' elements to data.json');
+            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved ' + num + ' elements to api.json');
         } else if (req.body.command == 'del') {
             delet(req.body.barcode, num, req.body.date);
         }
@@ -103,7 +103,7 @@ function delet(bar, num, date) {
         das.forEach(function (value) {
             if (value.barcode == bar && value.date == date) {
                 index = das.indexOf(value);
-                if (x == 0) {
+                if (x == 0 && index != null) {
                     if (num >= das[index].quantity) {
                         das.splice(index, 1);
                         y = das[index].quantity;
@@ -113,8 +113,6 @@ function delet(bar, num, date) {
                     }
                     x++
                 }
-            } else {
-                console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] This element does not exist");
             }
         })
         json = JSON.stringify(das);
@@ -131,7 +129,7 @@ function delet(bar, num, date) {
         das.forEach(function (value) {
             if (value.barcode == bar && value.date == date) {
                 index = das.indexOf(value);
-                if (x == 0) {
+                if (x == 0 && index != null) {
                     if (num >= das[index].quantity) {
                         das.splice(index, 1);
                     } else {
@@ -139,8 +137,6 @@ function delet(bar, num, date) {
                     }
                     x++
                 }
-            } else {
-                console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] This element does not exist");
             }
         })
         json = JSON.stringify(das);
