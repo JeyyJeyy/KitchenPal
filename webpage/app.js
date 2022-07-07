@@ -6,15 +6,31 @@ fetch("api.json")
       let placeholder = document.querySelector("#data-output");
       let out = "";
       for (let product of products) {
+         let url;
          let date = product.date.replace(/\//gi,'_');
+         let time = product.date.split('/');
+         const date1 = new Date(time[1]+' '+time[0]+' '+time[2]);
+         const date2 = Date.now();
+         const diffTime = Math.abs(date2 - date1);
+         let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+         if(diffDays == 0 || diffDays == 1){
+            diffDays = 'aujourd\'hui';
+            url = 'equal.png';
+         }else if(date1 <= date2){
+            diffDays = 'depuis '+diffDays+' jours';
+            url = 'no.png';
+         }else{
+            diffDays = 'dans '+diffDays+' jours';
+            url = 'ok.png';
+         }
          out += `
          <tr>
-            <td> <img width="150" height="150" src='${product.lien}'> </td>
-            <td>${product.nom}</td>
-            <td>${product.barcode}</td>
-            <td>${product.date}</td>
-            <td>${product.quantity}</td>
-            <td><button onclick="delet(${product.barcode},${date})">Supprimer x1</button></td>
+            <td><img src='${url}'></td>
+            <td style="color:#555555; font-size: 12px;"> <img style='border-radius: 15px; height: 130px; width: auto;' src='${product.lien}'> <br> ${product.barcode} </td>
+            <td style="color:#555555; font-size: 16px;">${product.nom}</td>
+            <td style="color:#555555; font-size: 16px;">${product.date}<br>${diffDays}</td>
+            <td style="color:#555555; font-size: 16px;">${product.quantity}</td>
+            <td><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="delet(${product.barcode},${date})"><b>Supprimer</b></button></td>
          </tr>
       `;
       }
