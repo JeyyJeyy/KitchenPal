@@ -14,31 +14,25 @@ app.get("/", (req, res) => {
 });
 app.get("/app.js", (req, res) => {
     res.sendFile('app.js', { root: './webpage/' });
-    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] App.JS has been loaded');
 });
 app.get("/icon.ico", (req, res) => {
     res.sendFile('icon.ico', { root: './webpage/icons/' });
-    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Icon.ICO has been loaded');
+    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Assets have been loaded');
 });
 app.get("/ok.png", (req, res) => {
     res.sendFile('ok.png', { root: './webpage/icons/' });
-    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Icon.ICO has been loaded');
 });
 app.get("/no.png", (req, res) => {
     res.sendFile('no.png', { root: './webpage/icons/' });
-    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Icon.ICO has been loaded');
 });
 app.get("/equal.png", (req, res) => {
     res.sendFile('equal.png', { root: './webpage/icons/' });
-    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Icon.ICO has been loaded');
 });
 app.get("/api.json", (req, res) => {
     res.sendFile('api.json', { root: './' });
-    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Api.JSON has been loaded');
 });
 app.get("/styles.css", (req, res) => {
     res.sendFile('styles.css', { root: './webpage/' });
-    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Styles.CSS has been loaded');
 });
 app.post('/posts', function (req, res, next) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
