@@ -26,7 +26,7 @@ fetch("api.json")
          out += `
          <tr>
             <td><img src='${url}'></td>
-            <td style="color:#555555; font-size: 12px;"> <img style='border-radius: 15px; height: 130px; width: auto;' src='${product.lien}'> <br> ${product.barcode} </td>
+            <td style="color:#555555; font-size: 12px;"> <img style='border-radius: 15px; height: 150px; width: 150px; object-fit: contain;' src='${product.lien}'> <br> ${product.barcode} </td>
             <td style="color:#555555; font-size: 16px;">${product.nom}</td>
             <td style="color:#555555; font-size: 16px;">${product.date}<br>${diffDays}</td>
             <td style="color:#555555; font-size: 16px;">${product.quantity}</td>
