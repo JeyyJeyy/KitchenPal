@@ -9,7 +9,8 @@ fetch("api.json")
          let url;
          let date = product.date.replace(/\//gi,'_');
          let time = product.date.split('/');
-         const date1 = new Date(time[1]+' '+time[0]+' '+time[2]);
+         const date1 = Date.parse(time[1]+' '+time[0]+' '+time[2])
+         //const date1 = new Date(time[1]+' '+time[0]+' '+time[2]);
          const date2 = Date.now();
          const diffTime = Math.abs(date2 - date1);
          let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
