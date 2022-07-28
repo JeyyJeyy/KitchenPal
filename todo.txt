@@ -1,17 +1,9 @@
-recompiler en exe
-
 nutriscore_grade: 'e',
 nutriscore_score: 27,
 categories:
 
-plus beau site
-+ ecran 3 api pour afficher site
+ecran 3 api pour afficher site
 
-if same date and same barcode ++ quantity
-prendre en compte date pour delete
-
-
-delete fichier api.json et tout rassembler dans data ? + si meme barcode pas api call
 ajouter date selector client
 test app
 resoudre pb date ios
