@@ -9,3 +9,9 @@ plus beau site
 
 if same date and same barcode ++ quantity
 prendre en compte date pour delete
+
+
+delete fichier api.json et tout rassembler dans data ? + si meme barcode pas api call
+ajouter date selector client
+test app
+resoudre pb date ios
