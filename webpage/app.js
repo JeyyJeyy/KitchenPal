@@ -31,7 +31,7 @@ fetch("data.json")
             <td style="color:#555555; font-size: 16px;">${product.nom}</td>
             <td style="color:#555555; font-size: 16px;">${product.date}<br>${diffDays}</td>
             <td style="color:#555555; font-size: 16px;">${product.quantity}</td>
-            <td><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="added(${product.barcode},${date})"><b>Ajouter</b></button><br><br><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="delet(${product.barcode},${date})"><b>Supprimer</b></button></td>
+            <td><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="added(${product.barcode},${date})"><b>Ajouter</b></button><br><br><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="delet(${product.barcode},${date})"><b>Supprimer</b></button><br><br><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="getinfos(${product.barcode},${date})"><b>Infos</b></button></td>
          </tr>
       `;
       }
@@ -68,4 +68,8 @@ function added(bar,date) {
       }
    })
    location.reload();
+}
+
+function getinfos(bar,date) {
+   location.href='element.html?id='+bar+'&date='+date;
 }

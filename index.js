@@ -11,6 +11,14 @@ app.use(express.static('webpage'));
 app.use(express.static('webpage/icons/'));
 app.use(express.static('.'));
 
+app.get('/element.html', function(req, res) {
+    var html = buildHtml(req.query.id,req.query.date);
+    res.end(html);
+})
+app.get('/element.css', function(req, res) {
+    res.sendFile('element.css', { root: './webpage/element/' });
+})
+
 app.post('/posts', function (req, res, next) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let obj = JSON.parse(data);
@@ -95,7 +103,7 @@ function delet(bar, num, date) {
     });
 }
 
-app.listen(8080, '192.168.1.249', () => {
+app.listen(8080, 'localhost', () => {
     console.log("\x1b[1m", 'Stock-Manager v1.2.0: [Serveur allumé sur le port 8080]')
 })
 
@@ -116,3 +124,50 @@ function date(date) {
     }
     return date[0] + '/' + date[1] + '/' + date[2];
 }
+
+function buildHtml(id,dat) {
+    let data = fs.readFileSync('data.json', 'utf8');
+    let das = JSON.parse(data);
+    let date = dat.slice(0, 2)+'/'+dat.slice(2, 4)+'/'+dat.slice(4, 8);
+    let index;
+    let file;
+    let x = 0;
+    das.forEach(function (value) {
+        if (value.barcode == id && value.date == date) {
+            index = das.indexOf(value);
+            if (x == 0 && index != null) {
+                x++
+                file = '<html lang="fr">'+
+                '<head>'+
+                   '<meta charset="UTF-8">'+
+                   '<meta name="viewport" content="width=device-width, initial-scale=1.0">'+
+                   '<link rel="stylesheet" href="element.css">'+
+                   '<link rel="icon" href="icon.ico" />'+
+                   '<title>Stock-Manager</title>'+
+                '</head>'+
+                '<body>'+
+                   '<br>'+
+                   '<center><img width="100" height="100" src="icon.ico"><h1>Stock Manager v1.2.0</h1></center>'+
+                   '<table>'+
+                      '<thead>'+
+                         '<tr>'+
+                            '<th>'+das[index].nom+'</th>'+
+                            '<th>Image</th>'+
+                            '<th>Nom du produit</th>'+
+                            '<th>Date limite</th>'+
+                            '<th>Quantité</th>'+
+                            '<th>Commande</th>'+
+                         '</tr>'+
+                      '</thead>'+
+                      '<tbody id="data-output">'+
+                      '</tbody>'+
+                   '</table>'+
+                '</body>'+
+                '</html>';
+            }else{
+                file = '<!DOCTYPE html><html><body><h1>TEST FAILED</h1></body></html>';
+            }
+        }
+    })
+    return file;
+};
