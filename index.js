@@ -15,9 +15,6 @@ app.get('/element.html', function (req, res) {
     var html = buildHtml(req.query.id, req.query.date);
     res.end(html);
 })
-app.get('/element.css', function (req, res) {
-    res.sendFile('element.css', { root: './webpage/element/' });
-})
 
 app.post('/posts', function (req, res, next) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
@@ -172,6 +169,7 @@ function buildHtml(id, dat) {
                     '<th>Nom du produit</th>' +
                     '<th>Date limite</th>' +
                     '<th>Quantité</th>' +
+                    '<th>Commande</th>' +
                     '</tr>' +
                     '<tr>' +
                     '<td><img src=' + url + '></td>' +
@@ -179,11 +177,13 @@ function buildHtml(id, dat) {
                     '<td style="color:#555555; font-size: 16px;">' + das[index].nom + '</td>' +
                     '<td style="color:#555555; font-size: 16px;">' + das[index].date + '<br>' + diffDays + '</td>' +
                     '<td style="color:#555555; font-size: 16px;">' + das[index].quantity + '</td>' +
+                    '<td><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button></td>' +
                     '</tr>' +
                     '</thead>' +
                     '<tbody id="data-output">' +
                     '</tbody>' +
                     '</table>' +
+                    '<script src="element.js"></script>'+
                     '</body>' +
                     '</html>';
             } else {
