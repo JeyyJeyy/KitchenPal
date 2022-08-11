@@ -141,7 +141,7 @@ function buildHtml(id,dat) {
                 '<head>'+
                    '<meta charset="UTF-8">'+
                    '<meta name="viewport" content="width=device-width, initial-scale=1.0">'+
-                   '<link rel="stylesheet" href="element.css">'+
+                   '<link rel="stylesheet" href="styles.css">'+
                    '<link rel="icon" href="icon.ico" />'+
                    '<title>Stock-Manager</title>'+
                 '</head>'+
@@ -151,12 +151,17 @@ function buildHtml(id,dat) {
                    '<table>'+
                       '<thead>'+
                          '<tr>'+
-                            '<th>'+das[index].nom+'</th>'+
                             '<th>Image</th>'+
                             '<th>Nom du produit</th>'+
                             '<th>Date limite</th>'+
                             '<th>Quantité</th>'+
-                            '<th>Commande</th>'+
+                         '</tr>'+
+                         '<tr>'+
+                            '<td style="color:#555555; font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src='+das[index].lien+'> <br> '+das[index].barcode+' </td>'+
+                            '<td style="color:#555555; font-size: 16px;">${product.nom}</td>'+
+                            '<td style="color:#555555; font-size: 16px;">${product.date}<br>${diffDays}</td>'+
+                            '<td style="color:#555555; font-size: 16px;">${product.quantity}</td>'+
+                            '<td><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="added(${product.barcode},${date})"><b>Ajouter</b></button><br><br><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="delet(${product.barcode},${date})"><b>Supprimer</b></button><br><br><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="getinfos(${product.barcode},${date})"><b>Infos</b></button></td>'+
                          '</tr>'+
                       '</thead>'+
                       '<tbody id="data-output">'+
