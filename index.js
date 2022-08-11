@@ -101,7 +101,7 @@ function delet(bar, num, date) {
 }
 
 app.listen(8080, 'localhost', () => {
-    console.log("\x1b[1m", 'Stock-Manager v1.2.0: [Serveur allumé sur le port 8080]')
+    console.log("\x1b[1m", 'Stock-Manager v1.3.14: [Serveur allumé sur le port 8080]')
 })
 
 function date(date) {
@@ -160,7 +160,7 @@ function buildHtml(id, dat) {
                     '</head>' +
                     '<body>' +
                     '<br>' +
-                    '<center><img width="100" height="100" src="icon.ico"><h1>Stock Manager v1.2.0</h1></center>' +
+                    '<center><img width="100" height="100" src="icon.ico"><h1>Stock Manager v1.3.14</h1></center>' +
                     '<table>' +
                     '<thead>' +
                     '<tr>' +
