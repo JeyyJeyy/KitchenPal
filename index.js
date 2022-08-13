@@ -192,7 +192,6 @@ function buildHtml(id, dat) {
                     '</tbody>' +
                     '</table>' +
                     '<script src="element.js"></script>' +
-                    '<script>element.classList.toggle("dark-mode");</script>' +
                     '</body>' +
                     '</html>';
             } else {
