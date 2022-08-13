@@ -18,8 +18,6 @@ app.get('/data.json', function (req, res) {
     console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Webpage has been loaded');
 })
 app.get('/product.html', function (req, res) {
-    let url = req.url;
-    console.log(url)
     var html = buildHtml(req.query.id, req.query.date);
     res.end(html);
 })
