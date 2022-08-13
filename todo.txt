@@ -20,7 +20,8 @@ resoudre pb date ios
 
 ajouter element page les infos du produits
 qd finis remettre ip a normal
-
+refaire systeme darkmode
+juste apres body \/
 <label class="switch">
       <input type="checkbox" checked="" onclick="darkmode()">
       <span class="slider"></span>

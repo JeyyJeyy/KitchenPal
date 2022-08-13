@@ -3,6 +3,7 @@ const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
 const app = express();
+let times = 0;
 
 console.clear();
 app.use(bodyParser.json());
@@ -15,7 +16,7 @@ app.get('/', function (req, res) {
 })
 app.get('/data.json', function (req, res) {
     res.sendFile('data.json', { root: '.' });
-    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Webpage has been loaded');
+    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Webpage has been loaded [' + times + ' times]');
 })
 app.get('/product.html', function (req, res) {
     var html = buildHtml(req.query.id, req.query.date);
@@ -166,7 +167,7 @@ function buildHtml(id, dat) {
                     '</head>' +
                     '<body>' +
                     '<br>' +
-                    '<center><img width="80" height="80" src="icon.ico"><h1>Stock Manager v1.3.14</h1></center>' +
+                    '<center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v1.3.14</h1></center>' +
                     '<table>' +
                     '<thead>' +
                     '<tr>' +
@@ -190,6 +191,7 @@ function buildHtml(id, dat) {
                     '</tbody>' +
                     '</table>' +
                     '<script src="element.js"></script>' +
+                    '<script>element.classList.toggle("dark-mode");</script>' +
                     '</body>' +
                     '</html>';
             } else {
