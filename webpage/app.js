@@ -71,16 +71,10 @@ function added(bar, date) {
 }
 
 function getinfos(bar, date, hid) {
-   location.href = 'product.html?id=' + bar + '&date=' + date + '&dm=' + hid;
+   location.href = 'product.html?id=' + bar + '&date=' + date;
 }
 
 function darkmode() {
    var element = document.body;
    element.classList.toggle("dark-mode");
-   if (hid == true) {
-      hid = false;
-   } else {
-      hid = true;
-   }
-   console.log(hid)
 }
