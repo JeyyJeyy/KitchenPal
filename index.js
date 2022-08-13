@@ -17,6 +17,7 @@ app.get('/', function (req, res) {
 app.get('/data.json', function (req, res) {
     res.sendFile('data.json', { root: '.' });
     console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Webpage has been loaded [' + times + ' times]');
+    times++
 })
 app.get('/product.html', function (req, res) {
     var html = buildHtml(req.query.id, req.query.date);
