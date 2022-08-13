@@ -9,9 +9,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('webpage'));
 app.use(express.static('webpage/icons/'));
-app.use(express.static('.'));
 
-app.get('/element.html', function (req, res) {
+app.get('/', function (req, res) {
+    res.redirect('/home.html');
+})
+app.get('/data.json', function (req, res) {
+    res.sendFile('data.json', { root: '.' });
+    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Webpage has been loaded');
+})
+app.get('/product.html', function (req, res) {
+    let url = req.url;
+    console.log(url)
     var html = buildHtml(req.query.id, req.query.date);
     res.end(html);
 })
@@ -160,7 +168,7 @@ function buildHtml(id, dat) {
                     '</head>' +
                     '<body>' +
                     '<br>' +
-                    '<center><img width="100" height="100" src="icon.ico"><h1>Stock Manager v1.3.14</h1></center>' +
+                    '<center><img width="80" height="80" src="icon.ico"><h1>Stock Manager v1.3.14</h1></center>' +
                     '<table>' +
                     '<thead>' +
                     '<tr>' +
@@ -173,17 +181,17 @@ function buildHtml(id, dat) {
                     '</tr>' +
                     '<tr>' +
                     '<td><img src=' + url + '></td>' +
-                    '<td style="color:#555555; font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src=' + das[index].lien + '> <br> ' + das[index].barcode + ' </td>' +
-                    '<td style="color:#555555; font-size: 16px;">' + das[index].nom + '</td>' +
-                    '<td style="color:#555555; font-size: 16px;">' + das[index].date + '<br>' + diffDays + '</td>' +
-                    '<td style="color:#555555; font-size: 16px;">' + das[index].quantity + '</td>' +
-                    '<td><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button></td>' +
+                    '<td style="font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src=' + das[index].lien + '> <br> ' + das[index].barcode + ' </td>' +
+                    '<td style="font-size: 16px;">' + das[index].nom + '</td>' +
+                    '<td style="font-size: 16px;">' + das[index].date + '<br>' + diffDays + '</td>' +
+                    '<td style="font-size: 16px;">' + das[index].quantity + '</td>' +
+                    '<td><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button><br><br><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="gohome()"><b>Retour</b></button></td>' +
                     '</tr>' +
                     '</thead>' +
                     '<tbody id="data-output">' +
                     '</tbody>' +
                     '</table>' +
-                    '<script src="element.js"></script>'+
+                    '<script src="element.js"></script>' +
                     '</body>' +
                     '</html>';
             } else {
