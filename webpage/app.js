@@ -73,9 +73,6 @@ function added(bar, date) {
 function getinfos(bar, date, hid) {
    location.href = 'product.html?id=' + bar + '&date=' + date + '&dm=' + hid;
 }
-function gohome() {
-   window.location.href = 'home.html';
-}
 
 function darkmode() {
    var element = document.body;

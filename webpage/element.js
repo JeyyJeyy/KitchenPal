@@ -29,3 +29,7 @@ function delet(bar,date) {
     })
     location.reload();
  }
+
+ function gohome() {
+   location.href = 'home.html';
+}
