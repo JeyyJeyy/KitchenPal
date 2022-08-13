@@ -135,14 +135,14 @@ function buildHtml(id, dat) {
     let das = JSON.parse(data);
     let date2 = dat.slice(0, 2) + '/' + dat.slice(2, 4) + '/' + dat.slice(4, 8);
     let index;
-    let file;
+    let file = '<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="styles.css"><link rel="icon" href="icon.ico" /><title>Stock-Manager</title></head>' +
+    '<body><br><center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v1.4.14</h1></center>';
     let x = 0;
     das.forEach(function (value) {
         if (value.barcode == id && value.date == date2) {
             index = das.indexOf(value);
             if (x == 0 && index != null) {
                 x++
-                let date = das[index].date.replace(/\//gi, '_');
                 let time = das[index].date.split('/');
                 const date1 = Date.parse(time[1] + ' ' + time[0] + ' ' + time[2])
                 const date2 = Date.now();
@@ -158,18 +158,7 @@ function buildHtml(id, dat) {
                     diffDays = 'dans ' + diffDays + ' jours';
                     url = 'ok.png';
                 }
-                file = '<html lang="fr">' +
-                    '<head>' +
-                    '<meta charset="UTF-8">' +
-                    '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
-                    '<link rel="stylesheet" href="styles.css">' +
-                    '<link rel="icon" href="icon.ico" />' +
-                    '<title>Stock-Manager</title>' +
-                    '</head>' +
-                    '<body>' +
-                    '<br>' +
-                    '<center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v1.4.14</h1></center>' +
-                    '<table>' +
+                file += '<table>' +
                     '<thead>' +
                     '<tr>' +
                     '<th>Consommable</th>' +
@@ -194,10 +183,11 @@ function buildHtml(id, dat) {
                     '<script src="element.js"></script>' +
                     '</body>' +
                     '</html>';
-            } else {
-                file = '<!DOCTYPE html><html><body><h1>TEST FAILED</h1></body></html>';
             }
         }
     })
+    if (index == null) {
+        file += '<br><center><h2>Produit inconnu</h2>';
+    }
     return file;
 };
