@@ -16,6 +16,12 @@ body {
 	background-color: #2F3136;
 	color: white;
 }
+
+.dark-mode table {
+	width: 80%;
+	border: 1px solid #2F3136;
+}
+
 .dark-mode table th {
 	background-color: #36393F;
 	border: thin solid #2B2B2B;
