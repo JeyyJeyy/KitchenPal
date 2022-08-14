@@ -24,3 +24,13 @@ qd finis remettre ip a normal
 Note mienne:
 60% = nutrition-score-fr --> translate tableau yuka (if _keywords include boisson changer echelle)
 40% = additives (chaque additif sans danger = -10/100, si additif nocif max 49/100)
+
+Sucre = masse pour 100g (0 à 9= peu de sucre, 9 à 18= faible impact, 18 à 31 = un peu trop sucré, 31 à 45+ = trop sucré)
+kCalories = pour 100g (0 à 160= peu de calories, 160 à 360= faible impact, 360 à 560 = un peu trop calorique, 560 à 800+ = trop calorique)
+sel = pour 100g (0 à 0,46= peu de sel, 0,46 à 0,92= faible impact, 0,92 à 1,62 = un peu trop salé, 1,62 à 2,3+ = trop salé)
+graisse saturée = pour 100g (0 à 2= peu de g sat, 2 à 4= faible impact, 4 à 7 = un peu trop de g sat, 7 à 10+ = trop de gsat)
+additifs listé avec couleur selon nocif ou non et afficher noms + type si possible
+proteines
+fibres
+fruits
+!skip si 0 ou nul pour fruits proteines fibres
