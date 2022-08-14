@@ -39,3 +39,5 @@ section qualitées et section defauts
 
 pas afficher impact eco
 afficher juste image eco score et nutriscore et nova? + handle scores inconnus
+
+shift alt f pour format
