@@ -2,6 +2,7 @@ var bodyParser = require('body-parser');
 const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
+const http = require('http');
 const app = express();
 let times = 0;
 
@@ -52,9 +53,9 @@ app.post('/posts', function (req, res, next) {
                 if (index != null) {
                     obj[index].quantity = obj[index].quantity + num;
                 } else {
-                    await axios.get(`https://fr.openfoodfacts.org/api/v0/product/${req.body.barcode}.json`)
+                    let address = `http://fr.openfoodfacts.org/api/v0/product/${req.body.barcode}.json`;
+                    await axios.get(address)
                         .then(res => {
-                            res.data.pipe(fs.createWriteStream(`/products/${req.body.barcode}.json`));
                             let name = res.data.product.product_name_fr;
                             let url = res.data.product.selected_images.front.display.fr;
                             req.body["nom"] = name;
@@ -66,6 +67,12 @@ app.post('/posts', function (req, res, next) {
                         });
                     console.log(req.body)
                     obj.push(req.body);
+                    var file = fs.createWriteStream(`./products/${req.body.barcode}.json`);
+                    var request = http.get(address, function (response) {
+                        response.on("finish", function () {
+                            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] New ' + num + ' elements downloaded');
+                        }).pipe(file);
+                    });
                 }
                 json = JSON.stringify(obj);
                 fs.writeFile("data.json", json, (err) => {
