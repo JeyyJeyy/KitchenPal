@@ -26,4 +26,3 @@ juste apres body \/
       <input type="checkbox" checked="" onclick="darkmode()">
       <span class="slider"></span>
    </label>
-   
