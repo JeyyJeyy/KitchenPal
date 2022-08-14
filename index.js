@@ -54,6 +54,7 @@ app.post('/posts', function (req, res, next) {
                 } else {
                     await axios.get(`https://fr.openfoodfacts.org/api/v0/product/${req.body.barcode}.json`)
                         .then(res => {
+                            res.data.pipe(fs.createWriteStream(`/products/${req.body.barcode}.json`));
                             let name = res.data.product.product_name_fr;
                             let url = res.data.product.selected_images.front.display.fr;
                             req.body["nom"] = name;
@@ -142,7 +143,12 @@ function buildHtml(id, dat) {
         if (value.barcode == id && value.date == date2) {
             index = das.indexOf(value);
             if (x == 0 && index != null) {
-                x++
+                let produit = fs.readFileSync(`./products/${id}.json`);
+                let produit2 = JSON.parse(produit);
+                console.log(produit2)
+                let prod = produit2.product;
+                let ing_text = prod.ingredients_text_fr;
+                ing_text = ing_text.slice(0, -2);
                 let time = das[index].date.split('/');
                 const date1 = Date.parse(time[1] + ' ' + time[0] + ' ' + time[2])
                 const date2 = Date.now();
@@ -159,30 +165,18 @@ function buildHtml(id, dat) {
                     url = 'ok.png';
                 }
                 file += '<center><div style="overflow-x:auto;"><table>' +
-                    '<thead>' +
-                    '<tr>' +
-                    '<th>Consommable</th>' +
-                    '<th>Image</th>' +
-                    '<th>Nom du produit</th>' +
-                    '<th>Date limite</th>' +
-                    '<th>Quantité</th>' +
-                    '<th>Commande</th>' +
-                    '</tr>' +
-                    '<tr>' +
+                    '<thead><tr><th>Consommable</th><th>Image</th><th>Nom du produit</th>' +
+                    '<th>Date limite</th><th>Quantité</th><th>Commande</th></tr><tr>' +
                     '<td><img src=' + url + '></td>' +
                     '<td style="font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src=' + das[index].lien + '> <br> ' + das[index].barcode + ' </td>' +
                     '<td style="font-size: 16px;">' + das[index].nom + '</td>' +
                     '<td style="font-size: 16px;">' + das[index].date + '<br>' + diffDays + '</td>' +
                     '<td style="font-size: 16px;">' + das[index].quantity + '</td>' +
                     '<td><button onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button><br><br><button onclick="gohome()"><b>Retour</b></button></td>' +
-                    '</tr>' +
-                    '</thead>' +
-                    '<tbody id="data-output">' +
-                    '</tbody>' +
-                    '</table></div></center>' +
-                    '<script src="app.js"></script>' +
-                    '</body>' +
-                    '</html>';
+                    '</tr></thead><tbody id="data-output"></tbody></table></div></center><br>' +
+                    '<div name="product" class="centered"><label style="display: block; margin: auto;"><h4 style="display: inline">Ingrédients du produit: </h4>(' + prod.additives_n + ' allergènes)</label><p>' + ing_text + '</p>' +
+                    '</div><script src="app.js"></script></body></html>';
+                x++
             }
         }
     })

@@ -5,10 +5,15 @@
 	box-sizing: border-box;
 }
 
+.centered {
+	margin: 0 auto;
+}
+
 body {
 	font-family: sans-serif;
 	min-height: 100vh;
 	filter: grayscale(20%);
+	color: #555;
 }
 
 button {
@@ -26,13 +31,23 @@ label {
 	font-size: 20px;
 }
 
+div[name="product"] {
+	border: 1px solid #d4d4d4;
+	width: 1000px;
+	padding: 10px;
+}
+
 .dark-mode {
 	background-color: #2F3136;
 	color: white;
 }
 
+.dark-mode div[name="product"] {
+	border: 1px solid #2F3136;
+}
+
 .dark-mode table {
-	width: 80%;
+	width: 1000px;
 	border: 1px solid #2F3136;
 }
 
@@ -61,7 +76,7 @@ label {
 }
 
 table {
-	width: 80%;
+	width: 1000px;
 	border: 1px solid #d4d4d4;
 }
 

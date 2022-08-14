@@ -35,9 +35,7 @@ fibres
 fruits
 !skip si 0 ou nul pour fruits proteines fibres
 
-section qualitées et section defauts
-
 pas afficher impact eco
-afficher juste image eco score et nutriscore et nova? + handle scores inconnus
+afficher juste image eco score et nutriscore + handle scores inconnus
 
 shift alt f pour format
