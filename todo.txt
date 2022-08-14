@@ -20,3 +20,7 @@ resoudre pb date ios
 
 ajouter element page les infos du produits
 qd finis remettre ip a normal
+
+Note mienne:
+60% = nutrition-score-fr --> translate tableau yuka (if _keywords include boisson changer echelle)
+40% = additives (chaque additif sans danger = -10/100, si additif nocif max 49/100)
