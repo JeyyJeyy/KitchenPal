@@ -1,4 +1,6 @@
 var dm = false;
+var checkbox = document.querySelector('input[name="mode"]');
+
 function delet(bar, date) {
    const response = fetch('/posts', {
       method: 'POST',
@@ -66,6 +68,8 @@ if (localStorage.getItem("isDarkMode") == null) {
 
 if (localStorage.getItem("isDarkMode") == "1" && dm != true) {
    darkmode();
+   checkbox.checked = true;
 } else if (localStorage.getItem("isDarkMode") == "0" && dm != false) {
    darkmode();
+   checkbox.checked = false;
 }
