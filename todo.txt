@@ -4,8 +4,6 @@ categories:
 "additives_n"
 "additives_tags"
 "data_quality_warnings_tags"
-"ingredients"
-"ingredients_text"
 "misc_tags"
 "nutrient_levels"
 "nutriments"
@@ -18,7 +16,6 @@ ajouter date selector client
 test app
 resoudre pb date ios
 
-ajouter element page les infos du produits
 qd finis remettre ip a normal
 
 Note mienne:
