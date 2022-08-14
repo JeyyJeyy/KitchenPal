@@ -180,7 +180,7 @@ function buildHtml(id, dat) {
                     '<tbody id="data-output">' +
                     '</tbody>' +
                     '</table></div></center>' +
-                    '<script src="element.js"></script>' +
+                    '<script src="app.js"></script>' +
                     '</body>' +
                     '</html>';
             }
