@@ -136,7 +136,7 @@ function buildHtml(id, dat) {
     let date2 = dat.slice(0, 2) + '/' + dat.slice(2, 4) + '/' + dat.slice(4, 8);
     let index;
     let file = '<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="styles.css"><link rel="icon" href="icon.ico" /><title>Stock-Manager</title></head>' +
-    '<body><br><label><input name="mode" type="checkbox" style="width: 20px; height: 20px;" onclick="darkmode()">  Dark mode</label><br><center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v1.4.14</h1></center><br>';
+        '<body><br><label><input name="mode" type="checkbox" style="width: 20px; height: 20px;" onclick="darkmode()">  Dark mode</label><br><center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v1.4.14</h1></center><br>';
     let x = 0;
     das.forEach(function (value) {
         if (value.barcode == id && value.date == date2) {
@@ -174,7 +174,7 @@ function buildHtml(id, dat) {
                     '<td style="font-size: 16px;">' + das[index].nom + '</td>' +
                     '<td style="font-size: 16px;">' + das[index].date + '<br>' + diffDays + '</td>' +
                     '<td style="font-size: 16px;">' + das[index].quantity + '</td>' +
-                    '<td><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button><br><br><button style="width: 90px; height: 30px; color:#555555; font-size: 16px; border-radius: 5px; border: 1px solid" onclick="gohome()"><b>Retour</b></button></td>' +
+                    '<td><button onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button><br><br><button onclick="gohome()"><b>Retour</b></button></td>' +
                     '</tr>' +
                     '</thead>' +
                     '<tbody id="data-output">' +

@@ -11,9 +11,18 @@ body {
 	filter: grayscale(20%);
 }
 
+button {
+	width: 90px;
+	height: 30px;
+	color: #555555;
+	font-size: 16px;
+	border-radius: 4px;
+	border: 1px solid;
+}
+
 label {
 	margin: 20px;
-	color:#555555; 
+	color: #555555;
 	font-size: 20px;
 }
 
@@ -47,7 +56,7 @@ label {
 }
 
 .dark-mode label {
-	color: white; 
+	color: white;
 	font-size: 20px;
 }
 
