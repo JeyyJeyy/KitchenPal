@@ -155,7 +155,6 @@ function buildHtml(id, dat) {
                 console.log(produit2)
                 let prod = produit2.product;
                 let ing_text = prod.ingredients_text_fr;
-                ing_text = ing_text.slice(0, -2);
                 let time = das[index].date.split('/');
                 const date1 = Date.parse(time[1] + ' ' + time[0] + ' ' + time[2])
                 const date2 = Date.now();
