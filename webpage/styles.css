@@ -8,20 +8,14 @@
 body {
 	font-family: sans-serif;
 	min-height: 100vh;
-	transition: 400ms ease-in-out;
 	filter: grayscale(20%);
+	transition: 1000ms ease-in-out;
 }
 
 .dark-mode {
 	background-color: #2F3136;
 	color: white;
 }
-
-.dark-mode table {
-	transition: 1400ms ease-in-out;
-	color: white;
-}
-
 .dark-mode table th {
 	background-color: #36393F;
 	border: thin solid #2B2B2B;
@@ -38,13 +32,12 @@ body {
 }
 
 .dark-mode table img {
-	filter: grayscale(20%);
+	filter: grayscale(10%);
 }
 
 table {
-	width: 1000px;
-	margin: 30px auto;
-	transition: 1400ms ease-in-out;
+	width: 80%;
+	border: 1px solid #d4d4d4;
 }
 
 table th {

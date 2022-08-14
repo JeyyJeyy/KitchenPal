@@ -136,7 +136,7 @@ function buildHtml(id, dat) {
     let date2 = dat.slice(0, 2) + '/' + dat.slice(2, 4) + '/' + dat.slice(4, 8);
     let index;
     let file = '<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="styles.css"><link rel="icon" href="icon.ico" /><title>Stock-Manager</title></head>' +
-    '<body><br><center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v1.4.14</h1></center>';
+    '<body><br><center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v1.4.14</h1></center><br>';
     let x = 0;
     das.forEach(function (value) {
         if (value.barcode == id && value.date == date2) {
@@ -158,7 +158,7 @@ function buildHtml(id, dat) {
                     diffDays = 'dans ' + diffDays + ' jours';
                     url = 'ok.png';
                 }
-                file += '<table>' +
+                file += '<center><div style="overflow-x:auto;"><table>' +
                     '<thead>' +
                     '<tr>' +
                     '<th>Consommable</th>' +
@@ -179,7 +179,7 @@ function buildHtml(id, dat) {
                     '</thead>' +
                     '<tbody id="data-output">' +
                     '</tbody>' +
-                    '</table>' +
+                    '</table></div></center>' +
                     '<script src="element.js"></script>' +
                     '</body>' +
                     '</html>';
@@ -187,7 +187,7 @@ function buildHtml(id, dat) {
         }
     })
     if (index == null) {
-        file += '<br><center><h2>Produit inconnu</h2>';
+        file += '<center><h2>Produit inconnu</h2>';
     }
     return file;
 };
