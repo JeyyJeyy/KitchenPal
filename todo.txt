@@ -14,7 +14,6 @@ categories:
 
 ajouter date selector client
 test app
-resoudre pb date ios
 
 qd finis remettre ip a normal
 
@@ -38,3 +37,4 @@ shift alt f pour format
 sur home afficher produits périmés aujourd'hui et depuis longtemps (filtre perimé ?)
 script pour ordonner data.json a chaques ajout de produit nouveau par plus urgent au moins urgent (pas de filtre ?)
 dl images produits ?
+optimiser code
