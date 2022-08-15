@@ -7,9 +7,10 @@ fetch("data.json")
         let out = "";
         for (let product of products) {
             let url;
-            let date = product.date.replace(/\//gi, '_');
+            let dat = product.date.replace(/\//gi, '');
+            console.log(dat)
             let time = product.date.split('/');
-            const date1 = Date.parse(time[1] + ' ' + time[0] + ' ' + time[2])
+            const date1 = new Date(time[2], time[1]-1, time[0]);
             const date2 = Date.now();
             const diffTime = Math.abs(date2 - date1);
             let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -30,7 +31,7 @@ fetch("data.json")
             <td>${product.nom}</td>
             <td>${product.date}<br>${diffDays}</td>
             <td>${product.quantity}</td>
-            <td><button onclick="added(${product.barcode},${date})"><b>Ajouter</b></button><br><br><button onclick="delet(${product.barcode},${date})"><b>Supprimer</b></button><br><br><button onclick="getinfos(${product.barcode},${date})"><b>Infos</b></button></td>
+            <td><button onclick="added(${product.barcode},${dat})"><b>Ajouter</b></button><br><br><button onclick="delet(${product.barcode},${dat})"><b>Supprimer</b></button><br><br><button onclick="getinfos(${product.barcode},${dat})"><b>Infos</b></button></td>
          </tr>
       `;
         }

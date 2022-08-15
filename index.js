@@ -87,7 +87,7 @@ app.post('/posts', function (req, res, next) {
     });
 });
 
-app.listen(8080, 'localhost', () => {
+app.listen(8080, '192.168.228.250', () => {
     console.log("\x1b[1m", 'Stock-Manager v1.7.10: [Serveur allumé sur le port 8080]')
 })
 
@@ -180,7 +180,7 @@ function buildHtml(id, dat) {
                 let prod = produit2.product;
                 let ing_text = prod.ingredients_text_fr;
                 let time = das[index].date.split('/');
-                const date1 = Date.parse(time[1] + ' ' + time[0] + ' ' + time[2])
+                const date1 = new Date(time[2], time[1]-1, time[0]);
                 const date2 = Date.now();
                 const diffTime = Math.abs(date2 - date1);
                 let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
