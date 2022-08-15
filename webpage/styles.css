@@ -105,7 +105,8 @@ table td {
 	width: 18%;
 	text-align: center;
 	background-color: #fff;
-	color: #555
+	color: #555;
+	font-size: 16px;
 }
 
 table img {

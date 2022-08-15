@@ -198,9 +198,9 @@ function buildHtml(id, dat) {
                     '<th>Date limite</th><th>Quantité</th><th>Commande</th></tr><tr>' +
                     '<td><img src=' + url + '></td>' +
                     '<td style="font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src=' + das[index].lien + '> <br> ' + das[index].barcode + ' </td>' +
-                    '<td style="font-size: 16px;">' + das[index].nom + '</td>' +
-                    '<td style="font-size: 16px;">' + das[index].date + '<br>' + diffDays + '</td>' +
-                    '<td style="font-size: 16px;">' + das[index].quantity + '</td>' +
+                    '<td>' + das[index].nom + '</td>' +
+                    '<td>' + das[index].date + '<br>' + diffDays + '</td>' +
+                    '<td>' + das[index].quantity + '</td>' +
                     '<td><button onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button><br><br><button onclick="gohome()"><b>Retour</b></button></td>' +
                     '</tr></thead><tbody id="data-output"></tbody></table></div></center><br>' +
                     '<div name="product" class="centered"><label style="display: block; margin: auto;"><h4 style="display: inline">Ingrédients du produit: </h4>(' + prod.additives_n + ' allergènes)</label><p>' + ing_text + '</p>' +

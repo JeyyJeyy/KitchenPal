@@ -27,9 +27,9 @@ fetch("data.json")
          <tr>
             <td><img src='${url}'></td>
             <td style="font-size: 12px;"> <img style='border-radius: 15px; height: 150px; width: 150px; object-fit: contain;' src='${product.lien}'> <br> ${product.barcode} </td>
-            <td style="font-size: 16px;">${product.nom}</td>
-            <td style="font-size: 16px;">${product.date}<br>${diffDays}</td>
-            <td style="font-size: 16px;">${product.quantity}</td>
+            <td>${product.nom}</td>
+            <td>${product.date}<br>${diffDays}</td>
+            <td>${product.quantity}</td>
             <td><button onclick="added(${product.barcode},${date})"><b>Ajouter</b></button><br><br><button onclick="delet(${product.barcode},${date})"><b>Supprimer</b></button><br><br><button onclick="getinfos(${product.barcode},${date})"><b>Infos</b></button></td>
          </tr>
       `;
