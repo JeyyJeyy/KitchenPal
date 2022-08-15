@@ -31,9 +31,6 @@ proteines
 fibres
 fruits
 !skip si 0 ou nul pour fruits proteines fibres
-
 pas afficher impact eco
 afficher juste image eco score et nutriscore + handle scores inconnus
-
 shift alt f pour format
-supprimer lignes inutiles css
