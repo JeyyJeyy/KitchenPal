@@ -87,7 +87,7 @@ app.post('/posts', function (req, res, next) {
     });
 });
 
-app.listen(8080, '192.168.228.250', () => {
+app.listen(8080, 'localhost', () => {
     console.log("\x1b[1m", 'Stock-Manager v1.7.10: [Serveur allumé sur le port 8080]')
 })
 
