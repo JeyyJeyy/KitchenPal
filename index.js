@@ -3,7 +3,6 @@ const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
 const https = require('https');
-const { json } = require('body-parser');
 
 const app = express();
 let times = 0;
@@ -86,6 +85,12 @@ app.post('/posts', function (req, res, next) {
     });
 });
 
+app.listen(8080, 'localhost', () => {
+    console.log("\x1b[1m", 'Stock-Manager v1.6.0: [Serveur allumé sur le port 8080]')
+})
+
+
+
 function delet(bar, num, date) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let das = JSON.parse(data);
@@ -114,10 +119,6 @@ function delet(bar, num, date) {
         console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted " + y + " elements of data.json");
     });
 }
-
-app.listen(8080, 'localhost', () => {
-    console.log("\x1b[1m", 'Stock-Manager v1.6.0: [Serveur allumé sur le port 8080]')
-})
 
 function readJsonFile(bar) {
     let file = `https://fr.openfoodfacts.org/api/v0/produit/${bar}.json`;
