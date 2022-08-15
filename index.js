@@ -14,14 +14,17 @@ app.use(express.static('webpage'));
 app.use(express.static('webpage/icons/'));
 
 app.get('/', function (req, res) {
-    res.redirect('/home.html');
+    res.redirect('/home');
 })
 app.get('/data.json', function (req, res) {
     res.sendFile('data.json', { root: '.' });
     console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Webpage has been loaded [' + times + ' times]');
     times++
 })
-app.get('/product.html', function (req, res) {
+app.get('/home', function (req, res) {
+    res.sendFile('home.html', { root: './webpage/' });
+})
+app.get('/product', function (req, res) {
     (async () => {
         var html = await buildHtml(req.query.id, req.query.date);
         res.end(html);

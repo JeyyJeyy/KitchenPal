@@ -34,7 +34,7 @@ function added(bar, date) {
 }
 
 function getinfos(bar, date) {
-   location.href = 'product.html?id=' + bar + '&date=' + date;
+   location.href = 'product?id=' + bar + '&date=' + date;
 }
 
 function darkmode() {
@@ -49,7 +49,7 @@ function darkmode() {
 }
 
 function gohome() {
-   location.href = 'home.html';
+   location.href = 'home';
 }
 
 function toggleModes(bool) {
@@ -81,14 +81,14 @@ function search() {
    table = document.getElementById("data-output");
    tr = table.getElementsByTagName("tr");
    for (i = 0; i < tr.length; i++) {
-     td = tr[i].getElementsByTagName("td")[2];
-     if (td) {
-       txtValue = td.textContent || td.innerText;
-       if (txtValue.toUpperCase().indexOf(filter) > -1) {
-         tr[i].style.display = "";
-       } else {
-         tr[i].style.display = "none";
-       }
-     }
+      td = tr[i].getElementsByTagName("td")[2];
+      if (td) {
+         txtValue = td.textContent || td.innerText;
+         if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+         } else {
+            tr[i].style.display = "none";
+         }
+      }
    }
- }
+}
