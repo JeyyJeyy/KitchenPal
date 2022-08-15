@@ -6,35 +6,37 @@
    <link rel="icon" href="icon.ico" />
    <title>Stock-Manager</title>
 </head>
+
 <body>
    <br>
-   <label><input name="mode" type="checkbox" style="width: 20px; height: 20px;" onclick="darkmode()">  Dark mode</label>
+   <label><input name="mode" type="checkbox" style="width: 20px; height: 20px;" onclick="darkmode()"> Dark mode</label>
    <br>
    <center><a href="/home"><img width="100" height="100" src='icon.ico'></a>
-      <h1>Stock Manager v1.7.10</h1>
+      <h1>Stock Manager v1.8.10</h1>
    </center>
    <br>
    <center>
-   <div style="overflow-x:auto;">
-   <input type="text" id="input" onkeyup="search()" placeholder="Cherchez des produits...">
-   <table>
-      <thead>
-         <tr class="header">
-            <th>Consommable</th>
-            <th>Image</th>
-            <th>Nom du produit</th>
-            <th>Date limite</th>
-            <th>Quantité</th>
-            <th>Commande</th>
-         </tr>
-      </thead>
-      <tbody id="data-output">
-      </tbody>
-   </table>
-   </div>
-   <br><br><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center>
+      <div style="overflow-x:auto;">
+         <input type="text" id="input" onkeyup="search()" placeholder="Cherchez des produits...">
+         <table>
+            <thead>
+               <tr class="header">
+                  <th>Consommable</th>
+                  <th>Image</th>
+                  <th>Nom du produit</th>
+                  <th>Date limite</th>
+                  <th>Quantité</th>
+                  <th>Commande</th>
+               </tr>
+            </thead>
+            <tbody id="data-output">
+            </tbody>
+         </table>
+      </div>
+      <br><br>
+      <p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p>
+   </center>
    <script src="fetch.js"></script>
    <script src="app.js"></script>
 </body>
-
 </html>
