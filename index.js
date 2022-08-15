@@ -3,7 +3,7 @@ const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
 const https = require('https');
-const request = require('request');
+const { json } = require('body-parser');
 
 const app = express();
 let times = 0;
@@ -71,12 +71,7 @@ app.post('/posts', function (req, res, next) {
                         });
                     console.log(req.body)
                     obj.push(req.body);
-                    var file = fs.createWriteStream(`./products/${req.body.barcode}.json`);
-                    var request = https.get(address, function (response) {
-                        response.on("finish", function () {
-                            console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] New ' + num + ' elements downloaded');
-                        }).pipe(file);
-                    });
+                    readJsonFile(req.body.barcode);
                 }
                 json = JSON.stringify(obj);
                 fs.writeFile("data.json", json, (err) => {
@@ -122,16 +117,29 @@ function delet(bar, num, date) {
 
 app.listen(8080, 'localhost', () => {
     console.log("\x1b[1m", 'Stock-Manager v1.6.0: [Serveur allumé sur le port 8080]')
-    readJsonFile("http://fr.openfoodfacts.org/api/v0/produit/3664346307055.json")
 })
 
-function readJsonFile(file) {
-    fetch(file){
-        .then(res => res.json())
-        .then((json) => {
-            console.log(json);
+function readJsonFile(bar) {
+    let file = `https://fr.openfoodfacts.org/api/v0/produit/${bar}.json`;
+    https.get(file, (res) => {
+        let body = "";
+        res.on("data", (chunk) => {
+            body += chunk;
         });
-    }
+        res.on("end", () => {
+            try {
+                let json = JSON.parse(body);
+                json = JSON.stringify(json);
+                fs.writeFile(`./products/${bar}.json`, json, (err) => {
+                    if (err) console.log(err);
+                });
+            } catch (err) {
+                console.log(err);
+            };
+        });
+    }).on("error", (err) => {
+        console.log(err)
+    });
 }
 
 function date(date) {
