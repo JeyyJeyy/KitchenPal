@@ -134,6 +134,7 @@ function readJsonFile(bar) {
                 fs.writeFile(`./products/${bar}.json`, body, (err) => {
                     if (err) console.log(err);
                 });
+                console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved product informations to json');
             } catch (err) {
                 console.log(err);
             };
@@ -141,7 +142,6 @@ function readJsonFile(bar) {
     }).on("error", (err) => {
         console.log(err)
     });
-    console.log("done")
 }
 
 function date(date) {
