@@ -8,7 +8,6 @@ fetch("data.json")
         for (let product of products) {
             let url;
             let dat = product.date.replace(/\//gi, '');
-            console.log(dat)
             let time = product.date.split('/');
             const date1 = new Date(time[2], time[1]-1, time[0]);
             const date2 = Date.now();

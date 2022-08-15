@@ -57,17 +57,16 @@ app.post('/posts', function (req, res, next) {
                     }
                 }
                 if (index != null) {
-                    obj[index].quantity = obj[index].quantity + num;
+                    obj[index].quantity += num;
                 } else {
                     let address = `https://fr.openfoodfacts.org/api/v0/product/${req.body.barcode}.json`;
-                    readJsonFile(req.body.barcode);
+                    readJsonFile(address, req.body.barcode);
                     await axios.get(address)
                         .then(res => {
                             let name = res.data.product.product_name_fr;
                             let url = res.data.product.selected_images.front.display.fr;
                             req.body["nom"] = name;
                             req.body["lien"] = url;
-                            console.log(req.body);
                         })
                         .catch(function (error) {
                             console.log(error);
@@ -88,7 +87,7 @@ app.post('/posts', function (req, res, next) {
 });
 
 app.listen(8080, 'localhost', () => {
-    console.log("\x1b[1m", 'Stock-Manager v1.7.10: [Serveur allumé sur le port 8080]')
+    console.log("\x1b[1m", 'Stock-Manager v1.7.10: [Server enabled on port 8080]')
 })
 
 
@@ -97,33 +96,27 @@ function delet(bar, num, date) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let das = JSON.parse(data);
         let index;
-        let x = 0;
-        let y;
         das.forEach(function (value) {
             if (value.barcode == bar && value.date == date) {
                 index = das.indexOf(value);
-                if (x == 0 && index != null) {
-                    if (num >= das[index].quantity) {
-                        y = das[index].quantity;
-                        das.splice(index, 1);
-                    } else {
-                        das[index].quantity = das[index].quantity - num;
-                        y = num;
-                    }
-                    x++
-                }
             }
         })
+        if (index != null) {
+            if (num >= das[index].quantity) {
+                das.splice(index, 1);
+            } else {
+                das[index].quantity -= num;
+            }
+        }
         json = JSON.stringify(das);
         fs.writeFile("data.json", json, (err) => {
             if (err) console.log(err);
         });
-        console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted " + y + " elements of data.json");
+        console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted " + num + " elements of data.json");
     });
 }
 
-function readJsonFile(bar) {
-    let file = `https://fr.openfoodfacts.org/api/v0/produit/${bar}.json`;
+function readJsonFile(file, bar) {
     https.get(file, (res) => {
         let body = "";
         res.on("data", (chunk) => {
@@ -139,9 +132,7 @@ function readJsonFile(bar) {
                 console.log(err);
             };
         });
-    }).on("error", (err) => {
-        console.log(err)
-    });
+    })
 }
 
 function date(date) {
@@ -169,48 +160,45 @@ function buildHtml(id, dat) {
     let index;
     let file = '<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="styles.css"><link rel="icon" href="icon.ico" /><title>Stock-Manager</title></head>' +
         '<body><br><label><input name="mode" type="checkbox" style="width: 20px; height: 20px;" onclick="darkmode()">  Dark mode</label><br><center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v1.7.10</h1></center><br>';
-    let x = 0;
     das.forEach(function (value) {
         if (value.barcode == id && value.date == date2) {
             index = das.indexOf(value);
-            if (x == 0 && index != null) {
-                let produit = fs.readFileSync(`./products/${id}.json`);
-                let produit2 = JSON.parse(produit);
-                console.log(produit2)
-                let prod = produit2.product;
-                let ing_text = prod.ingredients_text_fr;
-                let time = das[index].date.split('/');
-                const date1 = new Date(time[2], time[1]-1, time[0]);
-                const date2 = Date.now();
-                const diffTime = Math.abs(date2 - date1);
-                let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                if (diffDays == 0 || diffDays == 1) {
-                    diffDays = 'aujourd\'hui';
-                    url = 'equal.png';
-                } else if (date1 <= date2) {
-                    diffDays = 'depuis ' + diffDays + ' jours';
-                    url = 'no.png';
-                } else {
-                    diffDays = 'dans ' + diffDays + ' jours';
-                    url = 'ok.png';
-                }
-                file += '<center><div style="overflow-x:auto;"><table>' +
-                    '<thead><tr><th>Consommable</th><th>Image</th><th>Nom du produit</th>' +
-                    '<th>Date limite</th><th>Quantité</th><th>Commande</th></tr><tr>' +
-                    '<td><img src=' + url + '></td>' +
-                    '<td style="font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src=' + das[index].lien + '> <br> ' + das[index].barcode + ' </td>' +
-                    '<td>' + das[index].nom + '</td>' +
-                    '<td>' + das[index].date + '<br>' + diffDays + '</td>' +
-                    '<td>' + das[index].quantity + '</td>' +
-                    '<td><button onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button><br><br><button onclick="gohome()"><b>Retour</b></button></td>' +
-                    '</tr></thead><tbody id="data-output"></tbody></table></div></center><br>' +
-                    '<div name="product" class="centered"><label style="display: block; margin: auto;"><h4 style="display: inline">Ingrédients du produit: </h4>(' + prod.additives_n + ' allergènes)</label><p>' + ing_text + '</p>' +
-                    '</div><br><br><center><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="app.js"></script></body></html>';
-                x++
-            }
         }
     })
-    if (index == null) {
+    if (index != null) {
+        let produit = fs.readFileSync(`./products/${id}.json`);
+        let produit2 = JSON.parse(produit);
+        console.log(produit2)
+        let prod = produit2.product;
+        let ing_text = prod.ingredients_text_fr;
+        let time = das[index].date.split('/');
+        const date1 = new Date(time[2], time[1] - 1, time[0]);
+        const date2 = Date.now();
+        const diffTime = Math.abs(date2 - date1);
+        let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        if (diffDays == 0 || diffDays == 1) {
+            diffDays = 'aujourd\'hui';
+            url = 'equal.png';
+        } else if (date1 <= date2) {
+            diffDays = 'depuis ' + diffDays + ' jours';
+            url = 'no.png';
+        } else {
+            diffDays = 'dans ' + diffDays + ' jours';
+            url = 'ok.png';
+        }
+        file += '<center><div style="overflow-x:auto;"><table>' +
+            '<thead><tr><th>Consommable</th><th>Image</th><th>Nom du produit</th>' +
+            '<th>Date limite</th><th>Quantité</th><th>Commande</th></tr><tr>' +
+            '<td><img src=' + url + '></td>' +
+            '<td style="font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src=' + das[index].lien + '> <br> ' + das[index].barcode + ' </td>' +
+            '<td>' + das[index].nom + '</td>' +
+            '<td>' + das[index].date + '<br>' + diffDays + '</td>' +
+            '<td>' + das[index].quantity + '</td>' +
+            '<td><button onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button><br><br><button onclick="gohome()"><b>Retour</b></button></td>' +
+            '</tr></thead><tbody id="data-output"></tbody></table></div></center><br>' +
+            '<div name="product" class="centered"><label style="display: block; margin: auto;"><h4 style="display: inline">Ingrédients du produit: </h4>(' + prod.additives_n + ' allergènes)</label><p>' + ing_text + '</p>' +
+            '</div><br><br><center><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="app.js"></script></body></html>';
+    } else {
         file += '<center><h2>Produit inconnu</h2></center>';
     }
     return file;
