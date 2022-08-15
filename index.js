@@ -60,6 +60,7 @@ app.post('/posts', function (req, res, next) {
                     obj[index].quantity = obj[index].quantity + num;
                 } else {
                     let address = `https://fr.openfoodfacts.org/api/v0/product/${req.body.barcode}.json`;
+                    readJsonFile(req.body.barcode);
                     await axios.get(address)
                         .then(res => {
                             let name = res.data.product.product_name_fr;
@@ -71,9 +72,7 @@ app.post('/posts', function (req, res, next) {
                         .catch(function (error) {
                             console.log(error);
                         });
-                    console.log(req.body)
                     obj.push(req.body);
-                    readJsonFile(req.body.barcode);
                 }
                 json = JSON.stringify(obj);
                 fs.writeFile("data.json", json, (err) => {
@@ -132,9 +131,7 @@ function readJsonFile(bar) {
         });
         res.on("end", () => {
             try {
-                let json = JSON.parse(body);
-                json = JSON.stringify(json);
-                fs.writeFile(`./products/${bar}.json`, json, (err) => {
+                fs.writeFile(`./products/${bar}.json`, body, (err) => {
                     if (err) console.log(err);
                 });
             } catch (err) {
@@ -144,6 +141,7 @@ function readJsonFile(bar) {
     }).on("error", (err) => {
         console.log(err)
     });
+    console.log("done")
 }
 
 function date(date) {
