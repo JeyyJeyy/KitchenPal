@@ -34,7 +34,5 @@ pas afficher impact eco
 afficher juste image eco score et nutriscore + handle scores inconnus (si = unknown)
 shift alt f pour format
 
-sur home afficher produits périmés aujourd'hui et depuis longtemps (filtre perimé ?)
-script pour ordonner data.json a chaques ajout de produit nouveau par plus urgent au moins urgent (pas de filtre ?)
-dl images produits ?
+sur home afficher produits périmés aujourd'hui et depuis longtempsdl images produits ?
 optimiser code
