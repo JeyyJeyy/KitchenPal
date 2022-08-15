@@ -3,6 +3,7 @@ const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
 const https = require('https');
+var Stream = require('stream').Transform;
 
 const app = express();
 let times = 0;
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('webpage'));
 app.use(express.static('webpage/icons/'));
+app.use(express.static('assets'));
 
 app.get('/', function (req, res) {
     res.redirect('/home');
@@ -60,13 +62,11 @@ app.post('/posts', function (req, res, next) {
                     obj[index].quantity += num;
                 } else {
                     let address = `https://fr.openfoodfacts.org/api/v0/product/${req.body.barcode}.json`;
-                    readJsonFile(address, req.body.barcode);
+                    downloading(address, req.body.barcode);
                     await axios.get(address)
                         .then(res => {
                             let name = res.data.product.product_name_fr;
-                            let url = res.data.product.selected_images.front.display.fr;
                             req.body["nom"] = name;
-                            req.body["lien"] = url;
                         })
                         .catch(function (error) {
                             console.log(error);
@@ -117,9 +117,10 @@ function delet(bar, num, date) {
     });
 }
 
-function readJsonFile(file, bar) {
+function downloading(file, bar) {
+    let body = "";
+    let obj;
     https.get(file, (res) => {
-        let body = "";
         res.on("data", (chunk) => {
             body += chunk;
         });
@@ -128,7 +129,19 @@ function readJsonFile(file, bar) {
                 fs.writeFile(`./products/${bar}.json`, body, (err) => {
                     if (err) console.log(err);
                 });
-                console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved product informations to json');
+                obj = JSON.parse(body);
+                let img = obj.product.selected_images.front.display.fr;
+                console.log(img)
+                https.get(img, (res) => {
+                    var data = new Stream();
+                    res.on('data', function (chunk) {
+                        data.push(chunk);
+                    });
+                    res.on('end', function () {
+                        fs.writeFileSync(`./assets/${bar}.jpg`, data.read());
+                    });
+                })
+                console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved product asset');
             } catch (err) {
                 console.log(err);
             };
@@ -191,7 +204,7 @@ function buildHtml(id, dat) {
             '<thead><tr><th>Consommable</th><th>Image</th><th>Nom du produit</th>' +
             '<th>Date limite</th><th>Quantité</th><th>Commande</th></tr><tr>' +
             '<td><img src=' + url + '></td>' +
-            '<td style="font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src=' + das[index].lien + '> <br> ' + das[index].barcode + ' </td>' +
+            '<td style="font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src="' + das[index].barcode + '.jpg"> <br> ' + das[index].barcode + ' </td>' +
             '<td>' + das[index].nom + '</td>' +
             '<td>' + das[index].date + '<br>' + diffDays + '</td>' +
             '<td>' + das[index].quantity + '</td>' +
