@@ -34,3 +34,5 @@ fruits
 pas afficher impact eco
 afficher juste image eco score et nutriscore + handle scores inconnus
 shift alt f pour format
+
+sur home afficher produits périmés aujourd'hui et depuis longtemps (filtre perimé ?)

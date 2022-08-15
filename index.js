@@ -207,7 +207,7 @@ function buildHtml(id, dat) {
                     '<td><button onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button><br><br><button onclick="gohome()"><b>Retour</b></button></td>' +
                     '</tr></thead><tbody id="data-output"></tbody></table></div></center><br>' +
                     '<div name="product" class="centered"><label style="display: block; margin: auto;"><h4 style="display: inline">Ingrédients du produit: </h4>(' + prod.additives_n + ' allergènes)</label><p>' + ing_text + '</p>' +
-                    '</div><br><br><center><p style="margin: 15px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="app.js"></script></body></html>';
+                    '</div><br><br><center><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="app.js"></script></body></html>';
                 x++
             }
         }
