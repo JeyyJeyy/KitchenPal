@@ -77,6 +77,7 @@ app.post('/posts', function (req, res, next) {
                 fs.writeFile("data.json", json, (err) => {
                     if (err) console.log(err);
                 });
+                ordonner();
                 console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved ' + num + ' elements to data.json');
             })();
         } else if (req.body.command == 'del') {
@@ -203,3 +204,23 @@ function buildHtml(id, dat) {
     }
     return file;
 };
+
+function ordonner() {
+    fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
+        let obj = JSON.parse(data);
+        obj.sort(function (a, b) {
+            let date1 = a.date.split('/');
+            let date2 = b.date.split('/');
+            let d1 = new Date(date1[2], date1[1] - 1, date1[0]);
+            let d2 = new Date(date2[2], date2[1] - 1, date2[0]);
+            if (d1 > d2) return 1;
+            if (d1 < d2) return -1;
+            return 0;
+        });
+        console.log(obj);
+        json = JSON.stringify(obj);
+        fs.writeFile("data.json", json, (err) => {
+            if (err) console.log(err);
+        });
+    });
+}
