@@ -2,7 +2,9 @@ var bodyParser = require('body-parser');
 const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
-const http = require('http');
+const https = require('https');
+const request = require('request');
+
 const app = express();
 let times = 0;
 
@@ -21,8 +23,10 @@ app.get('/data.json', function (req, res) {
     times++
 })
 app.get('/product.html', function (req, res) {
-    var html = buildHtml(req.query.id, req.query.date);
-    res.end(html);
+    (async () => {
+        var html = await buildHtml(req.query.id, req.query.date);
+        res.end(html);
+    })();
 })
 
 app.post('/posts', function (req, res, next) {
@@ -53,7 +57,7 @@ app.post('/posts', function (req, res, next) {
                 if (index != null) {
                     obj[index].quantity = obj[index].quantity + num;
                 } else {
-                    let address = `http://fr.openfoodfacts.org/api/v0/product/${req.body.barcode}.json`;
+                    let address = `https://fr.openfoodfacts.org/api/v0/product/${req.body.barcode}.json`;
                     await axios.get(address)
                         .then(res => {
                             let name = res.data.product.product_name_fr;
@@ -68,7 +72,7 @@ app.post('/posts', function (req, res, next) {
                     console.log(req.body)
                     obj.push(req.body);
                     var file = fs.createWriteStream(`./products/${req.body.barcode}.json`);
-                    var request = http.get(address, function (response) {
+                    var request = https.get(address, function (response) {
                         response.on("finish", function () {
                             console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] New ' + num + ' elements downloaded');
                         }).pipe(file);
@@ -118,7 +122,17 @@ function delet(bar, num, date) {
 
 app.listen(8080, 'localhost', () => {
     console.log("\x1b[1m", 'Stock-Manager v1.6.0: [Serveur allumé sur le port 8080]')
+    readJsonFile("http://fr.openfoodfacts.org/api/v0/produit/3664346307055.json")
 })
+
+function readJsonFile(file) {
+    fetch(file){
+        .then(res => res.json())
+        .then((json) => {
+            console.log(json);
+        });
+    }
+}
 
 function date(date) {
     if (!date[2]) {
