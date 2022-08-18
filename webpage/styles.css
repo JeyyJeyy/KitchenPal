@@ -8,6 +8,15 @@
 	margin: 0 auto;
 }
 
+#nova {
+	display: flex;
+	align-items: center;
+}
+
+#nova img {
+	margin-right: 20px;
+}
+
 #input {
 	background-image: url('/icons/search.png');
 	background-position: 10px 12px;
@@ -27,6 +36,21 @@ body {
 	color: #555;
 }
 
+div.outer {
+	display: table;
+	border: none
+}
+
+div.middle {
+	display: table-row;
+	border: none
+}
+
+div.inner {
+	display: table-cell;
+	border: none
+}
+
 button {
 	width: 90px;
 	height: 30px;
@@ -42,7 +66,7 @@ label {
 	font-size: 20px;
 }
 
-div[name="product"] {
+div:not(#except) {
 	border: 1px solid #d4d4d4;
 	width: 1000px;
 	padding: 10px;
@@ -53,7 +77,7 @@ div[name="product"] {
 	color: white;
 }
 
-.dark-mode div[name="product"] {
+.dark-mode div:not(#except) {
 	border: 1px solid #2F3136;
 }
 

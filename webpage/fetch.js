@@ -1,3 +1,6 @@
+let auj = 0;
+let long = 0;
+let non = 0;
 fetch("data.json")
     .then(function (response) {
         return response.json();
@@ -9,19 +12,22 @@ fetch("data.json")
             let url;
             let dat = product.date.replace(/\//gi, '');
             let time = product.date.split('/');
-            const date1 = new Date(time[2], time[1]-1, time[0]);
+            const date1 = new Date(time[2], time[1] - 1, time[0]);
             const date2 = Date.now();
             const diffTime = Math.abs(date2 - date1);
             let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             if (diffDays == 0 || diffDays == 1) {
                 diffDays = 'aujourd\'hui';
                 url = 'equal.png';
+                auj++
             } else if (date1 <= date2) {
                 diffDays = 'depuis ' + diffDays + ' jours';
                 url = 'no.png';
+                long++
             } else {
                 diffDays = 'dans ' + diffDays + ' jours';
                 url = 'ok.png';
+                non++
             }
             out += `
          <tr>
@@ -35,4 +41,5 @@ fetch("data.json")
       `;
         }
         placeholder.innerHTML = out;
+        document.querySelector('[name="per"]').innerHTML = '<div name="outer" style="border: none; height:50px;margin:auto 0"><div class="middle" id="nova" style="border: none;height:30px;width:1000px"><div class="inner" id="nova" style="border: none;"><img style="width:50px;" src="ok.png"><b style="font-size:25px">' + non + ' valables</b></div><div class="inner" id="nova" style="border: none;"><img style="width:50px;" src="equal.png"><b style="font-size:25px">' + auj + ' limites</b></div><div class="inner" id="nova" style="border: none;"><img style="width:50px;" src="no.png"><b style="font-size:25px">' + long + ' dépassés</b></div></div>';
     });

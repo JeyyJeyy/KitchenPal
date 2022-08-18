@@ -1,4 +1,3 @@
-nutriscore_grade: 'e',
 nutriscore_score: 27,
 categories:
 "additives_n"
@@ -31,7 +30,26 @@ fibres
 fruits
 !skip si 0 ou nul pour fruits proteines fibres
 pas afficher impact eco
-afficher juste image eco score et nutriscore + handle scores inconnus (si = unknown)
 shift alt f pour format
 
-sur home afficher produits périmés aujourd'hui et depuis longtemps
+taff pour ajouter données manquantes sur openfoodfact
+si pas ingredients pas de score et Alcools
+Sucre
+Laits infantiles
+Suppléments protéinés
+Nourriture pour animaux
+Compléments alimentaires
+Handle produits etrangers
+handle code barre inconnus 
+handle produits sans valeur nutri
+
+"score":51},"grade":"d","grades": = score production voir yuka
+
+
+
+sans risque (pastille vert) : aucun impact sur le score ; risque limité (pastille jaune) : -6 points/additif ; risque modéré (pastille orange) : -15 points/additif ; à risque (pastille rouge) : -30 points (avec un score maximum de 49/100).
+score boisson: En effet, un liquide est assimilé tout de suite par l’organisme et son indice glycémique est élevé. C’est pourquoi les calories et sucres liquides sont pénalisés plus sévèrement.
+
+60% 75 nutri score
+bio = +10 si pas data pas bio + si additips a partir de jaune pas bio 
+30% additifs (si additifs a risque pas de moins juste limite a 49 en prenant en compte le nutriscore et le bio)
