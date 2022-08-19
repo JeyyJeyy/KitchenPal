@@ -22,7 +22,7 @@
 	background-position: 10px 12px;
 	background-repeat: no-repeat;
 	background-size: 20px 20px;
-	width: 1000px;
+	width: 995px;
 	font-size: 16px;
 	padding: 12px 20px 12px 40px;
 	border: 1px solid #F2F3F5;
@@ -164,3 +164,8 @@ table td {
 table img {
 	width: 70%;
 }
+
+tr:first-child th:first-child {border-top-left-radius: 12px;}
+tr:last-child td:first-child {border-bottom-left-radius: 12px;}
+tr:first-child th:last-child {border-top-right-radius: 12px;}
+tr:last-child td:last-child {border-bottom-right-radius: 12px;}
