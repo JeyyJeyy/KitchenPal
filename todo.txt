@@ -16,10 +16,6 @@ test app
 
 qd finis remettre ip a normal
 
-Note mienne:
-60% = nutrition-score-fr --> translate tableau yuka (if _keywords include boisson changer echelle)
-40% = additives (chaque additif sans danger = -3/100, moyen = -7, si additif nocif max 49/100)
-
 Sucre = masse pour 100g (0 à 9= peu de sucre, 9 à 18= faible impact, 18 à 31 = un peu trop sucré, 31 à 45+ = trop sucré)
 kCalories = pour 100g (0 à 160= peu de calories, 160 à 360= faible impact, 360 à 560 = un peu trop calorique, 560 à 800+ = trop calorique)
 sel = pour 100g (0 à 0,46= peu de sel, 0,46 à 0,92= faible impact, 0,92 à 1,62 = un peu trop salé, 1,62 à 2,3+ = trop salé)
@@ -29,7 +25,6 @@ proteines
 fibres
 fruits
 !skip si 0 ou nul pour fruits proteines fibres
-pas afficher impact eco
 shift alt f pour format
 
 taff pour ajouter données manquantes sur openfoodfact
@@ -49,9 +44,6 @@ eco:
 indiquer si huile palme + infos yuka
 origine mm si inconnue
 emballage
-
-
-
 
 sans risque (pastille vert) : aucun impact sur le score ; risque limité (pastille jaune) : -6 points/additif ; risque modéré (pastille orange) : -15 points/additif ; à risque (pastille rouge) : -30 points (avec un score maximum de 49/100).
 score boisson: En effet, un liquide est assimilé tout de suite par l’organisme et son indice glycémique est élevé. C’est pourquoi les calories et sucres liquides sont pénalisés plus sévèrement.
