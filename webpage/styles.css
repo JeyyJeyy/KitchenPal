@@ -25,8 +25,9 @@
 	width: 1000px;
 	font-size: 16px;
 	padding: 12px 20px 12px 40px;
-	border: 1px solid #ddd;
+	border: 1px solid #C6C7C8;
 	margin-bottom: 5px;
+	background-color: #F2F3F5;
 }
 
 body {
@@ -34,6 +35,7 @@ body {
 	min-height: 100vh;
 	filter: grayscale(20%);
 	color: #555;
+	background-color: #F2F3F5;
 }
 
 div.outer {
@@ -52,12 +54,20 @@ div.inner {
 }
 
 button {
+	background-color: #F2F3F5;
+	border: 1px solid rgba(27, 31, 35, 0.15);
+	border-radius: 6px;
+	color: #555;
 	width: 90px;
 	height: 30px;
-	color: #555555;
-	font-size: 16px;
-	border-radius: 4px;
-	border: 1px solid;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+}
+
+button:hover {
+	background-color: #E7E9EB;
+	transition-duration: 0.3s;
 }
 
 label {
@@ -67,7 +77,7 @@ label {
 }
 
 div:not(#except) {
-	border: 1px solid #d4d4d4;
+	border: 1px solid #F2F3F5;
 	width: 1000px;
 	padding: 10px;
 }
@@ -111,24 +121,41 @@ div:not(#except) {
 	color: white;
 }
 
+.dark-mode button {
+	background-color: #2F3136;
+	border: 1px solid rgba(27, 31, 35, 0.15);
+	border-radius: 6px;
+	color: white;
+	width: 90px;
+	height: 30px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+}
+
+.dark-mode button:hover {
+	background-color: #0D0D0F;
+	transition-duration: 0.3s;
+}
+
 table {
 	width: 1000px;
-	border: 1px solid #d4d4d4;
+	border: 1px solid #F2F3F5;
 }
 
 table th {
 	padding: 10px 0;
-	background-color: #f4f4f4;
-	border: thin solid #d4d4d4;
+	background-color: #E7E9EB;
+	border: thin solid #F2F3F5;
 	color: #555;
 }
 
 table td {
 	padding: 10px;
-	border: thin solid #d4d4d4;
+	border: thin solid #F2F3F5;
 	width: 18%;
 	text-align: center;
-	background-color: #fff;
+	background-color: #FFFFFF;
 	color: #555;
 	font-size: 16px;
 }

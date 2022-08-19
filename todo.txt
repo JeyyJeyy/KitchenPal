@@ -42,8 +42,14 @@ Compléments alimentaires
 Handle produits etrangers
 handle code barre inconnus 
 handle produits sans valeur nutri
+bloquer produits beauté
 
+eco:
 "score":51},"grade":"d","grades": = score production voir yuka
+indiquer si huile palme + infos yuka
+origine mm si inconnue
+emballage
+
 
 
 
