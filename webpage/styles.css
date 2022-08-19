@@ -25,9 +25,10 @@
 	width: 1000px;
 	font-size: 16px;
 	padding: 12px 20px 12px 40px;
-	border: 1px solid #C6C7C8;
+	border: 1px solid #F2F3F5;
 	margin-bottom: 5px;
-	background-color: #F2F3F5;
+	background-color: #FFFFFF;
+	border-radius: 12px;
 }
 
 body {
@@ -92,9 +93,9 @@ div:not(#except) {
 }
 
 .dark-mode #input {
-	background-color: #2F3136;
+	background-color: #3C3F45;
 	color: white;
-	border: 1px solid #555;
+	border: 1px solid #2F3136;
 }
 
 .dark-mode table {
