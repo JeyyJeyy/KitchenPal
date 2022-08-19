@@ -25,10 +25,14 @@
 	width: 995px;
 	font-size: 16px;
 	padding: 12px 20px 12px 40px;
-	border: 1px solid #F2F3F5;
-	margin-bottom: 5px;
+	border: none;
+	margin-bottom: 6px;
 	background-color: #FFFFFF;
 	border-radius: 12px;
+}
+
+#input:focus {
+    outline-color: #B2B3B4;
 }
 
 body {
@@ -95,7 +99,11 @@ div:not(#except) {
 .dark-mode #input {
 	background-color: #3C3F45;
 	color: white;
-	border: 1px solid #2F3136;
+	border: none;
+}
+
+.dark-mode #input:focus {
+	outline-width: 1px;
 }
 
 .dark-mode table {
