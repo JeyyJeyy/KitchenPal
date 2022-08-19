@@ -50,6 +50,14 @@ rassembler logo + recap perimé dans div contrasté du fond ?
 sans risque (pastille vert) : aucun impact sur le score ; risque limité (pastille jaune) : -6 points/additif ; risque modéré (pastille orange) : -15 points/additif ; à risque (pastille rouge) : -30 points (avec un score maximum de 49/100).
 score boisson: En effet, un liquide est assimilé tout de suite par l’organisme et son indice glycémique est élevé. C’est pourquoi les calories et sucres liquides sont pénalisés plus sévèrement.
 
+plus besoin await axios.get(address)
+                        .then(res => {
+                            let name = res.data.product.product_name_fr;
+                            req.body["nom"] = name;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+
 60% 75 nutri score
-bio = +10 si pas data pas bio + si additips a partir de jaune pas bio 
 30% additifs (si additifs a risque pas de moins juste limite a 49 en prenant en compte le nutriscore et le bio)

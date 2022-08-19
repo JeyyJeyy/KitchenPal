@@ -126,12 +126,13 @@ function downloading(file, bar) {
         });
         res.on("end", () => {
             try {
+                obj = JSON.parse(body);
+                obj["yuka-score"] = yuka(obj.product);
+                body = JSON.stringify(obj);
                 fs.writeFile(`./products/${bar}.json`, body, (err) => {
                     if (err) console.log(err);
                 });
-                obj = JSON.parse(body);
                 let img = obj.product.selected_images.front.display.fr;
-                console.log(img)
                 https.get(img, (res) => {
                     var data = new Stream();
                     res.on('data', function (chunk) {
@@ -244,4 +245,65 @@ function ordonner() {
             if (err) console.log(err);
         });
     });
+}
+
+function yuka(prod) {
+    let bio, score;
+    let neg = 0;
+    let nutri = prod.nutriscore_score;
+    if (nutri) {
+        if (prod._keywords.includes('boisson')) {
+            if (nutri <= 1) {
+                switch (nutri) {
+                    case -4:
+                        score = 80
+                    case -3:
+                        score = 77
+                    case -2:
+                        score = 74
+                    case -1:
+                        score = 71
+                    case 0:
+                        score = 68
+                    case 1:
+                        score = 65
+                }
+                score *= 0.6;
+            } else if (nutri <= 5) {
+                neg = 8 * (nutri-2);
+                score = (57 - neg) * 0.6;
+            } else if (nutri <= 9) {
+                neg = 4 * (nutri-6);
+                score = (15 - neg) * 0.6;
+            } else {
+                score = 0;
+            }
+        } else if (prod._keywords.includes('sucre') || prod._keywords.includes('proteine') || prod._keywords.includes('additif') || prod._keywords.includes('animaux') || prod._keywords.includes('substitut') || prod._keywords.includes('complement')) {
+            return "?";
+        } else {
+            if (nutri <= -1) {
+                if (nutri == -1) {
+                    score = 90 * 0.6;
+                } else {
+                    score = 100 * 0.6;
+                }
+            } else if (nutri <= 11) {
+                neg = 5 * nutri;
+                score = (80 - neg) * 0.6;
+            } else if (nutri >= 19) {
+                score = 0;
+            } else {
+                neg = 2 * (nutri - 11);
+                score = (15 - neg) * 0.6;
+            }
+        }
+    } else {
+        return "?";
+    }
+    if (prod.nova_group && prod.nova_group <= 1) {
+        score += 10;
+    }
+    //AJOUTER CALCUL ADDITIFS
+    score = 0 * 0.6 + 0 * 0.3 + bio;
+    return score;
 }
