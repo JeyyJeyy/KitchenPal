@@ -224,7 +224,7 @@ function buildHtml(id, dat) {
             '</div><br><center style="overflow-x:auto;"><div name="product" class="centered"><label style="display: block; margin: auto;" align="left"><h4 style="display: inline" align="left">Ingrédients du produit: </h4>(' + prod.additives_n + ' allergènes)</label><p align="left">' + ing_text + '</p>' +
             '</div></center><br><br><center><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="app.js"></script></body></html>';
     } else {
-        file += '<center><h2>Produit inconnu</h2></center>';
+        file += '<center><h2>Produit inconnu</h2></center><center style="position: fixed;bottom: 0;right: 0;left: 0"><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="app.js"></script></body></html>';
     }
     return file;
 };
@@ -254,7 +254,7 @@ function yuka(prod) {
     let neg = 0;
     let nutri = prod.nutriscore_score;
     if (nutri) {
-        if (prod._keywords.includes('boisson')) {
+        if (prod.nutriscore_data.is_beverage == 1) {
             if (nutri <= 1) {
                 switch (nutri) {
                     case -4:
@@ -302,7 +302,7 @@ function yuka(prod) {
     } else {
         return "?";
     }
-    if (prod.nova_group && prod.nova_group <= 1) {
+    if (prod.nova_group && prod.nova_group == 1) {
         score += 10;
     }
     if (prod.additives_n) {
