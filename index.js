@@ -132,17 +132,19 @@ function downloading(file, bar) {
                 fs.writeFile(`./products/${bar}.json`, body, (err) => {
                     if (err) console.log(err);
                 });
-                let img = obj.product.selected_images.front.display.fr;
-                https.get(img, (res) => {
-                    var data = new Stream();
-                    res.on('data', function (chunk) {
-                        data.push(chunk);
-                    });
-                    res.on('end', function () {
-                        fs.writeFileSync(`./assets/${bar}.jpg`, data.read());
-                    });
-                })
-                console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved product asset');
+                if (!fs.existsSync(`./assets/${bar}.jpg`)) {
+                    let img = obj.product.selected_images.front.display.fr;
+                    https.get(img, (res) => {
+                        var data = new Stream();
+                        res.on('data', function (chunk) {
+                            data.push(chunk);
+                        });
+                        res.on('end', function () {
+                            fs.writeFileSync(`./assets/${bar}.jpg`, data.read());
+                        });
+                    })
+                    console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved product asset');
+                }
             } catch (err) {
                 console.log(err);
             };
@@ -270,10 +272,10 @@ function yuka(prod) {
                 }
                 score *= 0.6;
             } else if (nutri <= 5) {
-                neg = 8 * (nutri-2);
+                neg = 8 * (nutri - 2);
                 score = (57 - neg) * 0.6;
             } else if (nutri <= 9) {
-                neg = 4 * (nutri-6);
+                neg = 4 * (nutri - 6);
                 score = (15 - neg) * 0.6;
             } else {
                 score = 0;
@@ -303,7 +305,8 @@ function yuka(prod) {
     if (prod.nova_group && prod.nova_group <= 1) {
         score += 10;
     }
-    //AJOUTER CALCUL ADDITIFS
-    score = 0 * 0.6 + 0 * 0.3 + bio;
+    if (prod.additives_n) {
+        score -= (prod.additives_n * 8);
+    }
     return score;
 }

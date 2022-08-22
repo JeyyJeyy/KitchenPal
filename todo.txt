@@ -28,12 +28,6 @@ fruits
 shift alt f pour format
 
 taff pour ajouter données manquantes sur openfoodfact
-si pas ingredients pas de score et Alcools
-Sucre
-Laits infantiles
-Suppléments protéinés
-Nourriture pour animaux
-Compléments alimentaires
 Handle produits etrangers
 handle code barre inconnus 
 handle produits sans valeur nutri
