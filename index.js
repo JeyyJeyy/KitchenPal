@@ -27,6 +27,9 @@ app.get('/home', function (req, res) {
     res.sendFile('home.html', { root: './webpage/' });
 })
 app.get('/product', function (req, res) {
+    if (req.query.date.length == 7) {
+        req.query.date = "0" + req.query.date;
+    }
     (async () => {
         var html = await buildHtml(req.query.id, req.query.date);
         res.end(html);
@@ -211,15 +214,15 @@ function buildHtml(id, dat) {
             prod.nova_groups = "unknown";
         }
         let scoreurl;
-        if(produit2["yuka-score"] <= 20){
+        if (produit2["yuka-score"] <= 20) {
             scoreurl = "bordred.png";
-        }else if(produit2["yuka-score"] <= 40){
+        } else if (produit2["yuka-score"] <= 40) {
             scoreurl = "bordor.png";
-        }else if(produit2["yuka-score"] <= 60){
+        } else if (produit2["yuka-score"] <= 60) {
             scoreurl = "bordyel.png";
-        }else if(produit2["yuka-score"] <= 80){
+        } else if (produit2["yuka-score"] <= 80) {
             scoreurl = "bordgr.png";
-        }else{
+        } else {
             scoreurl = "bordgr2.png";
         }
 
