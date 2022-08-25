@@ -57,5 +57,6 @@ plus besoin await axios.get(address)
 60% 75 nutri score
 30% additifs (si additifs a risque pas de moins juste limite a 49 en prenant en compte le nutriscore et le bio)
 ajouter liste additifs sous ingredient
-ajouter script pour dl auto tous les jours les json des produits
+ajouter script pour dl auto tous les jours et a chaques demarrages les json des produits et images si "last_modified_t" pas pareil
 pb score vert bonbons ???????????????,,
+Ajouter icons comme yuka

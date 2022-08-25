@@ -214,13 +214,11 @@ function buildHtml(id, dat) {
             prod.nova_groups = "unknown";
         }
         let scoreurl;
-        if (produit2["yuka-score"] <= 20) {
+        if (produit2["yuka-score"] <= 25) {
             scoreurl = "bordred.png";
-        } else if (produit2["yuka-score"] <= 40) {
+        } else if (produit2["yuka-score"] <= 50) {
             scoreurl = "bordor.png";
-        } else if (produit2["yuka-score"] <= 60) {
-            scoreurl = "bordyel.png";
-        } else if (produit2["yuka-score"] <= 80) {
+        } else if (produit2["yuka-score"] <= 75) {
             scoreurl = "bordgr.png";
         } else {
             scoreurl = "bordgr2.png";
