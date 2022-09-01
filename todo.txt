@@ -64,3 +64,4 @@ Ajouter icons comme yuka
 bouton accueil produit inconnu
 tolowercase ingredients puis maj premiere lettre et replace __ en rien
 trouver solution dl images et infos produits qui s'arettent si pas assez rapide
+si il faut rajouter dans url index (fetch.js i++ a chaques produit) pour identifier produits dans infos
