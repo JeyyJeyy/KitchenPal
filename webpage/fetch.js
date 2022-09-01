@@ -29,14 +29,10 @@ fetch("data.json")
                 url = 'ok.png';
                 non++
             }
-            let pic = product.barcode + '.jpg';
-            if (!fs.existsSync(`./webpage/icons/${product.barcode}.jpg`)) {
-                pic = "no-product.png";
-            }
             out += `
          <tr>
             <td><img src='${url}'></td>
-            <td style="font-size: 12px;"> <img style='border-radius: 15px; height: 150px; width: 150px; object-fit: contain;' src="${product.barcode}.jpg"> <br> ${product.barcode} </td>
+            <td style="font-size: 12px;"> <img style='border-radius: 15px; height: 150px; width: 150px; object-fit: contain;' src="${product.barcode}.jpg" onerror="this.onerror=null; this.src='no-product.png'"> <br> ${product.barcode} </td>
             <td>${product.nom}</td>
             <td>${product.date}<br>${diffDays}</td>
             <td>${product.quantity}</td>
