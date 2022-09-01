@@ -29,7 +29,10 @@ fetch("data.json")
                 url = 'ok.png';
                 non++
             }
-            console.log(dat)
+            let pic = product.barcode + '.jpg';
+            if (!fs.existsSync(`./webpage/icons/${product.barcode}.jpg`)) {
+                pic = "no-product.png";
+            }
             out += `
          <tr>
             <td><img src='${url}'></td>

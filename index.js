@@ -220,14 +220,18 @@ function buildHtml(id) {
         } else {
             scoreurl = "bordgr2.png";
         }
-        if(!prod.nutriscore_grade){
+        if (!prod.nutriscore_grade) {
             prod.nutriscore_grade = "unknown";
+        }
+        let pic = das[index].barcode + '.jpg';
+        if (!fs.existsSync(`./webpage/icons/${das[index].barcode}.jpg`)) {
+            pic = "no-product.png";
         }
         file += '<center style="overflow-x:auto;"><table>' +
             '<thead><tr><th>Consommable</th><th>Image</th><th>Nom du produit</th>' +
             '<th>Date limite</th><th>Quantité</th><th>Commande</th></tr><tr>' +
             '<td><img src=' + url + '></td>' +
-            '<td style="font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src="' + das[index].barcode + '.jpg"> <br> ' + das[index].barcode + ' </td>' +
+            '<td style="font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src="' + pic + '"> <br> ' + das[index].barcode + ' </td>' +
             '<td>' + das[index].nom + '</td>' +
             '<td>' + das[index].date + '<br>' + diffDays + '</td>' +
             '<td>' + das[index].quantity + '</td>' +
