@@ -60,3 +60,7 @@ ajouter liste additifs sous ingredient
 ajouter script pour dl auto tous les jours et a chaques demarrages les json des produits et images si "last_modified_t" pas pareil
 pb score vert bonbons ???????????????,,
 Ajouter icons comme yuka
+
+bouton accueil produit inconnu
+tolowercase ingredients puis maj premiere lettre et replace __ en rien
+trouver solution dl images et infos produits qui s'arettent si pas assez rapide

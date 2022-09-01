@@ -223,7 +223,9 @@ function buildHtml(id, dat) {
         } else {
             scoreurl = "bordgr2.png";
         }
-
+        if(!prod.nutriscore_grade){
+            prod.nutriscore_grade = "unknown";
+        }
         file += '<center style="overflow-x:auto;"><table>' +
             '<thead><tr><th>Consommable</th><th>Image</th><th>Nom du produit</th>' +
             '<th>Date limite</th><th>Quantité</th><th>Commande</th></tr><tr>' +
