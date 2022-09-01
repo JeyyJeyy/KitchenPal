@@ -27,11 +27,8 @@ app.get('/home', function (req, res) {
     res.sendFile('home.html', { root: './webpage/' });
 })
 app.get('/product', function (req, res) {
-    if (req.query.date.length == 7) {
-        req.query.date = "0" + req.query.date;
-    }
     (async () => {
-        var html = await buildHtml(req.query.id, req.query.date);
+        var html = await buildHtml(req.query.id);
         res.end(html);
     })();
 })
@@ -173,16 +170,16 @@ function date(date) {
     return date[0] + '/' + date[1] + '/' + date[2];
 }
 
-function buildHtml(id, dat) {
+function buildHtml(id) {
     let data = fs.readFileSync('data.json', 'utf8');
     let das = JSON.parse(data);
-    let date2 = dat.slice(0, 2) + '/' + dat.slice(2, 4) + '/' + dat.slice(4, 8);
-    let index;
+    let index, dat;
     let file = '<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="styles.css"><link rel="icon" href="icon.ico" /><title>Stock-Manager</title></head>' +
         '<body><br><label><input name="mode" type="checkbox" style="width: 20px; height: 20px;" onclick="darkmode()">  Dark mode</label><br><center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v2.0.0</h1></center><br>';
     das.forEach(function (value) {
-        if (value.barcode == id && value.date == date2) {
+        if (value.barcode == id) {
             index = das.indexOf(value);
+            dat = das[index].date;
         }
     })
     if (index != null) {

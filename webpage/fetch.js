@@ -29,6 +29,7 @@ fetch("data.json")
                 url = 'ok.png';
                 non++
             }
+            console.log(dat)
             out += `
          <tr>
             <td><img src='${url}'></td>
@@ -36,7 +37,7 @@ fetch("data.json")
             <td>${product.nom}</td>
             <td>${product.date}<br>${diffDays}</td>
             <td>${product.quantity}</td>
-            <td><button onclick="added(${product.barcode},${dat})"><b>Ajouter</b></button><br><br><button onclick="delet(${product.barcode},${dat})"><b>Supprimer</b></button><br><br><button onclick="getinfos(${product.barcode},${dat})"><b>Infos</b></button></td>
+            <td><button onclick="added(${product.barcode},${dat})"><b>Ajouter</b></button><br><br><button onclick="delet(${product.barcode},${dat})"><b>Supprimer</b></button><br><br><button onclick="getinfos(${product.barcode})"><b>Infos</b></button></td>
          </tr>
       `;
         }

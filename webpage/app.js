@@ -33,8 +33,8 @@ function added(bar, date) {
    location.reload();
 }
 
-function getinfos(bar, date) {
-   location.href = 'product?id=' + bar + '&date=' + date;
+function getinfos(bar) {
+   location.href = 'product?id=' + bar;
 }
 
 function darkmode() {
