@@ -276,7 +276,7 @@ function yuka(prod) {
     let score;
     let neg = 0;
     let nutri = prod.nutriscore_score;
-    if (nutri) {
+    if (nutri || nutri == 0) {
         if (prod.nutriscore_data.is_beverage == 1) {
             if (nutri <= 1) {
                 switch (nutri) {
