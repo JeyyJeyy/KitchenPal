@@ -329,11 +329,11 @@ function yuka(prod) {
         score += 10;
     }
     if (prod.additives_n) {
-        if (prod.additives_n >= 4) {
-            score -= 20;
+        if (prod.additives_n >= 5) {
+            score += 0;
         } else {
-            score -= (prod.additives_n * 5);
+            score += 6 * (5 - prod.additives_n);
         }
     }
-    return score;
+    return Math.round(score);
 }
