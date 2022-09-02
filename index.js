@@ -316,11 +316,15 @@ function yuka(prod) {
     } else {
         return "?";
     }
-    if (prod.nova_group && prod.nova_group == 1) {
+    if (prod.nova_group && prod.nova_group >= 2) {
         score += 10;
     }
     if (prod.additives_n) {
-        score -= (prod.additives_n * 8);
+        if (prod.additives_n >= 4) {
+            score -= 20;
+        } else {
+            score -= (prod.additives_n * 5);
+        }
     }
     return score;
 }
