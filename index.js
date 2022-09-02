@@ -15,14 +15,14 @@ app.use(express.static('webpage'));
 app.use(express.static('webpage/icons/'));
 app.use(express.static('assets'));
 
-fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
+/*fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
     let das = JSON.parse(data);
     das.forEach(function (value) {
         let address = `https://fr.openfoodfacts.org/api/v0/product/${value.barcode}.json`;
         downloading(address, value.barcode);
         console.log(value.barcode + ' fichiers téléchargés')
     })
-});
+});*/
 
 app.get('/', function (req, res) {
     res.redirect('/home');

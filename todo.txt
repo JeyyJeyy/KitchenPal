@@ -62,6 +62,5 @@ Ajouter icons comme yuka (emotes etc)
 
 trouver solution dl images et infos produits qui s'arettent si pas assez rapide
 si il faut rajouter dans url index (fetch.js i++ a chaques produit) pour identifier produits dans infos
-redl produits ou "yuka-score":"?" et ou "status_verbose":"product found"} (pas score)
 changer image produits qd pas belles
 handle my score inconnus
