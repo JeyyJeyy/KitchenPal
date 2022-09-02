@@ -56,14 +56,12 @@ plus besoin await axios.get(address)
 
 60% 75 nutri score
 30% additifs (si additifs a risque pas de moins juste limite a 49 en prenant en compte le nutriscore et le bio)
-ajouter liste additifs sous ingredient
+ajouter liste additifs et allergenes sous ingredient
 ajouter script pour dl auto tous les jours et a chaques demarrages les json des produits et images si "last_modified_t" pas pareil
-pb score vert bonbons ???????????????,,
-Ajouter icons comme yuka
+Ajouter icons comme yuka (emotes etc)
 
-tolowercase ingredients puis maj premiere lettre et replace __ en rien
 trouver solution dl images et infos produits qui s'arettent si pas assez rapide
 si il faut rajouter dans url index (fetch.js i++ a chaques produit) pour identifier produits dans infos
-ajouter allergenes sous ingredients
-redl produits ou "yuka-score":"?" et ou pas yuka score
+redl produits ou "yuka-score":"?" et ou "status_verbose":"product found"} (pas score)
 changer image produits qd pas belles
+handle my score inconnus

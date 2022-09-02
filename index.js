@@ -87,7 +87,7 @@ app.post('/posts', function (req, res, next) {
     });
 });
 
-app.listen(8080, 'localhost', () => {
+app.listen(8080, '192.168.0.6', () => {
     console.log("\x1b[1m", 'Stock-Manager v2.0.0: [Server enabled on port 8080]')
 })
 
@@ -264,7 +264,7 @@ function ordonner() {
 }
 
 function yuka(prod) {
-    let bio, score;
+    let score;
     let neg = 0;
     let nutri = prod.nutriscore_score;
     if (nutri) {
@@ -294,7 +294,7 @@ function yuka(prod) {
             } else {
                 score = 0;
             }
-        } else if (prod._keywords.includes('sucre') || prod._keywords.includes('proteine') || prod._keywords.includes('additif') || prod._keywords.includes('animaux') || prod._keywords.includes('substitut') || prod._keywords.includes('complement')) {
+        } else if (prod._keywords.includes('proteine') || prod._keywords.includes('additif') || prod._keywords.includes('animaux') || prod._keywords.includes('substitut') || prod._keywords.includes('complement')) {
             return "?";
         } else {
             if (nutri <= -1) {
