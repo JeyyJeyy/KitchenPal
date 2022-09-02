@@ -66,3 +66,4 @@ trouver solution dl images et infos produits qui s'arettent si pas assez rapide
 si il faut rajouter dans url index (fetch.js i++ a chaques produit) pour identifier produits dans infos
 ajouter allergenes sous ingredients
 redl produits ou "yuka-score":"?" et ou pas yuka score
+changer image produits qd pas belles

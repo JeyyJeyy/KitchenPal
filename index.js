@@ -203,6 +203,7 @@ function buildHtml(id) {
             diffDays = 'dans ' + diffDays + ' jours';
             url = 'ok.png';
         }
+        ing_text = ing_text.replace(/_/gi, '');
         if (!ing_text) {
             ing_text = "Aucun ingrédient dans la base de donnée pour ce produit.";
             prod.additives_n = "0";
@@ -228,14 +229,14 @@ function buildHtml(id) {
             '<th>Date limite</th><th>Quantité</th><th>Commande</th></tr><tr>' +
             '<td><img src=' + url + '></td>' +
             '<td style="font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src="' + das[index].barcode + '.jpg" onerror="this.onerror=null; this.src=`no-product.png`"> <br> ' + das[index].barcode + ' </td>' +
-                '<td>' + das[index].nom + '</td>' +
-                '<td>' + das[index].date + '<br>' + diffDays + '</td>' +
-                '<td>' + das[index].quantity + '</td>' +
-                '<td><button onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button><br><br><button onclick="gohome()"><b>Retour</b></button></td>' +
-                '</tr></thead><tbody id="data-output"></tbody></table></center><br>' +
-                '<center style="overflow-x:auto;"><div name="outer" class="centered"><label style="display: block; margin: auto;"><h4 align="left">Scores du produit: </h4></label><div class="middle"><div class="inner" style="border: none;"><img style="width:200px;" src="' + scoreurl + '"><br><b>Score</b><br>Note personnelle</div><div class="inner" style="border: none;"><img style="width:200px;" src="nutriscore-' + prod.nutriscore_grade + '.svg"><br><b>Nutri-score</b><br>Qualité nutritionnelle</div><div class="inner" style="border: none;"><img style="width:200px;margin:auto" src="ecoscore-' + prod.ecoscore_grade + '.svg"><br><b>Eco-score</b><br>Impact environnemental</div><div class="inner" style="border: none;"><img src="nova-group-' + prod.nova_groups + '.svg"><br><b>Nova-score</b><br>Degré de transformation des aliments</div></div></center>' +
-                '</div><br><center style="overflow-x:auto;"><div name="product" class="centered"><label style="display: block; margin: auto;" align="left"><h4 style="display: inline" align="left">Ingrédients du produit: </h4>(' + prod.additives_n + ' additifs)</label><p align="left">' + ing_text + '</p>' +
-                '</div></center><br><br><center><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="app.js"></script></body></html>';
+            '<td>' + das[index].nom + '</td>' +
+            '<td>' + das[index].date + '<br>' + diffDays + '</td>' +
+            '<td>' + das[index].quantity + '</td>' +
+            '<td><button onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button><br><br><button onclick="gohome()"><b>Retour</b></button></td>' +
+            '</tr></thead><tbody id="data-output"></tbody></table></center><br>' +
+            '<center style="overflow-x:auto;"><div name="outer" class="centered"><label style="display: block; margin: auto;"><h4 align="left">Scores du produit: </h4></label><div class="middle"><div class="inner" style="border: none;"><img style="width:200px;" src="' + scoreurl + '"><br><b>Score</b><br>Note personnelle</div><div class="inner" style="border: none;"><img style="width:200px;" src="nutriscore-' + prod.nutriscore_grade + '.svg"><br><b>Nutri-score</b><br>Qualité nutritionnelle</div><div class="inner" style="border: none;"><img style="width:200px;margin:auto" src="ecoscore-' + prod.ecoscore_grade + '.svg"><br><b>Eco-score</b><br>Impact environnemental</div><div class="inner" style="border: none;"><img src="nova-group-' + prod.nova_groups + '.svg"><br><b>Nova-score</b><br>Degré de transformation des aliments</div></div></center>' +
+            '</div><br><center style="overflow-x:auto;"><div name="product" class="centered"><label style="display: block; margin: auto;" align="left"><h4 style="display: inline" align="left">Ingrédients du produit: </h4>(' + prod.additives_n + ' additifs)</label><p align="left">' + ing_text + '</p>' +
+            '</div></center><br><br><center><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="app.js"></script></body></html>';
     } else {
         file += '<center><h2>Produit inconnu</h2><br><button onclick="gohome()"><b>Retour</b></button></center><center style="position: fixed;bottom: 0;right: 0;left: 0"><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="app.js"></script></body></html>';
     }
