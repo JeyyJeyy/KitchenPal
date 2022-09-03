@@ -8,6 +8,56 @@
 	margin: 0 auto;
 }
 
+#tooltip {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  }
+  
+  /* Tooltip text */
+  #tooltip .tooltiptext {
+	visibility: hidden;
+	width: 120px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	padding: 5px 0;
+	border-radius: 6px;
+  
+	/* Position the tooltip text */
+	position: absolute;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -60px;
+	font-size: 12px;
+	font-family: Arial, sans-serif;
+  
+	/* Fade in tooltip */
+	opacity: 0;
+  }
+  
+  /* Tooltip arrow */
+  #tooltip .tooltiptext::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  #tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+  }
+
+#boxed {
+	background-color: white;
+	border-radius: 15px;
+}
+
 #nova {
 	display: flex;
 	align-items: center;
@@ -133,6 +183,10 @@ div:not(#except) {
 
 .dark-mode #input:focus {
 	outline-width: 1px;
+}
+
+.dark-mode #boxed {
+	background-color: #3C3F45;
 }
 
 .dark-mode table {
