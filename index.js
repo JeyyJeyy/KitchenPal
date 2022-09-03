@@ -96,7 +96,7 @@ app.post('/posts', function (req, res, next) {
 });
 
 app.listen(8080, '10.0.0.160', () => {
-    console.log("\x1b[1m", 'Stock-Manager v2.3.0: [Server enabled on port 8080]')
+    console.log("\x1b[1m", 'Stock-Manager v2.5.0: [Server enabled on port 8080]')
 })
 
 
@@ -183,7 +183,7 @@ function buildHtml(num) {
     let das = JSON.parse(data);
     let id, dat;
     let file = '<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="styles.css"><link rel="icon" href="icon.ico" /><title>Stock-Manager</title></head>' +
-        '<body><br><label><input name="mode" type="checkbox" style="width: 20px; height: 20px;" onclick="darkmode()">  Dark mode</label><br><center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v2.3.0</h1></center><br>';
+        '<body><br><label><input name="mode" type="checkbox" style="width: 20px; height: 20px;" onclick="darkmode()">  Dark mode</label><br><center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v2.5.0</h1></center><br>';
     try {
         dat = das[num].date;
         id = das[num].barcode;
