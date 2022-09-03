@@ -17,13 +17,13 @@ function delet(bar, date) {
    location.reload();
 }
 
-function added(bar, date) {
+function added(bar, date, nb) {
    const response = fetch('/posts', {
       method: 'POST',
       body: JSON.stringify({
          command: "add",
          barcode: bar,
-         quantity: 1,
+         quantity: nb,
          date: date.toString()
       }),
       headers: {
@@ -91,4 +91,12 @@ function search() {
          }
       }
    }
+}
+
+function submit(){
+   let dat = document.getElementById("date").value;
+   let quant = document.getElementById("quantity").value;
+   let bar = document.getElementById("barcode").value;
+   dat = dat.slice(8,10)+'/'+dat.slice(5,7)+'/'+dat.slice(0,4);
+   added(bar, dat, quant);
 }

@@ -25,12 +25,19 @@ app.get('/data.json', function (req, res) {
 app.get('/home', function (req, res) {
     res.sendFile('home.html', { root: './webpage/' });
 })
+app.get('/panel', function (req, res) {
+    res.sendFile('panel.html', { root: './webpage/' });
+})
+app.get('/about', function (req, res) {
+    res.sendFile('about.html', { root: './webpage/' });
+})
 app.get('/product', function (req, res) {
     var html = stock.buildHtml(req.query.id);
     res.end(html);
 })
 
 app.post('/posts', function (req, res, next) {
+    console.log(req.body)
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let obj = JSON.parse(data);
         let num = Number(req.body.quantity);

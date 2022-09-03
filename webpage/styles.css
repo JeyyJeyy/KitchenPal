@@ -4,6 +4,26 @@
 	box-sizing: border-box;
 }
 
+form.form-example {
+    display: table;
+	padding: 20px;
+	width: 500px;
+	text-align: left;
+}
+
+div.form-example {
+    display: table-row;
+}
+
+label[name="format"], input[name="format"] {
+    display: table-cell;
+    margin-bottom: 10px;
+}
+
+label[name="format"] {
+    padding-right: 10px;
+}
+
 .centered {
 	margin: 0 auto;
 }
@@ -57,7 +77,7 @@
 	border-radius: 15px;
 }
 
-label {
+label:not(#check) {
 	background-color: #F2F3F5;
 	border-radius: 12px;
 	padding: 10px;
@@ -142,7 +162,7 @@ div.inner {
 	border: none
 }
 
-button {
+button:not(#noid) {
 	background-color: #F2F3F5;
 	border: 1px solid rgba(27, 31, 35, 0.15);
 	border-radius: 6px;
@@ -154,12 +174,12 @@ button {
 	transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
 }
 
-button:hover {
+button:hover:not(#noid) {
 	background-color: #DDDDDD;
 	transition-duration: 0.3s;
 }
 
-label {
+label:not(#check) {
 	margin: 20px;
 	color: #555555;
 	font-size: 20px;
@@ -172,12 +192,12 @@ div:not(#except) {
 }
 
 .dark-mode {
-	background-color: #46484C;
+	background-color: #2F3033;
 	color: white;
 }
 
 .dark-mode div:not(#except) {
-	border: 1px solid #46484C;
+	border: 1px solid #2F3033;
 }
 
 .dark-mode #input {
@@ -194,23 +214,23 @@ div:not(#except) {
 	background-color: #3C3F45;
 }
 
-.dark-mode label {
-	background-color: #2F3136;
+.dark-mode label:not(#check) {
+	background-color: #222326;
 	padding: 10px;
 }
 
 .dark-mode table {
-	border: 1px solid #46484C;
+	border: 1px solid #2F3033;
 }
 
 .dark-mode table th {
-	background-color: #2F3136;
-	border: thin solid #46484C;
+	background-color: #222326;
+	border: thin solid #2F3033;
 	color: white;
 }
 
 .dark-mode table td {
-	border: thin solid #46484C;
+	border: thin solid #2F3033;
 	background-color: #3C3F45;
 	color: white;
 }
@@ -219,12 +239,12 @@ div:not(#except) {
 	filter: grayscale(10%);
 }
 
-.dark-mode label {
+.dark-mode label:not(#check) {
 	color: white;
 }
 
-.dark-mode button {
-	background-color: #2F3136;
+.dark-mode button:not(#noid) {
+	background-color: #232426;
 	border: 1px solid rgba(27, 31, 35, 0.15);
 	border-radius: 6px;
 	color: white;
@@ -235,8 +255,8 @@ div:not(#except) {
 	transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
 }
 
-.dark-mode button:hover {
-	background-color: #44464C;
+.dark-mode button:hover:not(#noid) {
+	background-color: #3D3F44;
 }
 
 table {

@@ -38,3 +38,7 @@ ajouter liste additifs et allergenes sous ingredient avec noms et desc
 Ajouter icons comme yuka (emotes etc)
 
 page infos avec description scores etc
+
+
+page panel ajouter titre section ajout
+ajouter section delete en dessous pareil adapter fonction delet pour quantité perso
