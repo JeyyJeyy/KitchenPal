@@ -16,8 +16,14 @@ fetch("data.json")
             const date2 = Date.now();
             const diffTime = Math.abs(date2 - date1);
             let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            if (diffDays == 0 || diffDays == 1) {
-                diffDays = 'aujourd\'hui';
+            if (diffDays <= 6) {
+                if (diffDays >= 0 && diffDays == 1) {
+                    diffDays = 'aujourd\'hui';
+                }else if (date1 <= date2) {
+                    diffDays = 'depuis ' + diffDays + ' jours';
+                } else {
+                    diffDays = 'dans ' + diffDays + ' jours';
+                }
                 url = 'equal.png';
                 auj++
             } else if (date1 <= date2) {

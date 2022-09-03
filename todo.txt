@@ -54,9 +54,7 @@ plus besoin await axios.get(address)
                             console.log(error);
                         });
 
-60% 75 nutri score
-30% additifs (si additifs a risque pas de moins juste limite a 49 en prenant en compte le nutriscore et le bio)
-ajouter liste additifs et allergenes sous ingredient
+ajouter liste additifs et allergenes sous ingredient avec noms et desc
 ajouter script pour dl auto tous les jours et a chaques demarrages les json des produits et images si "last_modified_t" pas pareil
 Ajouter icons comme yuka (emotes etc)
 
