@@ -10,7 +10,7 @@
 
 <body>
     <br>
-    <label style="margin-left: 10px; width: 90px; height: 30px; font-size: 14px; background-color: #232426;"><input
+    <label style="margin-left: 10px; width: 90px; height: 30px; font-size: 14px;"><input
             name="mode" type="checkbox" id="check" onclick="darkmode()"> Dark mode</label>
     <div id="except" style="display: inline; position: absolute; right: 10px; top: 10px"><button style="width:125px;"
             onclick="window.location.href='/panel';">Gérer les produits</button>&nbsp;&nbsp;<button
@@ -22,9 +22,9 @@
     <br>
     <center>
         <div style="display: flex;">
-            <div style="flex: 1; margin: auto; background-color: #3C3F45; border-radius: 15px; width: 550px; padding: 10px;"
-                id="except">
-                <label style="display: block; margin: auto; margin-bottom:10px" align="left">
+            <div style="flex: 1; margin: auto; border-radius: 15px; width: 560px; padding: 10px;"
+                id="except" class="infos">
+                <label id="title" style="display: block; margin: auto; margin-bottom:10px" align="left">
                     <h4 style="display: inline" align="left">Ajouter un aliment: </h4>
                 </label>
                 <div style="margin: 0;" class="form-example">
@@ -47,10 +47,10 @@
                     </div>
                 </div>
             </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <div style="flex: 1; margin: auto; background-color: #3C3F45; border-radius: 15px; width: 550px; padding: 10px;"
-                id="except">
-                <label style="display: block; margin: auto; margin-bottom:10px" align="left">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div style="flex: 1; margin: auto; border-radius: 15px; width: 560px; padding: 10px;"
+                id="except" class="infos">
+                <label id="title" style="display: block; margin: auto; margin-bottom:10px" align="left">
                     <h4 style="display: inline" align="left">Supprimer un aliment: </h4>
                 </label>
                 <div style="margin: 0;" class="form-example">

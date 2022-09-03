@@ -72,9 +72,20 @@ label[name="format"] {
 }
 
 label:not(#check) {
-	background-color: #F2F3F5;
 	border-radius: 12px;
 	padding: 10px;
+}
+
+label {
+	background-color: #EAEAEA;
+}
+
+#check {
+	background-color: #FFFFFF;
+}
+
+#title {
+	background-color: #EAEAEA;
 }
 
 #nova {
@@ -141,6 +152,10 @@ body {
 	background-color: #939496;
 }
 
+.infos {
+	background-color: white;
+}
+
 div.outer {
 	display: table;
 	border: none
@@ -194,6 +209,10 @@ div:not(#except) {
 	border: 1px solid #2F3033;
 }
 
+.dark-mode #check {
+	background-color: #3C3F45;
+}
+
 .dark-mode #input {
 	background-color: #3C3F45;
 	color: white;
@@ -211,6 +230,10 @@ div:not(#except) {
 .dark-mode label:not(#check) {
 	background-color: #222326;
 	padding: 10px;
+}
+
+.dark-mode label {
+	background-color: #3D3F44;
 }
 
 .dark-mode table {
@@ -251,6 +274,10 @@ div:not(#except) {
 
 .dark-mode button:hover {
 	background-color: #3D3F44;
+}
+
+.dark-mode .infos {
+	background-color: #3C3F45;
 }
 
 table {
