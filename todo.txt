@@ -34,15 +34,6 @@ emballage
 
 sans risque (pastille vert) : aucun impact sur le score ; risque limité (pastille jaune) : -6 points/additif ; risque modéré (pastille orange) : -15 points/additif ; à risque (pastille rouge) : -30 points (avec un score maximum de 49/100).
 
-plus besoin await axios.get(address)
-                        .then(res => {
-                            let name = res.data.product.product_name_fr;
-                            req.body["nom"] = name;
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-
 ajouter liste additifs et allergenes sous ingredient avec noms et desc
 ajouter script pour dl auto tous les jours et a chaques demarrages les json des produits et images si "last_modified_t" pas pareil
 Ajouter icons comme yuka (emotes etc)
