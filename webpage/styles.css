@@ -58,6 +58,12 @@
 	border-radius: 15px;
 }
 
+label {
+	background-color: #F2F3F5;
+	border-radius: 12px;
+	padding: 10px;
+}
+
 #nova {
 	display: flex;
 	align-items: center;
@@ -189,18 +195,23 @@ div:not(#except) {
 	background-color: #3C3F45;
 }
 
+.dark-mode label {
+	background-color: #2F3136;
+	padding: 10px;
+}
+
 .dark-mode table {
 	border: 1px solid #2F3136;
 }
 
 .dark-mode table th {
-	background-color: #36393F;
-	border: thin solid #2B2B2B;
+	background-color: #34373A;
+	border: thin solid #2F3136;
 	color: white;
 }
 
 .dark-mode table td {
-	border: thin solid #2B2B2B;
+	border: thin solid #2F3136;
 	background-color: #3C3F45;
 	color: white;
 }
@@ -232,7 +243,7 @@ table {
 
 table th {
 	padding: 10px 0;
-	background-color: #E7E9EB;
+	background-color: #EAEAEA;
 	border: thin solid #F2F3F5;
 	color: #555;
 }
