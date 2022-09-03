@@ -39,7 +39,7 @@ fetch("data.json")
             out += `
          <tr>
             <td><img src='${url}'></td>
-            <td style="font-size: 12px;"> <img style='border-radius: 15px; height: 150px; width: 150px; object-fit: contain;' src="${product.barcode}.jpg" onerror="this.onerror=null; this.src='no-product.png'"> <br> ${product.barcode} </td>
+            <td style="font-size: 12px;"><a href="/product?id=${ind}"><img style='border-radius: 15px; height: 150px; width: 150px; object-fit: contain;' src="${product.barcode}.jpg" onerror="this.onerror=null; this.src='no-product.png'"></a><br> ${product.barcode} </td>
             <td>${product.nom}</td>
             <td>${product.date}<br>${diffDays}</td>
             <td>${product.quantity}</td>

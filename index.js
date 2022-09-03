@@ -208,7 +208,7 @@ function buildHtml(num) {
             diffDays = 'dans ' + diffDays + ' jours';
             url = 'ok.png';
         }
-        ing_text = ing_text.replace(/_/gi, '');
+        ing_text = ing_text.replace(/_/gi, '').replace(/¹/gi, '');
         if (!ing_text) {
             ing_text = "Aucun ingrédient dans la base de donnée pour ce produit.";
             prod.additives_n = "0";
@@ -237,13 +237,13 @@ function buildHtml(num) {
             '<thead><tr><th>Consommable</th><th>Image</th><th>Nom du produit</th>' +
             '<th>Date limite</th><th>Quantité</th><th>Commande</th></tr><tr>' +
             '<td><img src=' + url + '></td>' +
-            '<td style="font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src="' + das[num].barcode + '.jpg" onerror="this.onerror=null; this.src=`no-product.png`"> <br> ' + das[num].barcode + ' </td>' +
+            '<td style="font-size: 12px;"><img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src="' + das[num].barcode + '.jpg" onerror="this.onerror=null; this.src=`no-product.png`"> <br> ' + das[num].barcode + ' </td>' +
             '<td>' + das[num].nom + '</td>' +
             '<td>' + das[num].date + '<br>' + diffDays + '</td>' +
             '<td>' + das[num].quantity + '</td>' +
             '<td><button onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button><br><br><button onclick="gohome()"><b>Retour</b></button></td>' +
             '</tr></thead><tbody id="data-output"></tbody></table></center><br>' +
-            '<center style="overflow-x:auto;"><div id="boxed" name="outer" class="centered"><label style="display: block; margin: auto;"><h4 align="left">Scores du produit: </h4></label><div class="middle"><div class="inner" style="border: none;"><svg width="110" height="110"><circle stroke="white" stroke-width="5" cx="55" cy="55" r="52" fill="' + scoreurl + '" /><text x="50%" y="43%" text-anchor="middle" font-weight="bold" fill="white" font-size="55px" font-family="Arial" dy=".3em">' + produit2["yuka-score"] + '</text><text x="50%" y="75%" text-anchor="middle" font-weight="bold" fill="white" font-size="25px" font-family="Arial" dy=".3em">/100</text></svg><br><b>Stock-Score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext">Note personnelle</span></i></div><div class="inner" style="border: none;"><img style="width:200px;" src="nutriscore-' + prod.nutriscore_grade + '.svg"><br><b>Nutri-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext">Qualité nutritionnelle</span></i></div><div class="inner" style="border: none;"><img style="width:200px;margin:auto" src="ecoscore-' + prod.ecoscore_grade + '.svg"><br><b>Eco-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext">Impact environnemental</span></i></div><div class="inner" style="border: none;"><img src="nova-group-' + prod.nova_groups + '.svg"><br><b>Nova-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext">Degré de transformation des aliments</span></i></div></div></center>' +
+            '<center style="overflow-x:auto;"><div id="boxed" name="outer" class="centered"><label style="display: block; margin: auto;"><h4 align="left">Scores du produit: </h4></label><div class="middle"><div class="inner" style="border: none;"><svg width="110" height="110"><circle stroke="white" stroke-width="5" cx="55" cy="55" r="52" fill="' + scoreurl + '" /><text x="50%" y="43%" text-anchor="middle" font-weight="bold" fill="white" font-size="50px" font-family="Arial" dy=".3em">' + produit2["yuka-score"] + '</text><text x="50%" y="75%" text-anchor="middle" font-weight="bold" fill="white" font-size="25px" font-family="Arial" dy=".3em">/100</text></svg><br><b>Stock-Score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext">Note personnelle</span></i></div><div class="inner" style="border: none;"><img style="width:200px;" src="nutriscore-' + prod.nutriscore_grade + '.svg"><br><b>Nutri-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext">Qualité nutritionnelle</span></i></div><div class="inner" style="border: none;"><img style="width:200px;margin:auto" src="ecoscore-' + prod.ecoscore_grade + '.svg"><br><b>Eco-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext">Impact environnemental</span></i></div><div class="inner" style="border: none;"><img src="nova-group-' + prod.nova_groups + '.svg"><br><b>Nova-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext">Degré de transformation des aliments</span></i></div></div></center>' +
             '</div><br><center style="overflow-x:auto;"><div id="boxed" name="product" class="centered"><label style="display: block; margin: auto; margin-bottom:10px" align="left"><h4 style="display: inline" align="left">Ingrédients du produit: </h4>(' + prod.additives_n + ' additifs)</label><p align="left" style="margin:auto; margin-left:10px; margin-bottom:8px">' + ing_text + '</p>' +
             '</div></center><br><br><center><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="app.js"></script><script src="https://kit.fontawesome.com/48b85ccf71.js" crossorigin="anonymous"></script></body></html>';
     } else {
@@ -278,7 +278,6 @@ function yuka(prod) {
     let nutri = prod.nutriscore_score;
     if (nutri || nutri == 0) {
         if (prod.nutriscore_data.is_beverage == 1) {
-            nutri = prod.nutrition_score_beverage;
             if (nutri <= 1) {
                 switch (nutri) {
                     case -4:
@@ -302,9 +301,9 @@ function yuka(prod) {
                 neg = 4 * (nutri - 6);
                 score = (15 - neg) * 0.6;
             } else {
-                score = 0;
+                score = 5;
             }
-        } else if (prod._keywords.includes('proteine') || prod._keywords.includes('additif') || prod._keywords.includes('animaux') || prod._keywords.includes('substitut') || prod._keywords.includes('complement')) {
+        } else if (prod._keywords.includes('additif') || prod._keywords.includes('animaux') || prod._keywords.includes('substitut') || prod._keywords.includes('complement')) {
             return "?";
         } else {
             if (nutri <= -1) {
@@ -317,7 +316,7 @@ function yuka(prod) {
                 neg = 5 * nutri;
                 score = (80 - neg) * 0.6;
             } else if (nutri >= 19) {
-                score = 0;
+                score = 5;
             } else {
                 neg = 2 * (nutri - 11);
                 score = (15 - neg) * 0.6;
@@ -326,13 +325,14 @@ function yuka(prod) {
     } else {
         return "?";
     }
-    if (prod.nova_group && prod.nova_group >= 2) {
+    if (prod._keywords.includes('bio') || prod._keywords.includes('biologique') || prod.labels.includes('Bio') ||  prod.labels.includes('bio')) {
         score += 10;
     }
     if (prod.additives_n >= 5) {
-        score += 0;
+        score += 3;
     } else {
         score += 6 * (5 - prod.additives_n);
     }
+    console.log(prod._id)
     return Math.round(score);
 }
