@@ -1,6 +1,7 @@
 let auj = 0;
 let long = 0;
 let non = 0;
+let ind = 0;
 fetch("data.json")
     .then(function (response) {
         return response.json();
@@ -42,10 +43,11 @@ fetch("data.json")
             <td>${product.nom}</td>
             <td>${product.date}<br>${diffDays}</td>
             <td>${product.quantity}</td>
-            <td><button onclick="added(${product.barcode},${dat})"><b>Ajouter</b></button><br><br><button onclick="delet(${product.barcode},${dat})"><b>Supprimer</b></button><br><br><button onclick="getinfos(${product.barcode})"><b>Infos</b></button></td>
+            <td><button onclick="added(${product.barcode},${dat})"><b>Ajouter</b></button><br><br><button onclick="delet(${product.barcode},${dat})"><b>Supprimer</b></button><br><br><button onclick="getinfos(${ind})"><b>Infos</b></button></td>
          </tr>
       `;
         }
         placeholder.innerHTML = out;
         document.querySelector('[name="per"]').innerHTML = '<div name="outer" style="border: none; height:50px;margin:auto 0"><div class="middle" id="nova" style="border: none;height:30px;width:1000px"><div class="inner" id="nova" style="border: none;"><img style="width:50px;" src="ok.png"><b style="font-size:25px">' + non + ' valables</b></div><div class="inner" id="nova" style="border: none;"><img style="width:50px;" src="equal.png"><b style="font-size:25px">' + auj + ' limites</b></div><div class="inner" id="nova" style="border: none;"><img style="width:50px;" src="no.png"><b style="font-size:25px">' + long + ' dépassés</b></div></div>';
+    ind++
     });

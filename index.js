@@ -179,25 +179,21 @@ function date(date) {
     return date[0] + '/' + date[1] + '/' + date[2];
 }
 
-function buildHtml(id) {
+function buildHtml(num) {
     let data = fs.readFileSync('data.json', 'utf8');
     let das = JSON.parse(data);
-    let index, dat;
+    let id, dat;
     let file = '<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="styles.css"><link rel="icon" href="icon.ico" /><title>Stock-Manager</title></head>' +
         '<body><br><label><input name="mode" type="checkbox" style="width: 20px; height: 20px;" onclick="darkmode()">  Dark mode</label><br><center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v2.3.0</h1></center><br>';
-    das.forEach(function (value) {
-        if (value.barcode == id) {
-            index = das.indexOf(value);
-            dat = das[index].date;
-        }
-    })
-    if (index != null) {
+    dat = das[num].date;
+    id = das[num].barcode;
+    if (id != null) {
         let produit = fs.readFileSync(`./products/${id}.json`);
         let produit2 = JSON.parse(produit);
         console.log(produit2)
         let prod = produit2.product;
         let ing_text = prod.ingredients_text_fr;
-        let time = das[index].date.split('/');
+        let time = das[num].date.split('/');
         const date1 = new Date(time[2], time[1] - 1, time[0]);
         const date2 = Date.now();
         const diffTime = Math.abs(date2 - date1);
@@ -237,10 +233,10 @@ function buildHtml(id) {
             '<thead><tr><th>Consommable</th><th>Image</th><th>Nom du produit</th>' +
             '<th>Date limite</th><th>Quantité</th><th>Commande</th></tr><tr>' +
             '<td><img src=' + url + '></td>' +
-            '<td style="font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src="' + das[index].barcode + '.jpg" onerror="this.onerror=null; this.src=`no-product.png`"> <br> ' + das[index].barcode + ' </td>' +
-            '<td>' + das[index].nom + '</td>' +
-            '<td>' + das[index].date + '<br>' + diffDays + '</td>' +
-            '<td>' + das[index].quantity + '</td>' +
+            '<td style="font-size: 12px;"> <img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src="' + das[num].barcode + '.jpg" onerror="this.onerror=null; this.src=`no-product.png`"> <br> ' + das[num].barcode + ' </td>' +
+            '<td>' + das[num].nom + '</td>' +
+            '<td>' + das[num].date + '<br>' + diffDays + '</td>' +
+            '<td>' + das[num].quantity + '</td>' +
             '<td><button onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button><br><br><button onclick="gohome()"><b>Retour</b></button></td>' +
             '</tr></thead><tbody id="data-output"></tbody></table></center><br>' +
             '<center style="overflow-x:auto;"><div name="outer" class="centered"><label style="display: block; margin: auto;"><h4 align="left">Scores du produit: </h4></label><div class="middle"><div class="inner" style="border: none;"><img style="width:200px;" src="' + scoreurl + '"><br><b>Score</b><br>Note personnelle</div><div class="inner" style="border: none;"><img style="width:200px;" src="nutriscore-' + prod.nutriscore_grade + '.svg"><br><b>Nutri-score</b><br>Qualité nutritionnelle</div><div class="inner" style="border: none;"><img style="width:200px;margin:auto" src="ecoscore-' + prod.ecoscore_grade + '.svg"><br><b>Eco-score</b><br>Impact environnemental</div><div class="inner" style="border: none;"><img src="nova-group-' + prod.nova_groups + '.svg"><br><b>Nova-score</b><br>Degré de transformation des aliments</div></div></center>' +
