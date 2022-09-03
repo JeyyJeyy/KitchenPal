@@ -155,7 +155,7 @@ button {
 }
 
 button:hover {
-	background-color: #E7E9EB;
+	background-color: #DDDDDD;
 	transition-duration: 0.3s;
 }
 
@@ -233,6 +233,10 @@ div:not(#except) {
 	cursor: pointer;
 	font-size: 14px;
 	transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+}
+
+.dark-mode button:hover {
+	background-color: #44464C;
 }
 
 table {
