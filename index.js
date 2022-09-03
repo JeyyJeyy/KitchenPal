@@ -15,14 +15,14 @@ app.use(express.static('webpage'));
 app.use(express.static('webpage/icons/'));
 app.use(express.static('assets'));
 
-/*fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
+fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
     let das = JSON.parse(data);
     das.forEach(function (value) {
         let address = `https://fr.openfoodfacts.org/api/v0/product/${value.barcode}.json`;
         downloading(address, value.barcode);
         console.log(value.barcode + ' fichiers téléchargés')
     })
-});*/
+});
 
 app.get('/', function (req, res) {
     res.redirect('/home');
@@ -278,6 +278,7 @@ function yuka(prod) {
     let nutri = prod.nutriscore_score;
     if (nutri || nutri == 0) {
         if (prod.nutriscore_data.is_beverage == 1) {
+            nutri = prod.nutrition_score_beverage;
             if (nutri <= 1) {
                 switch (nutri) {
                     case -4:
@@ -328,12 +329,10 @@ function yuka(prod) {
     if (prod.nova_group && prod.nova_group >= 2) {
         score += 10;
     }
-    if (prod.additives_n) {
-        if (prod.additives_n >= 5) {
-            score += 0;
-        } else {
-            score += 6 * (5 - prod.additives_n);
-        }
+    if (prod.additives_n >= 5) {
+        score += 0;
+    } else {
+        score += 6 * (5 - prod.additives_n);
     }
     return Math.round(score);
 }
