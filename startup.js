@@ -16,8 +16,8 @@ fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
     fs.readdir("./products/", function (err, files) {
         files.forEach(function (file, index) {
             let f = file.slice(0, -5);
-            if(!bars.includes(f)){
-                fs.unlinkSync('./products/'+f+'.json');
+            if(!bars.includes(f) && f != "additives"){
+                fs.unlinkSync('./products/'+file);
                 fs.unlinkSync('./assets/'+f+'.jpg');
                 x++
             }
