@@ -20,7 +20,7 @@ fetch("data.json")
             if (diffDays <= 6) {
                 if (diffDays == 0 || diffDays == 1) {
                     diffDays = 'aujourd\'hui';
-                }else if (date1 <= date2) {
+                } else if (date1 <= date2) {
                     diffDays = 'depuis ' + diffDays + ' jours';
                 } else {
                     diffDays = 'dans ' + diffDays + ' jours';
@@ -49,5 +49,5 @@ fetch("data.json")
         }
         placeholder.innerHTML = out;
         document.querySelector('[name="per"]').innerHTML = '<div name="outer" style="border: none; height:50px;margin:auto 0"><div class="middle" id="nova" style="border: none;height:30px;width:1000px"><div class="inner" id="nova" style="border: none;"><img style="width:50px;" src="ok.png"><b style="font-size:25px">' + non + ' valables</b></div><div class="inner" id="nova" style="border: none;"><img style="width:50px;" src="equal.png"><b style="font-size:25px">' + auj + ' limites</b></div><div class="inner" id="nova" style="border: none;"><img style="width:50px;" src="no.png"><b style="font-size:25px">' + long + ' dépassés</b></div></div>';
-    ind++
+        ind++
     });

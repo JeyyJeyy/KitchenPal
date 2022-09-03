@@ -56,7 +56,6 @@ ajouter liste additifs et allergenes sous ingredient avec noms et desc
 ajouter script pour dl auto tous les jours et a chaques demarrages les json des produits et images si "last_modified_t" pas pareil
 Ajouter icons comme yuka (emotes etc)
 
-trouver solution dl images et infos produits qui s'arettent si pas assez rapide
-si il faut rajouter dans url index (fetch.js i++ a chaques produit) pour identifier produits dans infos
 handle my score inconnus
 ajouter fond comme table aux div
+fonction pour nettoyer fichiers produits (recup tout bar data.json puis foreach file in products et assets if !in barcodes delete)

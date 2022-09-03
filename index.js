@@ -223,6 +223,8 @@ function buildHtml(num) {
             scoreurl = "bordor.png";
         } else if (produit2["yuka-score"] <= 75) {
             scoreurl = "bordgr.png";
+        } else if (produit2["yuka-score"] == "?") {
+            scoreurl = "bordgr3.png";
         } else {
             scoreurl = "bordgr2.png";
         }
