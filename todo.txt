@@ -58,7 +58,3 @@ Ajouter icons comme yuka (emotes etc)
 
 page infos avec description scores etc
 fonction pour nettoyer fichiers produits (recup tout bar data.json puis foreach file in products et assets if !in barcodes delete)
-
-
-
-fix formule

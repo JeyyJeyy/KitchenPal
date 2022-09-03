@@ -237,7 +237,7 @@ function buildHtml(num) {
             '<thead><tr><th>Consommable</th><th>Image</th><th>Nom du produit</th>' +
             '<th>Date limite</th><th>Quantité</th><th>Commande</th></tr><tr>' +
             '<td><img src=' + url + '></td>' +
-            '<td style="font-size: 12px;"><img style="border-radius: 15px; height: 150px; width: 150px; object-fit: contain;" src="' + das[num].barcode + '.jpg" onerror="this.onerror=null; this.src=`no-product.png`"> <br> ' + das[num].barcode + ' </td>' +
+            '<td style="font-size: 12px;"><img style="border-radius: 15px; height: 150px; width: 150px; object-fit: cover; max-width: 80%; max-height: 80%"" src="' + das[num].barcode + '.jpg" onerror="this.onerror=null; this.src=`no-product.png`"> <br> ' + das[num].barcode + ' </td>' +
             '<td>' + das[num].nom + '</td>' +
             '<td>' + das[num].date + '<br>' + diffDays + '</td>' +
             '<td>' + das[num].quantity + '</td>' +
