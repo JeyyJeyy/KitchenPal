@@ -21,7 +21,8 @@
     </center>
     <br>
     <center>
-        <div style="margin: auto; background-color: #3C3F45; border-radius: 15px; width: 550px;" id="except">
+        <div style="margin: auto; background-color: #3C3F45; border-radius: 15px; width: 550px; padding: 10px;" id="except">
+            <label style="display: block; margin: auto; margin-bottom:10px" align="left"><h4 style="display: inline" align="left">Ajouter un aliment: </h4></label>
             <div style="margin: 0;" class="form-example">
                 <div class="form-example">
                     <label id="check" for="barcode" name="format">Code barre: </label>
@@ -36,12 +37,33 @@
                     <input type="quantity" name="format" id="quantity" required>
                 </div>
                 <div class="form-example">
-                    <button style="height: 29px; width: 129px" id="noid" onclick="submit()">Ajouter cet élément</button>&nbsp;&nbsp;<button style="height: 29px; width: 55px" id="noid" onclick="window.location.href='/home';">Retour</button>
+                    <button style="height: 29px; width: 129px" onclick="submit()">Ajouter cet élément</button>&nbsp;&nbsp;<button style="height: 29px; width: 55px" onclick="window.location.href='/home';">Retour</button>
                 </div>
             </div>
         </div>
         <br><br>
-        <p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p>
+        <div style="margin: auto; background-color: #3C3F45; border-radius: 15px; width: 550px; padding: 10px;" id="except">
+            <label style="display: block; margin: auto; margin-bottom:10px" align="left"><h4 style="display: inline" align="left">Supprimer un aliment: </h4></label>
+            <div style="margin: 0;" class="form-example">
+                <div class="form-example">
+                    <label id="check" for="barcode" name="format">Code barre: </label>
+                    <input type="text" name="format" id="barcode2" required>
+                </div>
+                <div class="form-example">
+                    <label id="check" for="date" name="format">Date de péremption: </label>
+                    <input style="width: 166px;" type="date" name="format" id="date2" required>
+                </div>
+                <div class="form-example">
+                    <label id="check" for="quantity" name="format">Quantité: </label>
+                    <input type="quantity" name="format" id="quantity2" required>
+                </div>
+                <div class="form-example">
+                    <button style="height: 29px; width: 129px" onclick="submit2()">Retirer cet élément</button>&nbsp;&nbsp;<button style="height: 29px; width: 55px" onclick="window.location.href='/home';">Retour</button>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br>
+        <p style="margin: 10px; position: absolute; bottom: 5px; left: 42%">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p>
     </center>
     <script src="app.js"></script>
 </body>

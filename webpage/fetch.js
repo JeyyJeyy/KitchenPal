@@ -43,7 +43,7 @@ fetch("data.json")
             <td>${product.nom}</td>
             <td>${product.date}<br>${diffDays}</td>
             <td>${product.quantity}</td>
-            <td><button onclick="added(${product.barcode},${dat},1)"><b>Ajouter</b></button><br><br><button onclick="delet(${product.barcode},${dat})"><b>Supprimer</b></button><br><br><button onclick="getinfos(${ind})"><b>Infos</b></button></td>
+            <td><button onclick="added(${product.barcode},${dat},1)"><b>Ajouter</b></button><br><br><button onclick="delet(${product.barcode},${dat},1)"><b>Supprimer</b></button><br><br><button onclick="getinfos(${ind})"><b>Infos</b></button></td>
          </tr>
       `;
             ind++

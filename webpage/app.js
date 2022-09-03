@@ -1,13 +1,13 @@
 var dm = false;
 var checkbox = document.querySelector('input[name="mode"]');
 
-function delet(bar, date) {
+function delet(bar, date, nb) {
    const response = fetch('/posts', {
       method: 'POST',
       body: JSON.stringify({
          command: "del",
          barcode: bar,
-         quantity: 1,
+         quantity: nb,
          date: date.toString()
       }),
       headers: {
@@ -99,4 +99,12 @@ function submit(){
    let bar = document.getElementById("barcode").value;
    dat = dat.slice(8,10)+'/'+dat.slice(5,7)+'/'+dat.slice(0,4);
    added(bar, dat, quant);
+}
+
+function submit2(){
+   let dat = document.getElementById("date2").value;
+   let quant = document.getElementById("quantity2").value;
+   let bar = document.getElementById("barcode2").value;
+   dat = dat.slice(8,10)+'/'+dat.slice(5,7)+'/'+dat.slice(0,4);
+   delet(bar, dat, quant);
 }
