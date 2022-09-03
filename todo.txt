@@ -1,6 +1,3 @@
-nutriscore_score: 27,
-categories:
-"additives_n"
 "additives_tags"
 "data_quality_warnings_tags"
 "misc_tags"
@@ -11,8 +8,7 @@ categories:
 
 "warning":"origins_are_100_percent_unknown"},"packaging":{"non_recyclable_and_non_biodegradable_materials":1,"packagings":[{"ecoscore_material_score":92,"ecoscore_shape_ratio":1,"material":"en:paper","number":"55","shape":"en:individual-bag"},{"ecoscore_material_score":0,"ecoscore_shape_ratio":1,"material":"en:plastic","non_recyclable_and_non_biodegradable":"maybe","shape":"en:bag"}],"score":-8,"value":-11},"production_system":{"labels":[],"value":0,"warning":"no_label"},"threatened_species":{"ingredient":"en:palm-oil","value":-10}},"agribalyse":{"agribalyse_food_code":"31003","co2_agriculture":2.1277843,"co2_consumption":0,"co2_distribution":0.014104999,"co2_packaging":0.2752397,"co2_processing":0.28750323,"co2_total":2.9115727,"co2_transportation":0.20694049,"code":"31003","dqr":"3.64","ef_agriculture":0.82681788,"ef_consumption":0,"ef_distribution":0.0045906531,"ef_packaging":0.020545657,"ef_processing":0.045350868,"ef_total":0.91567794,"ef_transportation":0.018372886,"is_beverage":0,"name_en":"Candies, all types","name_fr":"Bonbons, tout type","score":34},"grade":"e",
 
-ajouter date selector client
-gui client
+ajouter produits depuis site (nouvelle page) --> indiquer client comme obsolete
 test app
 
 Sucre = masse pour 100g (0 à 9= peu de sucre, 9 à 18= faible impact, 18 à 31 = un peu trop sucré, 31 à 45+ = trop sucré)
@@ -27,10 +23,8 @@ fruits
 shift alt f pour format
 
 taff pour ajouter données manquantes sur openfoodfact
-Handle produits etrangers
 handle code barre inconnus 
-handle produits sans valeur nutri
-bloquer produits beauté
+bloquer produits beauté "categories_hierarchy":["en:non-food-products","en:open-beauty-facts"]
 
 eco:
 "score":51},"grade":"d","grades": = score production voir yuka
