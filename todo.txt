@@ -57,6 +57,5 @@ ajouter script pour dl auto tous les jours et a chaques demarrages les json des 
 Ajouter icons comme yuka (emotes etc)
 
 handle my score inconnus
-ajouter fond comme table aux div
 page infos avec description scores etc
 fonction pour nettoyer fichiers produits (recup tout bar data.json puis foreach file in products et assets if !in barcodes delete)

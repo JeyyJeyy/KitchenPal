@@ -173,12 +173,12 @@ div:not(#except) {
 }
 
 .dark-mode {
-	background-color: #2F3136;
+	background-color: #46484C;
 	color: white;
 }
 
 .dark-mode div:not(#except) {
-	border: 1px solid #2F3136;
+	border: 1px solid #46484C;
 }
 
 .dark-mode #input {
@@ -201,17 +201,17 @@ div:not(#except) {
 }
 
 .dark-mode table {
-	border: 1px solid #2F3136;
+	border: 1px solid #46484C;
 }
 
 .dark-mode table th {
-	background-color: #34373A;
-	border: thin solid #2F3136;
+	background-color: #2F3136;
+	border: thin solid #46484C;
 	color: white;
 }
 
 .dark-mode table td {
-	border: thin solid #2F3136;
+	border: thin solid #46484C;
 	background-color: #3C3F45;
 	color: white;
 }
