@@ -185,8 +185,13 @@ function buildHtml(num) {
     let id, dat;
     let file = '<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="styles.css"><link rel="icon" href="icon.ico" /><title>Stock-Manager</title></head>' +
         '<body><br><label><input name="mode" type="checkbox" style="width: 20px; height: 20px;" onclick="darkmode()">  Dark mode</label><br><center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v2.3.0</h1></center><br>';
-    dat = das[num].date;
-    id = das[num].barcode;
+    try {
+        dat = das[num].date;
+        id = das[num].barcode;
+    } catch {
+        file += '<center><h2>Produit inconnu</h2><br><button onclick="gohome()"><b>Retour</b></button></center><center style="position: fixed;bottom: 0;right: 0;left: 0"><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="https://kit.fontawesome.com/48b85ccf71.js" crossorigin="anonymous"></script><script src="app.js"></script></body></html>';
+        return file;
+    }
     if (id != null) {
         let produit = fs.readFileSync(`./products/${id}.json`);
         let produit2 = JSON.parse(produit);
@@ -246,8 +251,6 @@ function buildHtml(num) {
             '<center style="overflow-x:auto;"><div id="boxed" name="outer" class="centered"><label style="display: block; margin: auto;"><h4 align="left">Scores du produit: </h4></label><div class="middle"><div class="inner" style="border: none;"><svg width="110" height="110"><circle stroke="white" stroke-width="5" cx="55" cy="55" r="52" fill="' + scoreurl + '" /><text x="50%" y="43%" text-anchor="middle" font-weight="bold" fill="white" font-size="50px" font-family="Arial" dy=".3em">' + produit2["yuka-score"] + '</text><text x="50%" y="75%" text-anchor="middle" font-weight="bold" fill="white" font-size="25px" font-family="Arial" dy=".3em">/100</text></svg><br><b>Stock-Score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext">Note personnelle</span></i></div><div class="inner" style="border: none;"><img style="width:200px;" src="nutriscore-' + prod.nutriscore_grade + '.svg"><br><b>Nutri-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext">Qualité nutritionnelle</span></i></div><div class="inner" style="border: none;"><img style="width:200px;margin:auto" src="ecoscore-' + prod.ecoscore_grade + '.svg"><br><b>Eco-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext">Impact environnemental</span></i></div><div class="inner" style="border: none;"><img src="nova-group-' + prod.nova_groups + '.svg"><br><b>Nova-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext">Degré de transformation des aliments</span></i></div></div></center>' +
             '</div><br><center style="overflow-x:auto;"><div id="boxed" name="product" class="centered"><label style="display: block; margin: auto; margin-bottom:10px" align="left"><h4 style="display: inline" align="left">Ingrédients du produit: </h4>(' + prod.additives_n + ' additifs)</label><p align="left" style="margin:auto; margin-left:10px; margin-bottom:8px">' + ing_text + '</p>' +
             '</div></center><br><br><center><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="app.js"></script><script src="https://kit.fontawesome.com/48b85ccf71.js" crossorigin="anonymous"></script></body></html>';
-    } else {
-        file += '<center><h2>Produit inconnu</h2><br><button onclick="gohome()"><b>Retour</b></button></center><center style="position: fixed;bottom: 0;right: 0;left: 0"><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="https://kit.fontawesome.com/48b85ccf71.js" crossorigin="anonymous"></script><script src="app.js"></script></body></html>';
     }
     return file;
 };
@@ -325,7 +328,7 @@ function yuka(prod) {
     } else {
         return "?";
     }
-    if (prod._keywords.includes('bio') || prod._keywords.includes('biologique') || prod.labels.includes('Bio') ||  prod.labels.includes('bio')) {
+    if (prod._keywords.includes('bio') || prod._keywords.includes('biologique') || prod.labels.includes('Bio') || prod.labels.includes('bio')) {
         score += 10;
     }
     if (prod.additives_n >= 5) {
