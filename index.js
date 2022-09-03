@@ -17,11 +17,13 @@ app.use(express.static('assets'));
 
 fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
     let das = JSON.parse(data);
+    let i = 0;
     das.forEach(function (value) {
         let address = `https://fr.openfoodfacts.org/api/v0/product/${value.barcode}.json`;
         downloading(address, value.barcode);
-        console.log(value.barcode + ' fichiers téléchargés')
+        i++
     })
+    console.log('[!] ' + i + ' produits rechargés')
 });
 
 app.get('/', function (req, res) {
@@ -36,10 +38,8 @@ app.get('/home', function (req, res) {
     res.sendFile('home.html', { root: './webpage/' });
 })
 app.get('/product', function (req, res) {
-    (async () => {
-        var html = await buildHtml(req.query.id);
-        res.end(html);
-    })();
+    var html = buildHtml(req.query.id);
+    res.end(html);
 })
 
 app.post('/posts', function (req, res, next) {
@@ -74,8 +74,7 @@ app.post('/posts', function (req, res, next) {
                     downloading(address, req.body.barcode);
                     await axios.get(address)
                         .then(res => {
-                            let name = res.data.product.product_name_fr;
-                            req.body["nom"] = name;
+                            req.body["nom"] = res.data.product.product_name_fr;
                         })
                         .catch(function (error) {
                             console.log(error);
@@ -195,7 +194,6 @@ function buildHtml(num) {
     if (id != null) {
         let produit = fs.readFileSync(`./products/${id}.json`);
         let produit2 = JSON.parse(produit);
-        console.log(produit2)
         let prod = produit2.product;
         let ing_text = prod.ingredients_text_fr;
         let time = das[num].date.split('/');
@@ -243,7 +241,7 @@ function buildHtml(num) {
             '<th>Date limite</th><th>Quantité</th><th>Commande</th></tr><tr>' +
             '<td><img src=' + url + '></td>' +
             '<td style="font-size: 12px;"><img style="border-radius: 15px; height: 150px; width: 150px; object-fit: cover; max-width: 80%; max-height: 80%"" src="' + das[num].barcode + '.jpg" onerror="this.onerror=null; this.src=`no-product.png`"> <br> ' + das[num].barcode + ' </td>' +
-            '<td>' + das[num].nom + '</td>' +
+            '<td>' + prod.product_name_fr + '</td>' +
             '<td>' + das[num].date + '<br>' + diffDays + '</td>' +
             '<td>' + das[num].quantity + '</td>' +
             '<td><button onclick="added(' + id + ',' + dat + ')"><b>Ajouter</b></button><br><br><button onclick="delet(' + id + ',' + dat + ')"><b>Supprimer</b></button><br><br><button onclick="gohome()"><b>Retour</b></button></td>' +
@@ -267,7 +265,6 @@ function ordonner() {
             if (d1 < d2) return -1;
             return 0;
         });
-        console.log(obj);
         json = JSON.stringify(obj);
         fs.writeFile("data.json", json, (err) => {
             if (err) console.log(err);
@@ -336,6 +333,5 @@ function yuka(prod) {
     } else {
         score += 6 * (5 - prod.additives_n);
     }
-    console.log(prod._id)
     return Math.round(score);
 }
