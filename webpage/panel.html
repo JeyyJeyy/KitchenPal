@@ -21,51 +21,79 @@
     </center>
     <br>
     <center>
-        <div style="margin: auto; background-color: #3C3F45; border-radius: 15px; width: 550px; padding: 10px;" id="except">
-            <label style="display: block; margin: auto; margin-bottom:10px" align="left"><h4 style="display: inline" align="left">Ajouter un aliment: </h4></label>
-            <div style="margin: 0;" class="form-example">
-                <div class="form-example">
-                    <label id="check" for="barcode" name="format">Code barre: </label>
-                    <input type="text" name="format" id="barcode" required>
+        <div style="display: flex;">
+            <div style="flex: 1; margin: auto; background-color: #3C3F45; border-radius: 15px; width: 550px; padding: 10px;"
+                id="except">
+                <label style="display: block; margin: auto; margin-bottom:10px" align="left">
+                    <h4 style="display: inline" align="left">Ajouter un aliment: </h4>
+                </label>
+                <div style="margin: 0;" class="form-example">
+                    <div class="form-example">
+                        <label id="check" for="barcode" name="format">Code barre: </label>
+                        <input type="text" name="format" id="barcode" required>
+                    </div>
+                    <div class="form-example">
+                        <label id="check" for="date" name="format">Date de péremption: </label>
+                        <input style="width: 166px;" type="date" name="format" id="date" required>
+                    </div>
+                    <div class="form-example">
+                        <label id="check" for="quantity" name="format">Quantité: </label>
+                        <input type="quantity" name="format" id="quantity" required>
+                    </div>
+                    <div class="form-example">
+                        <button style="height: 29px; width: 129px" onclick="submit()">Ajouter cet
+                            élément</button>&nbsp;&nbsp;<button style="height: 29px; width: 55px"
+                            onclick="window.location.href='/home';">Retour</button>
+                    </div>
                 </div>
-                <div class="form-example">
-                    <label id="check" for="date" name="format">Date de péremption: </label>
-                    <input style="width: 166px;" type="date" name="format" id="date" required>
-                </div>
-                <div class="form-example">
-                    <label id="check" for="quantity" name="format">Quantité: </label>
-                    <input type="quantity" name="format" id="quantity" required>
-                </div>
-                <div class="form-example">
-                    <button style="height: 29px; width: 129px" onclick="submit()">Ajouter cet élément</button>&nbsp;&nbsp;<button style="height: 29px; width: 55px" onclick="window.location.href='/home';">Retour</button>
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div style="flex: 1; margin: auto; background-color: #3C3F45; border-radius: 15px; width: 550px; padding: 10px;"
+                id="except">
+                <label style="display: block; margin: auto; margin-bottom:10px" align="left">
+                    <h4 style="display: inline" align="left">Supprimer un aliment: </h4>
+                </label>
+                <div style="margin: 0;" class="form-example">
+                    <div class="form-example">
+                        <label id="check" for="barcode" name="format">Code barre: </label>
+                        <input type="text" name="format" id="barcode2" required>
+                    </div>
+                    <div class="form-example">
+                        <label id="check" for="date" name="format">Date de péremption: </label>
+                        <input style="width: 166px;" type="date" name="format" id="date2" required>
+                    </div>
+                    <div class="form-example">
+                        <label id="check" for="quantity" name="format">Quantité: </label>
+                        <input type="quantity" name="format" id="quantity2" required>
+                    </div>
+                    <div class="form-example">
+                        <button style="height: 29px; width: 129px" onclick="submit2()">Retirer cet
+                            élément</button>&nbsp;&nbsp;<button style="height: 29px; width: 55px"
+                            onclick="window.location.href='/home';">Retour</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <br><br>
-        <div style="margin: auto; background-color: #3C3F45; border-radius: 15px; width: 550px; padding: 10px;" id="except">
-            <label style="display: block; margin: auto; margin-bottom:10px" align="left"><h4 style="display: inline" align="left">Supprimer un aliment: </h4></label>
-            <div style="margin: 0;" class="form-example">
-                <div class="form-example">
-                    <label id="check" for="barcode" name="format">Code barre: </label>
-                    <input type="text" name="format" id="barcode2" required>
-                </div>
-                <div class="form-example">
-                    <label id="check" for="date" name="format">Date de péremption: </label>
-                    <input style="width: 166px;" type="date" name="format" id="date2" required>
-                </div>
-                <div class="form-example">
-                    <label id="check" for="quantity" name="format">Quantité: </label>
-                    <input type="quantity" name="format" id="quantity2" required>
-                </div>
-                <div class="form-example">
-                    <button style="height: 29px; width: 129px" onclick="submit2()">Retirer cet élément</button>&nbsp;&nbsp;<button style="height: 29px; width: 55px" onclick="window.location.href='/home';">Retour</button>
-                </div>
-            </div>
-        </div>
+        <br>
+        <input type="text" id="input" onkeyup="search()" placeholder="Cherchez des produits...">
+         <table>
+            <thead>
+               <tr class="header">
+                  <th>Image</th>
+                  <th>Nom du produit</th>
+                  <th>Date limite</th>
+                  <th>Quantité</th>
+               </tr>
+            </thead>
+            <tbody id="data-output">
+            </tbody>
+         </table>
         <br><br><br><br>
-        <p style="margin: 10px; position: absolute; bottom: 5px; left: 42%">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p>
+        <p style="margin: 10px; position: absolute; bottom: 5px; left: 42%">Made with <span
+                style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p>
     </center>
     <script src="app.js"></script>
+    <script src="manage.js"></script>
 </body>
 
 </html>
