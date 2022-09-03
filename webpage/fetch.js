@@ -17,7 +17,7 @@ fetch("data.json")
             const diffTime = Math.abs(date2 - date1);
             let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             if (diffDays <= 6) {
-                if (diffDays >= 0 && diffDays == 1) {
+                if (diffDays == 0 || diffDays == 1) {
                     diffDays = 'aujourd\'hui';
                 }else if (date1 <= date2) {
                     diffDays = 'depuis ' + diffDays + ' jours';
