@@ -99,6 +99,21 @@ app.listen(8080, '10.0.0.160', () => {
     console.log("\x1b[1m", 'Stock-Manager v2.5.0: [Server enabled on port 8080]')
 })
 
+const schedule = require('node-schedule');
+
+const rule = new schedule.RecurrenceRule();
+rule.hour = 20;
+rule.minute = 01;
+
+const job = schedule.scheduleJob(rule, async function () {
+  require('./startup.js').execute(rule);
+  const channel2 = client.channels.cache.get(log);
+  channel2.send("[LOAD] Reload des assets")
+  console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' SAVE] Reload des assets en cours')
+});
+
+require('./startup.js').execute(rule);
+
 
 
 function delet(bar, num, date) {
