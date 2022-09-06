@@ -90,7 +90,7 @@ app.post('/posts', function (req, res, next) {
     });
 });
 
-app.listen(8080, '10.0.0.160', () => {
+app.listen(8080, '192.168.0.6', () => {
     console.log("\x1b[1m", 'Stock-Manager v2.5.0: [Server enabled on port 8080]')
 })
 

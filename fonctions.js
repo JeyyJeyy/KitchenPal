@@ -84,7 +84,7 @@ function buildHtml(num) {
     let das = JSON.parse(data);
     let id, dat;
     let file = `<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="styles.css"><link rel="icon" href="icon.ico" /><title>Stock-Manager</title></head>` +
-        `<body><br><label style="margin-left: 10px; width: 90px; height: 30px; font-size: 14px;"><input name="mode" type="checkbox" id="check" onclick="darkmode()"> Dark mode</label><div id="except" style="display: inline; position: absolute; right: 10px; top: 10px"><button style="width:125px;" onclick="window.location.href='/panel';">Gérer les produits</button>&nbsp;&nbsp;<button onclick="window.location.href='/about';">Informations</button></div><br><center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v2.5.0</h1></center><br>`;
+        `<body><br><label style="margin-left: 10px; width: 90px; height: 30px; font-size: 14px;"><input name="mode" type="checkbox" id="check" onclick="darkmode()"> Dark mode</label><div id="except" style="display: inline; position: absolute; right: 10px; top: 10px"><button style="width:60px;" onclick="window.location.href='/home';">Accueil</button>&nbsp;&nbsp;<button style="width:125px;" onclick="window.location.href='/panel';">Gérer les produits</button>&nbsp;&nbsp;<button onclick="window.location.href='/about';">Informations</button></div><br><center><a href="/home.html"><img width="100" height="100" src="icon.ico"></a><h1>Stock Manager v2.5.0</h1></center><br>`;
     try {
         dat = das[num].date;
         id = das[num].barcode;
