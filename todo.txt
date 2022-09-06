@@ -35,6 +35,6 @@ emballage
 sans risque (pastille vert) : aucun impact sur le score ; risque limité (pastille jaune) : -6 points/additif ; risque modéré (pastille orange) : -15 points/additif ; à risque (pastille rouge) : -30 points (avec un score maximum de 49/100).
 
 ajouter liste additifs et allergenes sous ingredient avec noms et desc
-Ajouter icons comme yuka (emotes etc)
+Ajouter icons comme yuka (emotes etc) (pour descriptions produits et page infos)
 
 page infos avec description scores etc
