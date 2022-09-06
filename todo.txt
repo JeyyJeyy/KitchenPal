@@ -38,3 +38,5 @@ ajouter liste additifs et allergenes sous ingredient avec noms et desc
 Ajouter icons comme yuka (emotes etc) (pour descriptions produits et page infos)
 
 page infos avec description scores etc
+
+recap elements perimes par centré ?
