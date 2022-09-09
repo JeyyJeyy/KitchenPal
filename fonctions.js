@@ -237,4 +237,4 @@ function yuka(prod) {
     return Math.round(score);
 }
 
-module.exports = { delet, yuka, ordonner, buildHtml, downloading };
+module.exports = { delet, yuka, ordonner, buildHtml, downloading, date };
