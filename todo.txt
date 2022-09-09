@@ -40,4 +40,4 @@ Ajouter icons comme yuka (emotes etc) (pour descriptions produits et page infos)
 page infos avec description scores etc
 
 recap elements perimes par centré ?
-retirer icone et titre pages infos et manage ?
+retirer icone et titre pages infos
