@@ -27,7 +27,7 @@ app.use(express.static('assets'));
             console.log(col.red('Erreur au lancement...'));
             return;
         }
-        console.log(gradient('white', 'cyan')(data) + col.cyan('\n\tStockManager v2.7.8 - Gérer ses stocks @JeyyJeyy'));
+        console.log(gradient('white', 'cyan')(data) + col.cyan('\n\tStockManager v2.7.10 - Gérer ses stocks @JeyyJeyy'));
     });
     await delay(500);
 })();
@@ -109,7 +109,7 @@ app.post('/posts', function (req, res, next) {
 });
 
 app.listen(8080, () => {
-    console.log("\x1b[1m", 'Stock-Manager v2.7.8: [Serveur en écoute sur le port 8080]')
+    console.log("\x1b[1m", 'Stock-Manager v2.7.10: [Serveur en écoute sur le port 8080]')
 })
 
 require('./startup.js');
