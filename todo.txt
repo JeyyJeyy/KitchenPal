@@ -41,3 +41,4 @@ page infos avec description scores etc
 
 recap elements perimes pas centré ?
 retirer icone et titre pages infos
+Adapte page web pour mobile

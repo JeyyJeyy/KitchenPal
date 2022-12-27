@@ -3,7 +3,6 @@ const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
 const stock = require('./fonctions.js');
-
 const app = express();
 let times = 0;
 
@@ -14,13 +13,32 @@ app.use(express.static('webpage'));
 app.use(express.static('webpage/icons/'));
 app.use(express.static('assets'));
 
+(async () => {
+    console.clear();
+    let x = true;
+    figlet.text('StockManager', {
+        font: 'Standard',
+        horizontalLayout: 'default',
+        verticalLayout: 'default',
+        width: undefined,
+        whitespaceBreak: true
+    }, function (err, data) {
+        if (err) {
+            console.log(col.red('Erreur au lancement...'));
+            return;
+        }
+        console.log(gradient('white', 'cyan')(data) + col.cyan('\n\tStockManager v2.6.3 - Gérer ses stocks @JeyyJeyy'));
+    });
+    await delay(500);
+})();
+
 app.get('/', function (req, res) {
     res.redirect('/home');
 })
 app.get('/data.json', function (req, res) {
     res.sendFile('data.json', { root: '.' });
     times++
-    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Webpage has been loaded [' + times + ' times]');
+    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Requête de chargement reçue [' + times + 'x]');
 })
 app.get('/home', function (req, res) {
     res.sendFile('home.html', { root: './webpage/' });
@@ -81,7 +99,7 @@ app.post('/posts', function (req, res, next) {
                     if (err) console.log(err);
                 });
                 stock.ordonner();
-                console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Saved ' + num + ' elements to data.json');
+                console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Sauvegarde de ' + num + ' éléments dans data.json');
             })();
         } else if (req.body.command == 'del') {
             delete req.body["command"];
@@ -91,7 +109,7 @@ app.post('/posts', function (req, res, next) {
 });
 
 app.listen(8080, () => {
-    console.log("\x1b[1m", 'Stock-Manager v2.6.3: [Server enabled on port 8080]')
+    console.log("\x1b[1m", 'Stock-Manager v2.6.3: [Serveur en écoute sur le port 8080]')
 })
 
 require('./startup.js');
