@@ -18,19 +18,23 @@ function delet(bar, date, nb) {
 }
 
 function added(bar, date, nb) {
-   const response = fetch('/posts', {
-      method: 'POST',
-      body: JSON.stringify({
-         command: "add",
-         barcode: bar,
-         quantity: nb,
-         date: date.toString()
-      }),
-      headers: {
-         "Content-type": "application/json; charset=UTF-8"
-      }
-   })
-   location.reload();
+   try {
+      const response = fetch('/posts', {
+         method: 'POST',
+         body: JSON.stringify({
+            command: "add",
+            barcode: bar,
+            quantity: nb,
+            date: date.toString()
+         }),
+         headers: {
+            "Content-type": "application/json; charset=UTF-8"
+         }
+      })
+      location.reload();
+   } catch (error) {
+      console.log(error);
+   }
 }
 
 function getinfos(id) {
@@ -46,10 +50,6 @@ function darkmode() {
       dm = true;
    }
    toggleModes(dm)
-}
-
-function gohome() {
-   location.href = 'home';
 }
 
 function toggleModes(bool) {

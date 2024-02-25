@@ -6,7 +6,7 @@
   <br>
 </h1>
 
-<h4 align="center">Partie serveur du programme de gestion de stock</h4>
+<h4 align="center">Serveur du programme de gestion de stock</h4>
 
 <p align="center">
   <a>
