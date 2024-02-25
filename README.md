@@ -23,4 +23,7 @@
 # Aperçu
 
 Ce programme lié avec le programme côté client permet de gérer ses stocks. Le serveur dispose d'une interface web (port 8080) affichant les produits et leurs informations et permettant de les gérer sans utiliser le client. Retrouvez la partie client: [StockManager - client side](https://github.com/JeyyJeyy/StockManager-client)<br>
-Aucune configuration est nécessaire sur le programme.
+Le seul paramètre à configurer se trouve dans le fichier index.js:
+```js
+app.listen(8080,"127.0.0.1"); //Ligne 10 : addresse et port
+```

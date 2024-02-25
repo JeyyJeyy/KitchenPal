@@ -1,10 +1,13 @@
 var bodyParser = require('body-parser');
 const express = require('express');
 const axios = require('axios');
+const col = require('chalk');
 const fs = require('fs');
 const stock = require('./fonctions.js');
+const figlet = require('figlet');
+const gradient = require('gradient-string');
 const app = express();
-let times = 0;
+app.listen(8080,"127.0.0.1");
 
 console.clear();
 app.use(bodyParser.json());
@@ -24,30 +27,20 @@ app.use(express.static('assets'));
         whitespaceBreak: true
     }, function (err, data) {
         if (err) {
+            console.log(err)
             console.log(col.red('Erreur au lancement...'));
             return;
         }
         console.log(gradient('white', 'cyan')(data) + col.cyan('\n\tStockManager v2.7.10 - Gérer ses stocks @JeyyJeyy'));
     });
-    await delay(500);
 })();
 
 app.get('/', function (req, res) {
-    res.redirect('/home');
+    res.redirect('/home.html');
 })
 app.get('/data.json', function (req, res) {
     res.sendFile('data.json', { root: '.' });
-    times++
-    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Requête de chargement reçue [' + times + 'x]');
-})
-app.get('/home', function (req, res) {
-    res.sendFile('home.html', { root: './webpage/' });
-})
-app.get('/panel', function (req, res) {
-    res.sendFile('panel.html', { root: './webpage/' });
-})
-app.get('/about', function (req, res) {
-    res.sendFile('about.html', { root: './webpage/' });
+    console.log("\x1b[32m", "[" + process.uptime().toFixed(2) + ' LOAD] Requête de chargement reçue');
 })
 app.get('/product', function (req, res) {
     var html = stock.buildHtml(req.query.id);
@@ -107,9 +100,5 @@ app.post('/posts', function (req, res, next) {
         }
     });
 });
-
-app.listen(8080, () => {
-    console.log("\x1b[1m", 'Stock-Manager v2.7.10: [Serveur en écoute sur le port 8080]')
-})
 
 require('./startup.js');
