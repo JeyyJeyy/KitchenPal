@@ -9,13 +9,14 @@ const figlet = require('figlet');
 const gradient = require('gradient-string');
 const app = express();
 app.listen(8080,"127.0.0.1");
+//ramener page d'accueil si delete qd quantité = 1
 
 console.clear();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('webpage/'));
+app.use(express.static('webpage'));
 //app.use(express.static('webpage/icons/'));
-app.use(express.static('assets/'));
+app.use(express.static('assets'));
 
 (async () => {
     console.clear();
@@ -71,8 +72,6 @@ app.get('/product', function (req, res) {
 })
 
 app.post('/posts', function (req, res, next) {
-    console.log("test")
-    console.log(req.body)
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let obj = JSON.parse(data);
         let num = Number(req.body.quantity);
@@ -123,6 +122,7 @@ app.post('/posts', function (req, res, next) {
             delet(req.body.barcode, num, req.body.date);
         }
     });
+    res.send('done');
 });
 
 function delet(bar, num, date) {
@@ -205,7 +205,7 @@ function buildHtml(num) {
     let data = fs.readFileSync('data.json', 'utf8');
     let das = JSON.parse(data);
     let id, dat;
-    let file = `<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="styles.css"><link rel="icon" href="icons/icon.ico" /><title>Stock-Manager</title></head>` +
+    let file = `<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="styles.css"><link rel="icon" href="icons/icon.ico" /><title>Stock-Manager</title></head>` +
         `<body><br><label style="margin-left: 10px; width: 90px; height: 30px; font-size: 14px;"><input name="mode" type="checkbox" id="check" onclick="darkmode()"> Dark mode   <i class="fa-solid fa-circle-half-stroke"></i></label><div id="except" style="display: inline; position: absolute; right: 10px; top: 10px"><button style="width:85px;" onclick="window.location.href='/home.html';"><i class="fa-solid fa-house"></i>  Accueil</button>&nbsp;&nbsp;<button style="width:150px;" onclick="window.location.href='/panel.html';"><i class="fa-solid fa-gear"></i>   Gérer les produits</button>&nbsp;&nbsp;<button style="width:115px;" onclick="window.location.href='/about.html';"><i class="fa-solid fa-circle-info"></i>   Informations</button></div><br><center><a href="/home.html"><img width="100" height="100" src="icons/icon.ico"></a><h1>Stock Manager v2.7.10</h1></center><br>`;
     try {
         dat = das[num].date;
