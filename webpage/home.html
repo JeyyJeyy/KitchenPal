@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -5,43 +6,48 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="styles.css">
    <link rel="icon" href="icons/icon.ico" />
-   <title>Stock-Manager</title>
+   <title>StockManager</title>
 </head>
 
-<body>
-   <br>
-   <label style="margin-left: 10px; width: 90px; height: 30px; font-size: 14px;"><input name="mode" type="checkbox" id="check" onclick="darkmode()"> Dark mode   <i class="fa-solid fa-circle-half-stroke"></i></label>
-   <div id="except" style="display: inline; position: absolute; right: 10px; top: 10px"><button style="width:85px;" onclick="window.location.href='/home.html';"><i class="fa-solid fa-house"></i> Accueil</button>&nbsp;&nbsp;<button style="width:150px;" onclick="window.location.href='/panel.html';"><i class="fa-solid fa-gear"></i>   Gérer les produits</button>&nbsp;&nbsp;<button style="width:115px;" onclick="window.location.href='/about.html';"><i class="fa-solid fa-circle-info"></i>   Informations</button></div>
-   <br>
-   <center><a href="/home.html"><img width="100" height="100" src='icons/icon.ico'></a>
-      <h1>Stock Manager v2.7.10</h1>
-   </center>
-   <br>
+<body class="fadein">
+   <div
+      style="display: flex; align-items: center; border: none; margin-top: 50px; width: auto;justify-content: center;">
+      <a href="/home.html"><img src="icons/icon.ico" style="margin-right: 10px;height: 50pt;width: 50pt;"></a>
+      <a href="/home.html"></a>
+      <h1 style="font-size: 50pt;">StockManager</h1></a>
+   </div>
+   <div id="except" style="display: inline; position: absolute; right: 10px; top: 10px; border: none; width: auto;">
+      <button style="width:auto;" onclick="window.location.href='/home.html';"><span style="padding:20px"><i
+               style="margin:3px" class="fa-solid fa-house"></i> Accueil </span></button>&nbsp;
+      <button style="width:auto;" onclick="window.location.href='/panel.html';"><span style="padding:20px"><i
+               style="margin:3px" class="fa-solid fa-gear"></i> Ajouter un produit </span></button>&nbsp;
+      <button style="width:auto;" onclick="darkmode()"><span style="padding:10px"><i
+               class="fa-solid fa-circle-half-stroke"></i></span></button>
+   </div>
    <center>
-      <div style="overflow-x:auto;" id="except">
-         <div name="per" class="centered"></div><br>
-         <input type="text" id="input" onkeyup="search()" placeholder="Cherchez des produits...">
-         <table>
+      <div id="except" style="margin-top:4px;">
+         <!--<div id="except" name="per" class="centered"></div><br>-->
+         <input style="width:70%" type="text" id="input" onkeyup="search()" placeholder="Chercher des produits...">
+         <table style="width:70%;">
             <thead>
                <tr class="header">
-                  <th>Consommable</th>
-                  <th>Image</th>
-                  <th>Nom du produit</th>
-                  <th>Date limite</th>
-                  <th>Quantité</th>
-                  <th>Commande</th>
+                  <th style="width: 10%;">Status</th>
+                  <th style="width: 20%;">Image</th>
+                  <th>Nom produit</th>
+                  <th style="width: 15%;">Péremption</th>
+                  <th style="width: 10%;">Quantité</th>
+                  <th style="width: 15%;">Gestion</th>
                </tr>
             </thead>
-            <tbody id="data-output">
-            </tbody>
+            <tbody id="data-output"></tbody>
          </table>
       </div>
-      <br><br>
+      <br>
       <p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p>
    </center>
    <script src="fetch.js"></script>
    <script src="app.js"></script>
-   <script src="https://kit.fontawesome.com/48b85ccf71.js" crossorigin="anonymous"></script>
+   <script src="48b85ccf71.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

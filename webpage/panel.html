@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -5,91 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="icons/icon.ico" />
-    <title>Stock-Manager</title>
+    <title>StockManager</title>
 </head>
 
-<body>
-    <br>
-    <label style="margin-left: 10px; width: 90px; height: 30px; font-size: 14px;"><input
-            name="mode" type="checkbox" id="check" onclick="darkmode()"> Dark mode   <i class="fa-solid fa-circle-half-stroke"></i></label>
-    <div id="except" style="display: inline; position: absolute; right: 10px; top: 10px"><button style="width:85px;" onclick="window.location.href='/home.html';"><i class="fa-solid fa-house"></i>   Accueil</button>&nbsp;&nbsp;<button style="width:150px;" onclick="window.location.href='/panel.html';"><i class="fa-solid fa-gear"></i>   Gérer les produits</button>&nbsp;&nbsp;<button style="width:115px;" onclick="window.location.href='/about.html';"><i class="fa-solid fa-circle-info"></i>   Informations</button></div>
-    <br>
-    <br>
+<body class="fadein">
+    <div
+        style="display: flex; align-items: center; border: none; margin-top: 50px; width: auto;justify-content: center;">
+        <a href="/home.html"><img src="icons/icon.ico" style="margin-right: 10px;height: 50pt;width: 50pt;"></a>
+        <a href="/home.html"></a>
+        <h1 style="font-size: 50pt;">StockManager</h1></a>
+    </div>
+    <div id="except" style="display: inline; position: absolute; right: 10px; top: 10px; border: none; width: auto;">
+        <button style="width:auto;" onclick="window.location.href='/home.html';"><span style="padding:20px"><i
+                    style="margin:3px" class="fa-solid fa-house"></i> Accueil </span></button>&nbsp;
+        <button style="width:auto;" onclick="window.location.href='/panel.html';"><span style="padding:20px"><i
+                    style="margin:3px" class="fa-solid fa-gear"></i> Ajouter un produit </span></button>&nbsp;
+        <button style="width:auto;" onclick="darkmode()"><span style="padding:10px"><i
+                    class="fa-solid fa-circle-half-stroke"></i></span></button>
+    </div>
     <center>
-        <div style="display: flex;">
-            <div style="flex: 1; margin: auto; border-radius: 15px; width: 560px; padding: 10px;"
-                id="except" class="infos">
-                <label id="title" style="display: block; margin: auto; margin-bottom:10px" align="left">
-                    <h4 style="display: inline" align="left">Ajouter un aliment: </h4>
-                </label>
-                <div style="margin: 0;" class="form-example">
-                    <div class="form-example">
-                        <label id="check" for="barcode" name="format">Code barre: </label>
-                        <input type="number" name="format" id="barcode" required>
-                    </div>
-                    <div class="form-example">
-                        <label id="check" for="date" name="format">Date de péremption: </label>
-                        <input style="width: 166px;" type="date" name="format" id="date" required>
-                    </div>
-                    <div class="form-example">
-                        <label id="check" for="quantity" name="format">Quantité: </label>
-                        <input type="number" name="format" id="quantity" required>
-                    </div>
-                    <div class="form-example">
-                        <button style="height: 29px; width: 160px" onclick="submit()"><i class="fa-solid fa-circle-plus"></i>   Ajouter cet
-                            élément</button>&nbsp;&nbsp;<button style="height: 29px; width: 80px"
-                            onclick="window.location.href='/home.html';"><i class="fa-solid fa-rotate-left"></i>   Retour</button>
-                    </div>
+        <div style="width: 70%; margin: auto; border-radius: 15px; padding: 10px;" id="boxed" class="infos">
+            <label style="display: block; margin: auto; margin-bottom:10px" align="left">
+                <h4 style="display: inline" align="left">Ajouter un nouveau produit</h4>
+            </label>
+            <div style="margin: 20px; border: none;" id="etudes">
+                <div class="form-example">
+                    <label class="check" for="barcode">Code barre : &nbsp;</label>
+                    <textarea placeholder="" id="barcode" rows="1" cols="25" required></textarea>
                 </div>
-            </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <div style="flex: 1; margin: auto; border-radius: 15px; width: 560px; padding: 10px;"
-                id="except" class="infos">
-                <label id="title" style="display: block; margin: auto; margin-bottom:10px" align="left">
-                    <h4 style="display: inline" align="left">Supprimer un aliment: </h4>
-                </label>
-                <div style="margin: 0;" class="form-example">
-                    <div class="form-example">
-                        <label id="check" for="barcode" name="format">Code barre: </label>
-                        <input type="number" name="format" id="barcode2" required>
-                    </div>
-                    <div class="form-example">
-                        <label id="check" for="date" name="format">Date de péremption: </label>
-                        <input style="width: 166px;" type="date" name="format" id="date2" required>
-                    </div>
-                    <div class="form-example">
-                        <label id="check" for="quantity" name="format">Quantité: </label>
-                        <input type="number" name="format" id="quantity2" required>
-                    </div>
-                    <div class="form-example">
-                        <button style="height: 29px; width: 160px" onclick="submit2()"><i class="fa-solid fa-circle-minus"></i>   Retirer cet
-                            élément</button>&nbsp;&nbsp;<button style="height: 29px; width: 80px"
-                            onclick="window.location.href='/home.html';"><i class="fa-solid fa-rotate-left"></i>   Retour</button>
-                    </div>
+                <br />
+                <div class="form-example">
+                    <label id="texting" class="check" for="date">Date de péremption : &nbsp;</label>
+                    <input type="date" placeholder="" id="date" required>
+                </div>
+                <br />
+                <div class="form-example">
+                    <label class="check" for="quantity">Quantité : &nbsp;</label>
+                    <input placeholder="" type="text" id="quantity" required>
+                </div>
+                <br />
+                <div class="form-example">
+                    <button style="width:auto;padding-left:10px;padding-right:10px;" onclick="submit()"><i
+                            class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Ajouter cet élément</button>
+                    &nbsp;&nbsp;
+                    <button onclick="window.location.href='/home.html';"><i
+                            class="fa-solid fa-rotate-left"></i> Retour</button>
                 </div>
             </div>
         </div>
         <br>
-        <input type="text" id="input" onkeyup="search()" placeholder="Cherchez des produits...">
-         <table>
+        <input style="width:70%;" type="text" id="input" onkeyup="search()" placeholder="Cherchez des produits...">
+        <table style="width:70%;">
             <thead>
-               <tr class="header">
-                  <th>Image</th>
-                  <th>Nom du produit</th>
-                  <th>Date limite</th>
-                  <th>Quantité</th>
-               </tr>
+                <tr class="header">
+                    <th style="width: 10%;">Status</th>
+                    <th style="width: 20%;">Image</th>
+                    <th>Nom produit</th>
+                    <th style="width: 15%;">Péremption</th>
+                    <th style="width: 10%;">Quantité</th>
+                    <th style="width: 15%;">Gestion</th>
+                </tr>
             </thead>
             <tbody id="data-output">
             </tbody>
-         </table>
-        <br><br><br><br>
-        <p style="margin: 10px; position: absolute; bottom: 5px; left: 42%">Made with <span
-                style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p>
+        </table>
     </center>
     <script src="app.js"></script>
-    <script src="manage.js"></script>
-    <script src="https://kit.fontawesome.com/48b85ccf71.js" crossorigin="anonymous"></script>
+    <script src="fetch.js"></script>
+    <script src="48b85ccf71.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

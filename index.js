@@ -205,13 +205,37 @@ function buildHtml(num) {
     let data = fs.readFileSync('data.json', 'utf8');
     let das = JSON.parse(data);
     let id, dat;
-    let file = `<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="styles.css"><link rel="icon" href="icons/icon.ico" /><title>Stock-Manager</title></head>` +
-        `<body><br><label style="margin-left: 10px; width: 90px; height: 30px; font-size: 14px;"><input name="mode" type="checkbox" id="check" onclick="darkmode()"> Dark mode   <i class="fa-solid fa-circle-half-stroke"></i></label><div id="except" style="display: inline; position: absolute; right: 10px; top: 10px"><button style="width:85px;" onclick="window.location.href='/home.html';"><i class="fa-solid fa-house"></i>  Accueil</button>&nbsp;&nbsp;<button style="width:150px;" onclick="window.location.href='/panel.html';"><i class="fa-solid fa-gear"></i>   Gérer les produits</button>&nbsp;&nbsp;<button style="width:115px;" onclick="window.location.href='/about.html';"><i class="fa-solid fa-circle-info"></i>   Informations</button></div><br><center><a href="/home.html"><img width="100" height="100" src="icons/icon.ico"></a><h1>Stock Manager v2.7.10</h1></center><br>`;
+    let file = `<!DOCTYPE html>
+    <html lang="fr">
+    
+    <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link rel="stylesheet" href="styles.css">
+       <link rel="icon" href="icons/icon.ico" />
+       <title>StockManager</title>
+    </head>
+    
+    <body class="fadein">
+       <div
+          style="display: flex; align-items: center; border: none; margin-top: 50px; width: auto;justify-content: center;">
+          <a href="/home.html"><img src="icons/icon.ico" style="margin-right: 10px;height: 50pt;width: 50pt;"></a>
+          <a href="/home.html"></a>
+          <h1 style="font-size: 50pt;">StockManager</h1></a>
+       </div>
+       <div id="except" style="display: inline; position: absolute; right: 10px; top: 10px; border: none; width: auto;">
+          <button style="width:auto;" onclick="window.location.href='/home.html';"><span style="padding:20px"><i
+                   style="margin:3px" class="fa-solid fa-house"></i> Accueil </span></button>&nbsp;
+          <button style="width:auto;" onclick="window.location.href='/panel.html';"><span style="padding:20px"><i
+                   style="margin:3px" class="fa-solid fa-gear"></i> Ajouter un produit </span></button>&nbsp;
+          <button style="width:auto;" onclick="darkmode()"><span style="padding:10px"><i
+                   class="fa-solid fa-circle-half-stroke"></i></span></button>
+       </div>`;
     try {
         dat = das[num].date;
         id = das[num].barcode;
     } catch {
-        file += '<center><h2>Produit inconnu</h2><br><button onclick="window.location.href=`/home.html`;"><b><i class="fa-solid fa-rotate-left"></i>   Retour</b></button></center><center style="position: fixed;bottom: 0;right: 0;left: 0"><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="https://kit.fontawesome.com/48b85ccf71.js" crossorigin="anonymous"></script><script src="app.js"></script></body></html>';
+        file += '<center><h2>Produit inconnu</h2><br><button onclick="window.location.href=`/home.html`;"><b><i class="fa-solid fa-rotate-left"></i>   Retour</b></button></center><center style="position: fixed;bottom: 0;right: 0;left: 0"><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="48b85ccf71.js" crossorigin="anonymous"></script><script src="app.js"></script></body></html>';
         return file;
     }
     if (id != null) {
@@ -260,18 +284,18 @@ function buildHtml(num) {
             prod.nutriscore_grade = "unknown";
         }
         file += '<center style="overflow-x:auto;"><table>' +
-            '<thead><tr><th>Consommable</th><th>Image</th><th>Nom du produit</th>' +
-            '<th>Date limite</th><th>Quantité</th><th>Commande</th></tr><tr>' +
-            '<td><img src=icons/' + url + '></td>' +
-            '<td style="font-size: 12px;"><img style="border-radius: 15px; height: 150px; width: 150px; object-fit: cover; max-width: 80%; max-height: 80%"" src="' + das[num].barcode + '.jpg" onerror="this.onerror=null; this.src=`icons/no-product.png`"> <br> ' + das[num].barcode + ' </td>' +
+            '<thead><tr><th style="width: 10%;">Status</th><th style="width: 20%;">Image</th><th>Nom produit</th>' +
+            '<th style="width: 15%;">Péremption</th><th style="width: 10%;">Quantité</th><th style="width: 15%;">Gestion</th></tr><tr>' +
+            '<td style="width: 10%;"><img style="width: 75px;" src=icons/' + url + '></td>' +
+            '<td style="width: 20%;font-size: 12px;"><img style="border-radius: 15px; height: 150px; width: 150px; object-fit: cover; max-width: 80%; max-height: 80%"" src="' + das[num].barcode + '.jpg" onerror="this.onerror=null; this.src=`icons/no-product.png`"> <br> ' + das[num].barcode + ' </td>' +
             '<td>' + prod.product_name_fr + '</td>' +
-            '<td>' + das[num].date + '<br>' + diffDays + '</td>' +
-            '<td>' + das[num].quantity + '</td>' +
-            '<td><button onclick="added(' + id + ',`' + dat + '`,' + 1 + ')"><b><i class="fa-solid fa-circle-plus"></i>   Ajouter</b></button><br><br><button onclick="delet(' + id + ',`' + dat + '`,1)"><b><i class="fa-solid fa-circle-minus"></i>   Effacer</b></button><br><br><button onclick="window.location.href=`/home.html`;"><b><i class="fa-solid fa-rotate-left"></i>   Retour</b></button></td>' +
+            '<td style="width: 15%;">' + das[num].date + '<br>' + diffDays + '</td>' +
+            '<td style="width: 10%;">' + das[num].quantity + '</td>' +
+            '<td style="width: 15%;"><button onclick="added(' + id + ',`' + dat + '`,' + 1 + ')"><b><i class="fa-solid fa-circle-plus"></i>   Ajouter</b></button><br><br><button onclick="delet(' + id + ',`' + dat + '`,1)"><b><i class="fa-solid fa-circle-minus"></i>   Effacer</b></button><br><br><button onclick="window.location.href=`/home.html`;"><b><i class="fa-solid fa-rotate-left"></i>   Retour</b></button></td>' +
             '</tr></thead><tbody id="data-output"></tbody></table></center><br>' +
-            '<center style="overflow-x:auto;"><div id="boxed" name="outer" class="centered"><label style="display: block; margin: auto;"><h4 align="left">Scores du produit: </h4></label><div class="middle"><div class="inner" style="border: none;"><svg width="110" height="110"><circle stroke="white" stroke-width="5" cx="55" cy="55" r="52" fill="' + scoreurl + '" /><text x="50%" y="43%" text-anchor="middle" font-weight="bold" fill="white" font-size="50px" font-family="Arial" dy=".3em">' + produit2["yuka-score"] + '</text><text x="50%" y="75%" text-anchor="middle" font-weight="bold" fill="white" font-size="25px" font-family="Arial" dy=".3em">/100</text></svg><br><b>Stock-Score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Note personnelle</span></i></div><div class="inner" style="border: none;"><img style="width:200px;" src="icons/nutriscore-' + prod.nutriscore_grade + '.svg"><br><b>Nutri-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Qualité nutritionnelle</span></i></div><div class="inner" style="border: none;"><img style="width:200px;margin:auto" src="icons/ecoscore-' + prod.ecoscore_grade + '.svg"><br><b>Eco-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Impact environnemental</span></i></div><div class="inner" style="border: none;"><img src="icons/nova-group-' + prod.nova_groups + '.svg"><br><b>Nova-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Degré de transformation des aliments</span></i></div></div></center>' +
-            '</div><br><center style="overflow-x:auto;"><div id="boxed" name="product" class="centered"><label style="display: block; margin: auto; margin-bottom:10px" align="left"><h4 style="display: inline" align="left">Ingrédients du produit: </h4>(' + prod.additives_n + ' additifs)</label><p align="left" style="margin:auto; margin-left:10px; margin-bottom:8px">' + ing_text + '</p>' +
-            '</div></center><br><br><center><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="app.js"></script><script src="https://kit.fontawesome.com/48b85ccf71.js" crossorigin="anonymous"></script></body></html>';
+            '<center style="overflow-x:auto;"><div id="boxed" name="outer" class="centered"><label style="display: block; margin: auto;"><h4 align="left">Notes du produit : </h4></label><div class="middle"><div class="inner" style="width: 25%;border: none;"><svg width="110" height="110"><circle stroke="white" stroke-width="5" cx="55" cy="55" r="52" fill="' + scoreurl + '" /><text x="50%" y="43%" text-anchor="middle" font-weight="bold" fill="white" font-size="50px" font-family="Arial" dy=".3em">' + produit2["yuka-score"] + '</text><text x="50%" y="75%" text-anchor="middle" font-weight="bold" fill="white" font-size="25px" font-family="Arial" dy=".3em">/100</text></svg><br><b>Stock-Score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Note personnelle</span></i></div><div class="inner" style="width: 25%;border: none;"><img style="width:200px;" src="icons/nutriscore-' + prod.nutriscore_grade + '.svg"><br><b>Nutri-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Qualité nutritionnelle</span></i></div><div class="inner" style="width: 25%;border: none;"><img style="width:200px;margin:auto" src="icons/ecoscore-' + prod.ecoscore_grade + '.svg"><br><b>Eco-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Impact environnemental</span></i></div><div class="inner" style="width: 25%;border: none;"><img src="icons/nova-group-' + prod.nova_groups + '.svg"><br><b>Nova-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Degré de transformation des aliments</span></i></div></div></center>' +
+            '</div><br><center style="overflow-x:auto;"><div id="boxed" name="product" class="centered"><label style="display: block; margin: auto; margin-bottom:10px" align="left"><h4 align="left">Ingrédients du produit : (' + prod.additives_n + ' additifs)</h4></label><p align="left" style="margin:auto; margin-left:10px; margin-bottom:8px">' + ing_text + '</p>' +
+            '</div></center><br><br><center><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="app.js"></script><script src="48b85ccf71.js" crossorigin="anonymous"></script></body></html>';
     }
     return file;
 };
