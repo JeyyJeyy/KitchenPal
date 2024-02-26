@@ -95,6 +95,11 @@ function submit() {
    let dat = document.getElementById("date").value;
    let quant = document.getElementById("quantity").value;
    let bar = document.getElementById("barcode").value;
-   dat = dat.slice(8, 10) + '/' + dat.slice(5, 7) + '/' + dat.slice(0, 4);
-   added(bar, dat, quant);
+   if(!bar || !dat || parseInt(quant) < 1 || !quant || bar.length < 6){
+      alert("Veuillez entrer des valeurs valides.")
+   }else{
+      var date = dat.split('-');
+      dat = date[2] + '/' + date[1] + '/' + date[0];
+      added(bar, dat, quant);
+   }
 }
