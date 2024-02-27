@@ -280,6 +280,16 @@ tr:last-child td:last-child {
 	border-radius: 100%;
 }
 
+@keyframes rotation {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(359deg);
+	}
+}
+
 @-webkit-keyframes rotation {
 	from {
 		-webkit-transform: rotate(0deg);
@@ -310,16 +320,6 @@ tr:last-child td:last-child {
 	}
 }
 
-@keyframes rotation {
-	from {
-		transform: rotate(0deg);
-	}
-
-	to {
-		transform: rotate(359deg);
-	}
-}
-
 a:link {
 	color: #e9a136;
 	background-color: transparent;
@@ -344,7 +344,7 @@ a:active {
 	text-decoration: none;
 }
 
-/*.fadein {
+.fadein {
 	opacity: 0;
 	-moz-transition: opacity 0.3s;
 	-webkit-transition: opacity 0.3s;
@@ -354,7 +354,7 @@ a:active {
 
 body.loaded.fadein {
 	opacity: 1;
-}*/
+}
 
 ::-webkit-scrollbar {
 	width: 15px;

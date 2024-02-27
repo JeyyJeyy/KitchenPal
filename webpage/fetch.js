@@ -11,14 +11,13 @@ fetch("data.json")
         let out = "";
         for (let product of products) {
             let url;
-            let dat = product.date.replace(/\//gi, '');
             let time = product.date.split('/');
-            const date1 = new Date(time[2], time[1] - 1, time[0]);
+            const date1 = new Date(time[2], time[1] - 1, time[0], 12, 0, 0);
             const date2 = Date.now();
             const diffTime = Math.abs(date2 - date1);
-            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            let diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
             if (diffDays <= 6) {
-                if (diffDays == 0 || diffDays == 1) {
+                if (diffDays == 0) {
                     diffDays = 'aujourd\'hui';
                 } else if (date1 <= date2) {
                     diffDays = 'depuis ' + diffDays + ' jours';
@@ -43,7 +42,7 @@ fetch("data.json")
             <td>${product.nom}</td>
             <td style="width: 15%;">${product.date}<br>${diffDays}</td>
             <td style="width: 10%;">${product.quantity}</td>
-            <td style="width: 15%;"><button onclick="added(${product.barcode},'${dat}',1)"><b><i class="fa-solid fa-circle-plus"></i>   Ajouter</b></button><br><br><button onclick="delet(${product.barcode},'${dat}',1)"><b><i class="fa-solid fa-circle-minus"></i>   Effacer</b></button><br><br><button onclick="getinfos(${ind})"><b><i class="fa-solid fa-circle-info"></i>   Infos</b></button></td>
+            <td style="width: 15%;"><button onclick="added(${product.barcode},'${product.date}',1)"><b><i class="fa-solid fa-circle-plus"></i>   Ajouter</b></button><br><br><button onclick="delet(${product.barcode},'${product.date}',1)"><b><i class="fa-solid fa-circle-minus"></i>   Effacer</b></button><br><br><button onclick="getinfos(${ind})"><b><i class="fa-solid fa-circle-info"></i>   Infos</b></button></td>
          </tr>
       `;
             ind++

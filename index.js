@@ -74,23 +74,10 @@ app.get('/product', function (req, res) {
 app.post('/posts', function (req, res, next) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let obj = JSON.parse(data);
-        let num = Number(req.body.quantity);
-        if (num == 0) {
-            num = 1;
-        }
-        req.body.quantity = num;
-        if (!req.body.date.includes('/')) {
-            let day = req.body.date.slice(0, 2);
-            let month = req.body.date.slice(2, 4);
-            let year = req.body.date.slice(-4);
-            req.body.date = day + '/' + month + '/' + year;
-        }
-        let datee = req.body.date.split('/');
-        req.body.date = date(datee);
+        let num = parseInt(req.body.quantity);
         let index;
         if (req.body.command == 'add') {
             (async () => {
-                delete req.body["command"];
                 for (let dat of obj) {
                     if (dat.barcode == req.body.barcode && dat.date == req.body.date) {
                         index = obj.indexOf(dat);
@@ -103,7 +90,7 @@ app.post('/posts', function (req, res, next) {
                     downloading(address, req.body.barcode);
                     await axios.get(address)
                         .then(res => {
-                            req.body["nom"] = res.data.product.product_name_fr;
+                            req.body["nom"] = res.data.product.product_name_fr + " - " + res.data.product.quantity;
                         })
                         .catch(function (error) {
                             console.log(error);
@@ -116,13 +103,13 @@ app.post('/posts', function (req, res, next) {
                 });
                 ordonner();
                 console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Sauvegarde de ' + num + ' éléments dans data.json');
+                res.send('done');
             })();
         } else if (req.body.command == 'del') {
-            delete req.body["command"];
-            delet(req.body.barcode, num, req.body.date);
+            var unit = delet(req.body.barcode, num, req.body.date);
+            res.send(unit);
         }
     });
-    res.send('done');
 });
 
 function delet(bar, num, date) {
@@ -146,6 +133,7 @@ function delet(bar, num, date) {
             if (err) console.log(err);
         });
         console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted " + num + " elements of data.json");
+        return das[index].quantity;
     });
 }
 
@@ -181,24 +169,6 @@ function downloading(file, bar) {
             };
         });
     })
-}
-
-function date(date) {
-    if (!date[2]) {
-        date[2] = date[1];
-        date[1] = date[0];
-        date[0] = '30';
-    }
-    if (date[0].length == 1) {
-        date[0] = '0' + date[0];
-    }
-    if (date[1].length == 1) {
-        date[1] = '0' + date[1];
-    }
-    if (date[2].length == 2) {
-        date[2] = '20' + date[2];
-    }
-    return date[0] + '/' + date[1] + '/' + date[2];
 }
 
 function buildHtml(num) {
@@ -244,11 +214,11 @@ function buildHtml(num) {
         let prod = produit2.product;
         let ing_text = prod.ingredients_text_fr;
         let time = das[num].date.split('/');
-        const date1 = new Date(time[2], time[1] - 1, time[0]);
+        const date1 = new Date(time[2], time[1] - 1, time[0], 12, 0, 0);
         const date2 = Date.now();
         const diffTime = Math.abs(date2 - date1);
-        let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        if (diffDays == 0 || diffDays == 1) {
+        let diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+        if (diffDays == 0) {
             diffDays = 'aujourd\'hui';
             url = 'equal.png';
         } else if (date1 <= date2) {

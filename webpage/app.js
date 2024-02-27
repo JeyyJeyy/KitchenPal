@@ -1,5 +1,4 @@
 var dm = false;
-var checkbox = document.querySelector('input[name="mode"]');
 
 function delet(bar, date, nb) {
    fetch('/posts', {
@@ -13,9 +12,13 @@ function delet(bar, date, nb) {
       headers: {
          "Content-type": "application/json; charset=UTF-8"
       }
-   }).then(() => {
-      location.reload();
-   })
+   }).then(function (response) {
+      if (parseInt(response) == 0) {
+         location.href = 'home.html';
+      } else {
+         location.reload();
+      }
+   });
 }
 
 function added(bar, date, nb) {
@@ -66,10 +69,8 @@ if (localStorage.getItem("isDarkMode") == null) {
 
 if (localStorage.getItem("isDarkMode") == "1" && dm != true) {
    darkmode();
-   checkbox.checked = true;
 } else if (localStorage.getItem("isDarkMode") == "0" && dm != false) {
    darkmode();
-   checkbox.checked = false;
 }
 
 function search() {
@@ -95,11 +96,13 @@ function submit() {
    let dat = document.getElementById("date").value;
    let quant = document.getElementById("quantity").value;
    let bar = document.getElementById("barcode").value;
-   if(!bar || !dat || parseInt(quant) < 1 || !quant || bar.length < 6){
+   if (!bar || !dat || parseInt(quant) < 1 || !quant || bar.length < 6) {
       alert("Veuillez entrer des valeurs valides.")
-   }else{
+   } else {
       var date = dat.split('-');
       dat = date[2] + '/' + date[1] + '/' + date[0];
       added(bar, dat, quant);
    }
 }
+
+document.getElementsByClassName('fadein')[0].classList.add('loaded')
