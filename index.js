@@ -8,7 +8,7 @@ var Stream = require('stream').Transform;
 const figlet = require('figlet');
 const gradient = require('gradient-string');
 const app = express();
-app.listen(8080,"127.0.0.1");
+app.listen(8080,"10.229.17.1");
 //ramener page d'accueil si delete qd quantité = 1
 
 console.clear();
