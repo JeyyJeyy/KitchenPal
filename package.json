@@ -1,6 +1,6 @@
 {
   "name": "peremption-server",
-  "version": "2.7.10",
+  "version": "3.1.16",
   "description": "",
   "main": "index.js",
   "scripts": {
