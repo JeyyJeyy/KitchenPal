@@ -86,6 +86,7 @@ app.post('/posts', function (req, res, next) {
                 if (index != null) {
                     obj[index].quantity += num;
                 } else {
+                    req.body.quantity = num;
                     let address = `https://fr.openfoodfacts.org/api/v0/product/${req.body.barcode}.json`;
                     downloading(address, req.body.barcode);
                     await axios.get(address)

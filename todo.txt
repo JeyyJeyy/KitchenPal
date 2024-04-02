@@ -47,3 +47,6 @@ rassembler les aliments selon code barre meme si date differente (tableau de dat
 faire systeme sauvegarde du data json 
 reprendre charte visuelle de synapse
 refaire tous les code selon mes standards (cf synapse)
+ajouter des fonctions suivi santé type myfitnesspal
+ajouter une section type yuka avec avis sur la composition (sucre, gras, sel, gras saturé, additifs, ?alternatives?, ?quantité de fruits?, fibres, proteines, calories, )
+ajouter sections valeurs nutritionnelles

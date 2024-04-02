@@ -37,9 +37,9 @@ fetch("data.json")
             }
             out += `
          <tr>
-            <td style="width: 10%;"><img style="width:75px" src='icons/${url}'></td>
+            <td style="width: 10%;"><img style="width:50px" src='icons/${url}'></td>
             <td style="width: 20%;font-size: 12px;"><a href="/product?id=${ind}"><img style='border-radius: 15px; height: 150px; width: 150px; object-fit: cover; max-width: 80%; max-height: 80%' src="${product.barcode}.jpg" onerror="this.onerror=null; this.src='icons/no-product.png'"></a><br> ${product.barcode} </td>
-            <td>${product.nom}</td>
+            <td style="width: 30%;">${product.nom}</td>
             <td style="width: 15%;">${product.date}<br>${diffDays}</td>
             <td style="width: 10%;">${product.quantity}</td>
             <td style="width: 15%;"><button onclick="added(${product.barcode},'${product.date}',1)"><b><i class="fa-solid fa-circle-plus"></i>   Ajouter</b></button><br><br><button onclick="delet(${product.barcode},'${product.date}',1)"><b><i class="fa-solid fa-circle-minus"></i>   Effacer</b></button><br><br><button onclick="getinfos(${ind})"><b><i class="fa-solid fa-circle-info"></i>   Infos</b></button></td>
