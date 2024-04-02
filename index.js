@@ -33,7 +33,7 @@ app.use(express.static('assets'));
             console.log(col.red('Erreur au lancement...'));
             return;
         }
-        console.log(gradient('white', 'cyan')(data) + col.cyan('\n\tStockManager v3.1.16 - Gérer ses stocks @JeyyJeyy'));
+        console.log(gradient('white', 'cyan')(data) + col.cyan('\n\tStockManager v3.1.16 - Gérer ses stocks @JeyyJeyy\n'));
     });
 })();
 

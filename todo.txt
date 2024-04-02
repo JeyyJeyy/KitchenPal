@@ -37,7 +37,6 @@ sans risque (pastille vert) : aucun impact sur le score ; risque limité (pastil
 ajouter liste additifs et allergenes sous ingredient avec noms et desc
 Ajouter icons comme yuka (emotes etc) (pour descriptions produits et page infos)
 
-page infos avec description scores etc
 Adapte page web pour mobile
 creer une app + scanneur code barre compatible
 rassembler les aliments selon code barre meme si date differente (tableau de dates puis en fonction) (liste deroulante des dates puis enable disable les boutons add ou suppr)
