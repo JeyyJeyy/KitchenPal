@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a><img src="https://thumbs.dreamstime.com/b/banner-raw-uncooked-ingredients-cooking-pasta-background-food-healthy-eating-concept-186934703.jpg" alt="Manage your stock of food"></a>
+  <a><img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=nrd-D6Tu_L3chLE-unsplash.jpg" alt="Manage your stock of food"></a>
   <br>
   StockManager - Gérer ses stocks
   <br>
