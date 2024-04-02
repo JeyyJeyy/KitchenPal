@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a><img height="200px" src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=nrd-D6Tu_L3chLE-unsplash.jpg" alt="Manage your stock of food"></a>
+  <a><img height="200px" src="https://next.ouranos.ovh/index.php/apps/files_sharing/publicpreview/njMYLHCeeKza3Zb?file=/&fileId=33308&x=1920&y=1080&a=true&etag=6351adead8e45519c4bfffb8c1e3b7d2" alt="Manage your stock of food"></a>
   <br>
   StockManager - Gérer ses stocks
   <br>
