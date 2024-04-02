@@ -8,7 +8,7 @@ var Stream = require('stream').Transform;
 const figlet = require('figlet');
 const gradient = require('gradient-string');
 const app = express();
-app.listen(8080,"10.229.17.1");
+app.listen(8080,"127.0.0.1");
 //ramener page d'accueil si delete qd quantité = 1
 
 console.clear();
@@ -47,7 +47,7 @@ fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         bars.push(value.barcode);
         i++
     })
-    console.log('[!] ' + i + ' produits rechargés')
+    console.log("\x1b[32m", '[!] ' + i + ' produits rechargés')
     fs.readdir("./assets/", function (err, files) {
         files.forEach(function (file, index) {
             let f = file.slice(0, -5);
@@ -98,9 +98,7 @@ app.post('/posts', function (req, res, next) {
                     obj.push(req.body);
                 }
                 json = JSON.stringify(obj);
-                fs.writeFile("data.json", json, (err) => {
-                    if (err) console.log(err);
-                });
+                fs.writeFileSync("data.json", json);
                 ordonner();
                 console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Sauvegarde de ' + num + ' éléments dans data.json');
                 res.send('done');

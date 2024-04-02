@@ -40,4 +40,10 @@ Ajouter icons comme yuka (emotes etc) (pour descriptions produits et page infos)
 page infos avec description scores etc
 Adapte page web pour mobile
 creer une app + scanneur code barre compatible
-rassembler les aliments selon code barre meme si date differente (tableau de dates puis en fonction)
+rassembler les aliments selon code barre meme si date differente (tableau de dates puis en fonction) (liste deroulante des dates puis enable disable les boutons add ou suppr)
+    -créer un element display date (date la plus proche) et une liste des autres dates (inclus)
+    -handle les dates présentes plusieurs fois
+?pôssibilité fusion page ajout avec home + date selector a cote des items pour en ajouter des nouveaux depuis accueil
+faire systeme sauvegarde du data json
+reprendre charte visuelle de synapse
+refaire tous les code selon mes standards
