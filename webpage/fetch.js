@@ -11,7 +11,7 @@ fetch("data.json")
         let out = "";
         for (let product of products) {
             let url;
-            let time = product.date.split('/');
+            let time = product.date[0].split('/');
             const date1 = new Date(time[2], time[1] - 1, time[0], 12, 0, 0);
             const date2 = Date.now();
             const diffTime = Math.abs(date2 - date1);
@@ -40,11 +40,11 @@ fetch("data.json")
             <td style="width: 10%;"><img style="width:50px" src='icons/${url}'></td>
             <td style="width: 20%;font-size: 12px;"><a href="/product?id=${ind}"><img style='border-radius: 15px; height: 150px; width: 150px; object-fit: cover; max-width: 80%; max-height: 80%' src="${product.barcode}.jpg" onerror="this.onerror=null; this.src='icons/no-product.png'"></a><br> ${product.barcode} </td>
             <td style="width: 30%;">${product.nom}</td>
-            <td style="width: 15%;">${product.date}<br>${diffDays}</td>
+            <td style="width: 15%;">${product.date[0]}<br>${diffDays}</td>
             <td style="width: 10%;">${product.quantity}</td>
-            <td style="width: 15%;"><button onclick="added(${product.barcode},'${product.date}',1)"><b><i class="fa-solid fa-circle-plus"></i>   Ajouter</b></button><br><br><button onclick="delet(${product.barcode},'${product.date}',1)"><b><i class="fa-solid fa-circle-minus"></i>   Effacer</b></button><br><br><button onclick="getinfos(${ind})"><b><i class="fa-solid fa-circle-info"></i>   Infos</b></button></td>
+            <td style="width: 15%;"><button onclick="delet(${product.barcode},'${product.date[0]}',1)"><b><i class="fa-solid fa-circle-minus"></i>   Effacer</b></button><br><br><button onclick="getinfos(${ind})"><b><i class="fa-solid fa-circle-info"></i>   Infos</b></button></td>
          </tr>
-      `;
+      `; //ajouter liste des dates possibles avant bouton suppr
             ind++
         }
         placeholder.innerHTML = out;

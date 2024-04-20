@@ -7,7 +7,7 @@ function delet(bar, date, nb) {
          command: "del",
          barcode: bar,
          quantity: nb,
-         date: date
+         date: [date]
       }),
       headers: {
          "Content-type": "application/json; charset=UTF-8"
@@ -28,7 +28,7 @@ function added(bar, date, nb) {
          command: "add",
          barcode: bar,
          quantity: nb,
-         date: date
+         date: [date]
       }),
       headers: {
          "Content-type": "application/json; charset=UTF-8"

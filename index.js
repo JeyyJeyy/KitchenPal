@@ -9,13 +9,12 @@ const figlet = require('figlet');
 const gradient = require('gradient-string');
 const app = express();
 app.listen(8080,"127.0.0.1");
-//ramener page d'accueil si delete qd quantité = 1
+//ramener page d'accueil si delete qd quantité = 1 => le serveur envoit pas la quantité restante car att pas la variable
 
 console.clear();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('webpage'));
-//app.use(express.static('webpage/icons/'));
 app.use(express.static('assets'));
 
 (async () => {
@@ -79,12 +78,22 @@ app.post('/posts', function (req, res, next) {
         if (req.body.command == 'add') {
             (async () => {
                 for (let dat of obj) {
-                    if (dat.barcode == req.body.barcode && dat.date == req.body.date) {
+                    if (dat.barcode == req.body.barcode) {
                         index = obj.indexOf(dat);
                     }
                 }
                 if (index != null) {
                     obj[index].quantity += num;
+                    obj[index].date= obj[index].date.concat(req.body.date);
+                    obj[index].date.sort(function (a, b) {
+                        let date1 = a.split('/');
+                        let date2 = b.split('/');
+                        let d1 = new Date(date1[2], date1[1] - 1, date1[0]);
+                        let d2 = new Date(date2[2], date2[1] - 1, date2[0]);
+                        if (d1 > d2) return 1;
+                        if (d1 < d2) return -1;
+                        return 0;
+                    });
                 } else {
                     req.body.quantity = num;
                     let address = `https://fr.openfoodfacts.org/api/v0/product/${req.body.barcode}.json`;
@@ -105,8 +114,7 @@ app.post('/posts', function (req, res, next) {
                 res.send('done');
             })();
         } else if (req.body.command == 'del') {
-            var unit = delet(req.body.barcode, num, req.body.date);
-            res.send(unit);
+            res.send(delet(req.body.barcode, num, req.body.date));
         }
     });
 });
@@ -114,17 +122,21 @@ app.post('/posts', function (req, res, next) {
 function delet(bar, num, date) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let das = JSON.parse(data);
-        let index;
+        let index, finalvalue;
         das.forEach(function (value) {
-            if (value.barcode == bar && value.date == date) {
+            if (value.barcode == bar) {
                 index = das.indexOf(value);
             }
         })
+        finalvalue = das[index].quantity - num;
         if (index != null) {
             if (num >= das[index].quantity) {
                 das.splice(index, 1);
             } else {
                 das[index].quantity -= num;
+                date.forEach(function (value) {
+                    das[index].date.splice(das[index].date.indexOf(value),1);
+                })
             }
         }
         json = JSON.stringify(das);
@@ -132,7 +144,7 @@ function delet(bar, num, date) {
             if (err) console.log(err);
         });
         console.log("\x1b[31m", "[" + process.uptime().toFixed(2) + " DEL] Deleted " + num + " elements of data.json");
-        return das[index].quantity;
+        return finalvalue;
     });
 }
 
@@ -201,7 +213,7 @@ function buildHtml(num) {
                    class="fa-solid fa-circle-half-stroke"></i></span></button>
        </div>`;
     try {
-        dat = das[num].date;
+        dat = das[num].date[0];
         id = das[num].barcode;
     } catch {
         file += '<center><h2>Produit inconnu</h2><br><button onclick="window.location.href=`/home.html`;"><b><i class="fa-solid fa-rotate-left"></i>   Retour</b></button></center><center style="position: fixed;bottom: 0;right: 0;left: 0"><p style="margin: 10px">Made with <span style="color: #FF0000;">&hearts;</span> by JeyyJeyy</p></center><script src="48b85ccf71.js" crossorigin="anonymous"></script><script src="app.js"></script></body></html>';
@@ -212,7 +224,7 @@ function buildHtml(num) {
         let produit2 = JSON.parse(produit);
         let prod = produit2.product;
         let ing_text = prod.ingredients_text_fr;
-        let time = das[num].date.split('/');
+        let time = das[num].date[0].split('/');
         const date1 = new Date(time[2], time[1] - 1, time[0], 12, 0, 0);
         const date2 = Date.now();
         const diffTime = Math.abs(date2 - date1);
@@ -251,16 +263,16 @@ function buildHtml(num) {
         }
         if (!prod.nutriscore_grade) {
             prod.nutriscore_grade = "unknown";
-        }
+        } //ajouter list select pour dates avant bouton suppr
         file += '<center style="overflow-x:auto;"><table>' +
             '<thead><tr><th style="width: 10%;">Status</th><th style="width: 20%;">Image</th><th>Nom produit</th>' +
             '<th style="width: 15%;">Péremption</th><th style="width: 10%;">Quantité</th><th style="width: 15%;">Gestion</th></tr><tr>' +
             '<td style="width: 10%;"><img style="width: 75px;" src=icons/' + url + '></td>' +
             '<td style="width: 20%;font-size: 12px;"><img style="border-radius: 15px; height: 150px; width: 150px; object-fit: cover; max-width: 80%; max-height: 80%"" src="' + das[num].barcode + '.jpg" onerror="this.onerror=null; this.src=`icons/no-product.png`"> <br> ' + das[num].barcode + ' </td>' +
             '<td>' + prod.product_name_fr + '</td>' +
-            '<td style="width: 15%;">' + das[num].date + '<br>' + diffDays + '</td>' +
+            '<td style="width: 15%;">' + das[num].date[0] + '<br>' + diffDays + '</td>' +
             '<td style="width: 10%;">' + das[num].quantity + '</td>' +
-            '<td style="width: 15%;"><button onclick="added(' + id + ',`' + dat + '`,' + 1 + ')"><b><i class="fa-solid fa-circle-plus"></i>   Ajouter</b></button><br><br><button onclick="delet(' + id + ',`' + dat + '`,1)"><b><i class="fa-solid fa-circle-minus"></i>   Effacer</b></button><br><br><button onclick="window.location.href=`/home.html`;"><b><i class="fa-solid fa-rotate-left"></i>   Retour</b></button></td>' +
+            '<td style="width: 15%;"><button onclick="delet(' + id + ',`' + dat + '`,1)"><b><i class="fa-solid fa-circle-minus"></i>   Effacer</b></button><br><br><button onclick="window.location.href=`/home.html`;"><b><i class="fa-solid fa-rotate-left"></i>   Retour</b></button></td>' +
             '</tr></thead><tbody id="data-output"></tbody></table></center><br>' +
             '<center style="overflow-x:auto;"><div id="boxed" name="outer" class="centered"><label style="display: block; margin: auto;"><h4 align="left">Notes du produit : </h4></label><div class="middle"><div class="inner" style="width: 25%;border: none;"><svg width="110" height="110"><circle stroke="white" stroke-width="5" cx="55" cy="55" r="52" fill="' + scoreurl + '" /><text x="50%" y="43%" text-anchor="middle" font-weight="bold" fill="white" font-size="50px" font-family="Arial" dy=".3em">' + produit2["yuka-score"] + '</text><text x="50%" y="75%" text-anchor="middle" font-weight="bold" fill="white" font-size="25px" font-family="Arial" dy=".3em">/100</text></svg><br><b>Stock-Score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Note personnelle</span></i></div><div class="inner" style="width: 25%;border: none;"><img style="width:200px;" src="icons/nutriscore-' + prod.nutriscore_grade + '.svg"><br><b>Nutri-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Qualité nutritionnelle</span></i></div><div class="inner" style="width: 25%;border: none;"><img style="width:200px;margin:auto" src="icons/ecoscore-' + prod.ecoscore_grade + '.svg"><br><b>Eco-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Impact environnemental</span></i></div><div class="inner" style="width: 25%;border: none;"><img src="icons/nova-group-' + prod.nova_groups + '.svg"><br><b>Nova-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Degré de transformation des aliments</span></i></div></div></center>' +
             '</div><br><center style="overflow-x:auto;"><div id="boxed" name="product" class="centered"><label style="display: block; margin: auto; margin-bottom:10px" align="left"><h4 align="left">Ingrédients du produit : (' + prod.additives_n + ' additifs)</h4></label><p align="left" style="margin:auto; margin-left:10px; margin-bottom:8px">' + ing_text + '</p>' +
@@ -269,12 +281,12 @@ function buildHtml(num) {
     return file;
 };
 
-function ordonner() {
+function ordonner() { //solution = sort localement les dates dans chaque items puis prendre date[0] pour sort globalement
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let obj = JSON.parse(data);
         obj.sort(function (a, b) {
-            let date1 = a.date.split('/');
-            let date2 = b.date.split('/');
+            let date1 = a.date[0].split('/');
+            let date2 = b.date[0].split('/');
             let d1 = new Date(date1[2], date1[1] - 1, date1[0]);
             let d2 = new Date(date2[2], date2[1] - 1, date2[0]);
             if (d1 > d2) return 1;
