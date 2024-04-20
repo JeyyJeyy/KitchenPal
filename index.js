@@ -8,7 +8,7 @@ var Stream = require('stream').Transform;
 const figlet = require('figlet');
 const gradient = require('gradient-string');
 const app = express();
-app.listen(8080,"127.0.0.1");
+app.listen(8080, "127.0.0.1");
 //ramener page d'accueil si delete qd quantité = 1 => le serveur envoit pas la quantité restante car att pas la variable
 
 console.clear();
@@ -50,9 +50,9 @@ fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
     fs.readdir("./assets/", function (err, files) {
         files.forEach(function (file, index) {
             let f = file.slice(0, -5);
-            if(!bars.includes(f.slice(0, -5)) && f != "additives" && file.endsWith('json')){
-                fs.unlinkSync('./assets/'+file);
-                fs.unlinkSync('./assets/'+f+'.jpg');
+            if (!bars.includes(f.slice(0, -5)) && f != "additives" && file.endsWith('json')) {
+                fs.unlinkSync('./assets/' + file);
+                fs.unlinkSync('./assets/' + f + '.jpg');
             }
         })
     })
@@ -84,7 +84,7 @@ app.post('/posts', function (req, res, next) {
                 }
                 if (index != null) {
                     obj[index].quantity += num;
-                    obj[index].date= obj[index].date.concat(req.body.date);
+                    obj[index].date = obj[index].date.concat(req.body.date);
                     obj[index].date.sort(function (a, b) {
                         let date1 = a.split('/');
                         let date2 = b.split('/');
@@ -135,7 +135,7 @@ function delet(bar, num, date) {
             } else {
                 das[index].quantity -= num;
                 date.forEach(function (value) {
-                    das[index].date.splice(das[index].date.indexOf(value),1);
+                    das[index].date.splice(das[index].date.indexOf(value), 1);
                 })
             }
         }
@@ -179,7 +179,10 @@ function downloading(file, bar) {
                 console.log(err);
             };
         });
-    })
+    }).on('error', (e) => {
+        console.error(e);
+        return;
+    });
 }
 
 function buildHtml(num) {
@@ -264,9 +267,9 @@ function buildHtml(num) {
         if (!prod.nutriscore_grade) {
             prod.nutriscore_grade = "unknown";
         }
-        let select = '<select id="'+das[num].barcode+'">';
-        for(i=0;i<das[num].date.length;i++){
-            select += '<option value="'+das[num].date[i]+'">'+das[num].date[i]+'</option>';
+        let select = '<select id="' + das[num].barcode + '">';
+        for (i = 0; i < das[num].date.length; i++) {
+            select += '<option value="' + das[num].date[i] + '">' + das[num].date[i] + '</option>';
         }
         select += '</select>';
         file += '<center style="overflow-x:auto;"><table>' +
@@ -277,7 +280,7 @@ function buildHtml(num) {
             '<td>' + prod.product_name_fr + '</td>' +
             '<td style="width: 15%;">' + das[num].date[0] + '<br>' + diffDays + '</td>' +
             '<td style="width: 10%;">' + das[num].quantity + '</td>' +
-            '<td style="width: 15%;">'+select+'<br/><br/><button onclick="delet(' + id + ',1)"><b><i class="fa-solid fa-circle-minus"></i>   Effacer</b></button><br><br><button onclick="window.location.href=`/home.html`;"><b><i class="fa-solid fa-rotate-left"></i>   Retour</b></button></td>' +
+            '<td style="width: 15%;">' + select + '<br/><br/><button onclick="delet(' + id + ',1)"><b><i class="fa-solid fa-circle-minus"></i>   Effacer</b></button><br><br><button onclick="window.location.href=`/home.html`;"><b><i class="fa-solid fa-rotate-left"></i>   Retour</b></button></td>' +
             '</tr></thead><tbody id="data-output"></tbody></table></center><br>' +
             '<center style="overflow-x:auto;"><div id="boxed" name="outer" class="centered"><label style="display: block; margin: auto;"><h4 align="left">Notes du produit : </h4></label><div class="middle"><div class="inner" style="width: 25%;border: none;"><svg width="110" height="110"><circle stroke="white" stroke-width="5" cx="55" cy="55" r="52" fill="' + scoreurl + '" /><text x="50%" y="43%" text-anchor="middle" font-weight="bold" fill="white" font-size="50px" font-family="Arial" dy=".3em">' + produit2["yuka-score"] + '</text><text x="50%" y="75%" text-anchor="middle" font-weight="bold" fill="white" font-size="25px" font-family="Arial" dy=".3em">/100</text></svg><br><b>Stock-Score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Note personnelle</span></i></div><div class="inner" style="width: 25%;border: none;"><img style="width:200px;" src="icons/nutriscore-' + prod.nutriscore_grade + '.svg"><br><b>Nutri-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Qualité nutritionnelle</span></i></div><div class="inner" style="width: 25%;border: none;"><img style="width:200px;margin:auto" src="icons/ecoscore-' + prod.ecoscore_grade + '.svg"><br><b>Eco-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Impact environnemental</span></i></div><div class="inner" style="width: 25%;border: none;"><img src="icons/nova-group-' + prod.nova_groups + '.svg"><br><b>Nova-score </b><i style="margin-top:3px" class="fa-solid fa-circle-question" id="tooltip"><span class="tooltiptext" style="font-style: normal;">Degré de transformation des aliments</span></i></div></div></center>' +
             '</div><br><center style="overflow-x:auto;"><div id="boxed" name="product" class="centered"><label style="display: block; margin: auto; margin-bottom:10px" align="left"><h4 align="left">Ingrédients du produit : (' + prod.additives_n + ' additifs)</h4></label><p align="left" style="margin:auto; margin-left:10px; margin-bottom:8px">' + ing_text + '</p>' +
@@ -286,7 +289,7 @@ function buildHtml(num) {
     return file;
 };
 
-function ordonner() { //solution = sort localement les dates dans chaque items puis prendre date[0] pour sort globalement
+function ordonner() {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let obj = JSON.parse(data);
         obj.sort(function (a, b) {

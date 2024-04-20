@@ -42,7 +42,7 @@ fetch("data.json")
             select += '</select>';
             out += `
          <tr>
-            <td style="width: 10%;"><img style="width:50px" src='icons/${url}'></td>
+            <td style="width: 10%;"><img style="width:75px" src='icons/${url}'></td>
             <td style="width: 20%;font-size: 12px;"><a href="/product?id=${ind}"><img style='border-radius: 15px; height: 150px; width: 150px; object-fit: cover; max-width: 80%; max-height: 80%' src="${product.barcode}.jpg" onerror="this.onerror=null; this.src='icons/no-product.png'"></a><br> ${product.barcode} </td>
             <td style="width: 30%;">${product.nom}</td>
             <td style="width: 15%;">${product.date[0]}<br>${diffDays}</td>
