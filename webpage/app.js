@@ -1,6 +1,7 @@
 var dm = false;
 
-function delet(bar, date, nb) {
+function delet(bar, nb) {
+   var date = document.getElementById(bar).value;
    fetch('/posts', {
       method: 'POST',
       body: JSON.stringify({

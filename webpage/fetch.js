@@ -35,6 +35,11 @@ fetch("data.json")
                 url = 'ok.png';
                 non++
             }
+            let select = '<select id="'+product.barcode+'">';
+            for (i = 0; i < product.date.length; i++) {
+                select += '<option value="' + product.date[i] + '">' + product.date[i] + '</option>';
+            }
+            select += '</select>';
             out += `
          <tr>
             <td style="width: 10%;"><img style="width:50px" src='icons/${url}'></td>
@@ -42,9 +47,9 @@ fetch("data.json")
             <td style="width: 30%;">${product.nom}</td>
             <td style="width: 15%;">${product.date[0]}<br>${diffDays}</td>
             <td style="width: 10%;">${product.quantity}</td>
-            <td style="width: 15%;"><button onclick="delet(${product.barcode},'${product.date[0]}',1)"><b><i class="fa-solid fa-circle-minus"></i>   Effacer</b></button><br><br><button onclick="getinfos(${ind})"><b><i class="fa-solid fa-circle-info"></i>   Infos</b></button></td>
+            <td style="width: 15%;">${select}<br/><br/><button onclick="delet(${product.barcode},1)"><b><i class="fa-solid fa-circle-minus"></i>   Effacer</b></button><br><br><button onclick="getinfos(${ind})"><b><i class="fa-solid fa-circle-info"></i>   Infos</b></button></td>
          </tr>
-      `; //ajouter liste des dates possibles avant bouton suppr
+      `;
             ind++
         }
         placeholder.innerHTML = out;
