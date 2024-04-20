@@ -74,8 +74,9 @@ app.post('/posts', function (req, res, next) {
     fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
         let obj = JSON.parse(data);
         let num = parseInt(req.body.quantity);
-        let index;
-        if (req.body.command == 'add') {
+        let index, command = req.body.command;
+        delete req.body.command;
+        if (command == 'add') {
             (async () => {
                 for (let dat of obj) {
                     if (dat.barcode == req.body.barcode) {
@@ -117,7 +118,7 @@ app.post('/posts', function (req, res, next) {
                         });
                 }
             })();
-        } else if (req.body.command == 'del') {
+        } else if (command == 'del') {
             res.send(delet(req.body.barcode, num, req.body.date));
         }
     });
