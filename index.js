@@ -99,19 +99,23 @@ app.post('/posts', function (req, res, next) {
                     let address = `https://fr.openfoodfacts.org/api/v0/product/${req.body.barcode}.json`;
                     downloading(address, req.body.barcode);
                     await axios.get(address)
-                        .then(res => {
-                            req.body["nom"] = res.data.product.product_name_fr + " - " + res.data.product.quantity;
+                        .then(resp => {
+                            if (resp.data.status == 0) {
+                                res.send('nobar');
+                            } else {
+                                req.body["nom"] = resp.data.product.product_name_fr + " - " + resp.data.product.quantity;
+                                obj.push(req.body);
+                                json = JSON.stringify(obj);
+                                fs.writeFileSync("data.json", json);
+                                ordonner();
+                                console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Sauvegarde de ' + num + ' éléments dans data.json');
+                                res.send('done');
+                            }
                         })
                         .catch(function (error) {
                             console.log(error);
                         });
-                    obj.push(req.body);
                 }
-                json = JSON.stringify(obj);
-                fs.writeFileSync("data.json", json);
-                ordonner();
-                console.log("\x1b[36m", "[" + process.uptime().toFixed(2) + ' SAVE] Sauvegarde de ' + num + ' éléments dans data.json');
-                res.send('done');
             })();
         } else if (req.body.command == 'del') {
             res.send(delet(req.body.barcode, num, req.body.date));
@@ -158,6 +162,7 @@ function downloading(file, bar) {
         res.on("end", () => {
             try {
                 obj = JSON.parse(body);
+                if (obj.status == 0) { return; }
                 obj["yuka-score"] = yuka(obj.product);
                 body = JSON.stringify(obj);
                 fs.writeFile(`./assets/${bar}.json`, body, (err) => {
