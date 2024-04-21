@@ -32,7 +32,7 @@ app.use(express.static('assets'));
             console.log(col.red('Erreur au lancement...'));
             return;
         }
-        console.log(gradient('white', 'cyan')(data) + col.cyan('\n\t\tv3.1.16 - @JeyyJeyy\n'));
+        console.log(gradient('white', 'cyan')(data) + col.cyan('\n\t\tv3.2.10 - @JeyyJeyy\n'));
     });
 })();
 
