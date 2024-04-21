@@ -5,9 +5,6 @@
   KitchenPal - Gérer ses stocks
   <br>
 </h1>
-
-<h4 align="center">Serveur du programme de gestion de stock</h4>
-
 <p align="center">
   <a>
     <img src="https://img.shields.io/badge/Statut-actif-red" alt="version">
@@ -22,8 +19,14 @@
 
 # Aperçu
 
-Ce programme lié avec le programme côté client permet de gérer ses stocks. Le serveur dispose d'une interface web (port 8080) affichant les produits et leurs informations et permettant de les gérer sans utiliser le client. Retrouvez la partie client: [StockManager - client side](https://github.com/JeyyJeyy/StockManager-client)<br>
+Le serveur dispose d'une interface web (port 8080 par défaut) affichant les produits et leurs informations et permettant de les gérer sans utiliser le client. Retrouvez la partie client: [StockManager - client side](https://github.com/JeyyJeyy/StockManager-client)<br>
 Le seul paramètre à configurer se trouve dans le fichier index.js:
 ```js
 app.listen(8080,"127.0.0.1"); //Ligne 10 : addresse et port
 ```
+
+# A faire
+
+- Une application Android client
+- Scanneur de code barre connecté
+- Soigner l'interface mobile
