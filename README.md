@@ -30,3 +30,4 @@ app.listen(8080,"127.0.0.1"); //Ligne 10 : addresse et port
 - Une application Android client
 - Scanneur de code barre connecté
 - Soigner l'interface mobile
+- Conteneuriser le serveur sous Docker
