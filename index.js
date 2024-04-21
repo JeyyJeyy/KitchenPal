@@ -37,6 +37,10 @@ app.use(express.static('assets'));
 })();
 
 fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
+    if(data == "" && fs.existsSync(`./assets/backup_data.json`)){
+        data = fs.readFileSync('backup_data.json', 'utf8');
+        fs.writeFileSync("data.json", data);
+    }
     let das = JSON.parse(data);
     let i = 0;
     let bars = [];
@@ -50,12 +54,13 @@ fs.readFile('data.json', 'utf8', function readFileCallback(err, data) {
     fs.readdir("./assets/", function (err, files) {
         files.forEach(function (file, index) {
             let f = file.slice(0, -5);
-            if (!bars.includes(f.slice(0, -5)) && f != "additives" && file.endsWith('json')) {
+            if (!bars.includes(f.slice(0, -5)) && f != "additives" && f != "backup_data" && file.endsWith('json')) {
                 fs.unlinkSync('./assets/' + file);
                 fs.unlinkSync('./assets/' + f + '.jpg');
             }
         })
     })
+    backup();
 });
 
 app.get('/', function (req, res) {
@@ -194,7 +199,7 @@ function downloading(file, bar) {
 function buildHtml(num) {
     let data = fs.readFileSync('data.json', 'utf8');
     let das = JSON.parse(data);
-    let id, dat;
+    let id;
     let file = `<!DOCTYPE html>
     <html lang="fr">
     
@@ -376,4 +381,11 @@ function yuka(prod) {
         score += 6 * (5 - prod.additives_n);
     }
     return Math.round(score);
+}
+
+function backup(){
+    let datab = fs.readFileSync('data.json', 'utf8');
+    fs.writeFileSync("./assets/backup_data.json", datab);
+    console.log("\x1b[32m", '[!] Sauvegarde du fichier data.json');
+    setTimeout(backup, 600000);
 }
