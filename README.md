@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/badge/Statut-actif-red" alt="version">
   </a>
   <a>
-     <img alt="nodejs" src="https://img.shields.io/badge/node.js-v16.16.0-green">
+     <img alt="nodejs" src="https://img.shields.io/badge/node.js-v20.11.0-green">
   </a>
   <a>
      <img src="https://img.shields.io/badge/Projet-v3.2.10-blue" alt="version">
