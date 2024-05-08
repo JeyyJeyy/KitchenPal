@@ -6,9 +6,7 @@
   <br>
 </h1>
 
-# Aperçu
-
-Ensemble d'outils pour la gestion des stocks de nourriture. Dans ce projet se trouve : 
+Ensemble d'outils pour la gestion des stocks d'aliments. Dans ce projet se trouve : 
 - Une application serveur qui s'occupe de l'affichage et de la gestion des éléments
 - Une application Android pour l'ajout d'éléments depuis son téléphone [ A FAIRE ]
 - Un scanneur de code barre connecté pour créer un périphérique dédié à la tâche [ EN COURS ]
