@@ -15,8 +15,12 @@
 </p>
 
 # Aperçu
+Ce projet est un serveur de gestion de stocks de nourriture développé en Node.js. Il offre une solution simple et efficace pour gérer les inventaires alimentaires en utilisant des requêtes HTTP pour l'ajout et la suppression d'éléments. Les différentes fonctionnalités incluses sont les suivantes :
+- Gestion des Stocks: Ajoutez et supprimez facilement des produits alimentaires de votre inventaire.
+- Interface Web conviviale: Une interface web intuitive pour une gestion facile des stocks.
+- Intégration avec OpenFoodFact: Obtenez des informations détaillées sur les produits alimentaires grâce à l'API OpenFoodFact, notamment les valeurs nutritionnelles et les informations sur les ingrédients.
 
-Le serveur dispose d'une interface web (port 8080 par défaut) affichant les produits et leurs informations et permettant de les gérer sans utiliser le client. Retrouvez la partie client: [StockManager - client side](https://github.com/JeyyJeyy/StockManager-client)<br>
+Le serveur dispose d'une interface web (port 8080 par défaut) affichant les produits et leurs informations et permettant de les gérer sans utiliser de client dédié.<br>
 Le seul paramètre à configurer se trouve dans le fichier index.js:
 ```js
 app.listen(8080,"127.0.0.1"); //Ligne 10 : addresse et port
