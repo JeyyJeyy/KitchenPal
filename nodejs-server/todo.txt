@@ -47,3 +47,6 @@ verif l'autoremove des assets qui sont pas dans le data.json car bizarre
 uniformiser fetch axios https/stream
 voir pour retirer gradient figlet et chalk/logging inutile
 reflechir ajout item depuis page d'accueil avec liste deroulante comme delete (pb de place)
+quand mis quantité > 1 dans panel ou via requete => pas plusieurs fois la date dans data.json
+verif différences de score (type Noix de cajou non salées - Alesto - 200g ou Milka Lait Alpin)
+Les quantités s'affichent pas toujours dans les titres des produits (cf ci dessus)

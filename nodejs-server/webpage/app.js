@@ -96,7 +96,7 @@ function search() {
 function submit() {
    let dat = document.getElementById("date").value;
    let quant = document.getElementById("quantity").value;
-   let bar = document.getElementById("barcode").value;
+   let bar = document.getElementById("barcode").value.replaceAll(' ','');
    if (!bar || !dat || parseInt(quant) < 1 || !quant || bar.length < 6) {
       alert("Veuillez entrer des valeurs valides.")
    } else {

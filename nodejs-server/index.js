@@ -8,7 +8,7 @@ var Stream = require('stream').Transform;
 const figlet = require('figlet');
 const gradient = require('gradient-string');
 const app = express();
-app.listen(8080, "127.0.0.1");
+app.listen(8080, "10.229.17.1");
 //ramener page d'accueil si delete qd quantité = 1 => le serveur envoit pas la quantité restante car att pas la variable
 
 console.clear();
@@ -350,7 +350,7 @@ function yuka(prod) {
             } else {
                 score = 5;
             }
-        } else if (prod._keywords.includes('additif') || prod._keywords.includes('animaux') || prod._keywords.includes('substitut') || prod._keywords.includes('complement')) {
+        } else if (prod._keywords.includes('animaux') || prod._keywords.includes('substitut') || prod._keywords.includes('complement')) {
             return "?";
         } else {
             if (nutri <= -1) {
